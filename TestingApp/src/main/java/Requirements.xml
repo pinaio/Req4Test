@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="Entities.Requirements">
+        <table name="requirements" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="name">
+                <column name="Name"/>
+            </basic>
+            <basic name="description">
+                <column name="Description"/>
+            </basic>
+            <basic name="autor">
+                <column name="Autor"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

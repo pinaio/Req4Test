@@ -1,0 +1,16 @@
+table.req{
+    border: 2px solid green;
+    margin-left: 50px;
+}
+th, td{
+    border: 2px solid green;
+    padding: 3px;
+}
+th{
+    text-align: left;
+    background-color: honeydew;
+}
+
+tr{
+    padding: 5px;
+}

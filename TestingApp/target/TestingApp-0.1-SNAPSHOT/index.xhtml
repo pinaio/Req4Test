@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+  <title>TestingApp 0.1</title>
+
+  <link rel="stylesheet" href="style.css"/>
+</h:head>
+<h:body>
+  <h:outputText class="text-3xl font-bold " value="#{testSystem.name}"> </h:outputText>
+  <br/>
+  <div class="text-xl">
+    <h:outputLabel value="Titel der Anforderung:"></h:outputLabel>
+    <br></br>
+    <h:outputText value= "#{requirement.name}"></h:outputText>
+    <h1>Liste der Anforderungen</h1>
+    <h:dataTable styleClass="req" class="req" var="einRequirement" value="#{testSystem.reqList}">
+      <h:column>
+        <f:facet name="header">ID</f:facet>
+        <h:outputText value="#{einRequirement.id}"></h:outputText>
+      </h:column>
+      <h:column>
+        <f:facet name="header">Name</f:facet>
+        <h:outputText value="#{einRequirement.name}"></h:outputText></h:column>
+      <h:column>
+        <f:facet name="header">Beschreibung</f:facet>
+        <h:outputText value="#{einRequirement.description}"></h:outputText></h:column>
+      <h:column>
+        <f:facet name="header">Author</f:facet>
+        <h:outputText value="#{einRequirement.author}"></h:outputText></h:column>
+    </h:dataTable>
+
+
+
+
+  </div>
+
+
+</h:body>
+</html>
+
