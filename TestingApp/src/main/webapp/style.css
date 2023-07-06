@@ -1,6 +1,7 @@
+@import "WEB-INF/Ressources/primeflex.css";
+
 table.req{
-    border: 2px solid green;
-    margin-left: 50px;
+
 }
 th, td{
     border: 2px solid green;
@@ -13,4 +14,7 @@ th{
 
 tr{
     padding: 5px;
+}
+.ui-card-body {
+    background-color: green;
 }

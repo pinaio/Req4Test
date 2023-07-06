@@ -1,41 +1,62 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
 
 <h:head>
   <title>TestingApp 0.1</title>
+  <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+  <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/arya-blue.css" />
 
-  <link rel="stylesheet" href="style.css"/>
 </h:head>
-<h:body>
-  <h:outputText class="text-3xl font-bold " value="#{testSystem.name}"> </h:outputText>
-  <br/>
-  <div class="text-xl">
-    <h:outputLabel value="Titel der Anforderung:"></h:outputLabel>
-    <br></br>
-    <h:outputText value= "#{requirement.name}"></h:outputText>
-    <h1>Liste der Anforderungen</h1>
-    <h:dataTable styleClass="req" class="req" var="einRequirement" value="#{testSystem.reqList}">
-      <h:column>
-        <f:facet name="header">ID</f:facet>
-        <h:outputText value="#{einRequirement.id}"></h:outputText>
-      </h:column>
-      <h:column>
-        <f:facet name="header">Name</f:facet>
-        <h:outputText value="#{einRequirement.name}"></h:outputText></h:column>
-      <h:column>
-        <f:facet name="header">Beschreibung</f:facet>
-        <h:outputText value="#{einRequirement.description}"></h:outputText></h:column>
-      <h:column>
-        <f:facet name="header">Author</f:facet>
-        <h:outputText value="#{einRequirement.author}"></h:outputText></h:column>
-    </h:dataTable>
-
-
-
-
+<h:body styleClass="">
+  <!---Header Start-->
+  <div class="bg-red-400 m-0 p-0  flex flex-row justify-content-around align-items-center">
+    <h:outputText styleClass="text-6xl pl-4 px-2" value="#{testSystem.name}"> </h:outputText>
+    <div class="max-h-4rem">
+      <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
+      <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
+    </div>
   </div>
+  <!--App & Sidebar-->
+  <div class="flex bg-green-100 h-full ">
+    <div class="max-w-20remrem  w-20rem border-2 flex flex-column align-items-center ">
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
+      <p:commandButton type="button" value="Submit" icon="pi pi-check" iconPos="right" />
+    </div>
+    <div class="text-xl flex flex-column  p-4 align-items-center justify-content-center">
+      <h:outputLabel styleClass="text-6xl font-bold" value="Liste der Anforderung:"/>
+      <h:dataTable styleClass="req" class="req" var="einRequirement" value="#{testSystem.reqList}">
+        <h:column styleClass="text-3xl">
+          <f:facet name="header">ID</f:facet>
+          <h:outputText styleClass="text-3xl" value="#{einRequirement.id}"/>
+        </h:column>
+        <h:column>
+          <f:facet name="header">Name</f:facet>
+          <h:outputText value="#{einRequirement.name}"/></h:column>
+        <h:column>
+          <f:facet name="header">Beschreibung</f:facet>
+          <h:outputText  value="#{einRequirement.description}"/></h:column>
+        <h:column>
+          <f:facet name="header">Author</f:facet>
+          <h:outputText value="#{einRequirement.author}"/></h:column>
+      </h:dataTable>
+  </div>
+
+
+    </div>
+
+
+
+
 
 
 </h:body>
