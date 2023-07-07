@@ -2,7 +2,7 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="Entities.Requirements">
+    <entity class="Entities.Requirement">
         <table name="requirements" schema="testingapp" catalog=""/>
         <attributes>
             <id name="id">
@@ -16,6 +16,9 @@
             </basic>
             <basic name="autor">
                 <column name="Autor"/>
+            </basic>
+            <basic name="status">
+                <column name="Status"/>
             </basic>
         </attributes>
     </entity>

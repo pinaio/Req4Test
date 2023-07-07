@@ -1,3 +1,4 @@
+import Entities.Requirement;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -87,33 +88,6 @@ public class ReqsController implements Serializable {
         this.selectedRequirement = null;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
-    }
-
-    public String getDeleteButtonMessage() {
-        if (hasSelectedRequirements()) {
-            int size = this.selectedRequirements.size();
-            return size > 1 ? size + " Anforderungen ausgewählt" : "1 Anforderung Ausgewählt";
-        }
-
-        return "Delete";
-    }
-
-    public boolean hasSelectedRequirements() {
-        if (this.selectedRequirements == null ){
-        System.out.println("IST LEER");}
-        else{
-            System.out.println(this.selectedRequirements.size());
-            }
-        return this.selectedRequirements != null && !this.selectedRequirements.isEmpty();
-    }
-
-    public void deleteSelectedRequirements() {
-        this.requirements.removeAll(this.selectedRequirements);
-        this.selectedRequirements = null;
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderungen gelöscht"));
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
-        PrimeFaces.current().executeScript("PF('dtRequirements').clearFilters()");
-        PrimeFaces.current().executeScript("PF('dtRequirements').update()");
     }
 
     private int getNextIndex(){

@@ -37,40 +37,9 @@
          </div>
       </h:form>
       <!--Main Application "Window"-->
+
       <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
          <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{reqsController.header}"/>
-         <!--Primeface Table-->
-         <h:form>
-            <div class="card">
-               <p:dataTable  var="req"  value="#{reqsController.testSystem.reqList}">
-                  <p:column  headerText="ID">
-                     <h:outputText  value="#{req.id}" />
-                  </p:column>
-
-                  <p:column  headerText="Name">
-                     <h:outputText value="#{req.name}" />
-                  </p:column>
-
-                  <p:column  headerText="Beschreibung">
-                     <h:outputText value="#{req.description}" />
-                  </p:column>
-
-                  <p:column  headerText="Autor">
-                     <h:outputText value="#{req.author}" />
-                  </p:column>
-                  <p:column headerText="Bearbeiten">
-                     <div class="">
-                        <p:commandButton styleClass="ui-button m-2 " value="Details" icon="pi pi-code"  />
-                        <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil"  />
-                        <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" />
-                     </div>
-
-                  </p:column>
-
-               </p:dataTable>
-            </div>
-         </h:form>
-
          <!--CRUD-TABLE-->
          <div class="card crud-demo">
             <h:form id="form">
@@ -87,47 +56,48 @@
                  
                </p:toolbar>
 
-               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="requi" value="#{reqsController.requirements}"
+               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="req" value="#{reqsController.requirements}"
                             reflow="true" styleClass="text-white" selection="#{reqsController.selectedRequirements}"
                             rowKey="#{requirement.name}" paginator="false"   >
                   <f:facet name="header">
                      <div class="requirements-table-header">
                         <span style="font-weight: bold">Anforderungen</span>
-
                      </div>
                   </f:facet>
+                        <p:column  headerText="ID">
+                           <h:outputText  value="#{req.id}" />
+                        </p:column>
 
-                  <p:column headerText="ID" >
-                     <h:outputText styleClass="text-white" value="#{requi.id}" />
-                  </p:column>
-                  <p:column headerText="Name" sortBy="#{requi.name}" filterBy="#{requi.name}">
-                     <h:outputText value="#{requi.name}" />
-                  </p:column>
-                  <p:column headerText="Beschreibung" sortBy="#{requi.description}" filterBy="#{requi.description}">
-                     <h:outputText value="#{requi.description}" />
-                  </p:column>
+                        <p:column  headerText="Name">
+                           <h:outputText value="#{req.name}" />
+                        </p:column>
 
-                  <p:column headerText="Autor" sortBy="#{requi.author}" filterBy="#{requi.author}">
-                     <h:outputText value="#{requi.author}" />
-                  </p:column>
+                        <p:column  headerText="Beschreibung">
+                           <h:outputText value="#{req.description}" />
+                        </p:column>
 
-                  <p:column headerText="Status" sortBy="#{requi.status}"
-                            filterBy="#{requi.status}">
-                     <h:outputText value="#{requi.status}" />
-                  </p:column>
-                  <p:column exportable="false">
-                     <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
-                                      oncomplete="PF('manageRequirementDialog').show()"
-                                      styleClass="edit-button rounded-button ui-button-success" process="@this">
-                        <f:setPropertyActionListener value="#{requi}" target="#{reqsController.selectedRequirement}" />
-                        <p:resetInput target=":dialogs:manage-requirement-content" />
-                     </p:commandButton>
-                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
-                                      process="@this"
-                                      oncomplete="PF('deleteRequirementDialog').show()">
-                        <f:setPropertyActionListener value="#{requi}" target="#{reqsController.selectedRequirement}" />
-                     </p:commandButton>
-                  </p:column>
+                        <p:column  headerText="Autor">
+                           <h:outputText value="#{req.author}" />
+                        </p:column>
+                        <p:column  headerText="Autor">
+                           <h:outputText value="#{req.status}" />
+                        </p:column>
+                        <p:column headerText="Bearbeiten">
+                           <div class="">
+                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
+                                               oncomplete="PF('manageRequirementDialog').show()" process="@this" >
+                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
+                                 <p:resetInput target=":dialogs:manage-requirement-content" />
+                              </p:commandButton>
+                              <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
+                                               oncomplete="PF('deleteRequirementDialog').show()">
+                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
+
+                              </p:commandButton>
+                           </div>
+
+                        </p:column>
+
                </p:dataTable>
             </h:form>
 
@@ -187,18 +157,8 @@
                </p:confirmDialog>
             </h:form>
          </div>
-
-
       </div>
-
-
    </div>
-
-
-
-
-
-
 </h:body>
 </html>
 
