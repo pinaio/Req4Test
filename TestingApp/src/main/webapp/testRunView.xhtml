@@ -43,7 +43,7 @@
       <!--Main Application "Window"-->
 
       <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
-         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{reqsController.header}"/>
+         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testRunController.header}"/>
          <!--CRUD-TABLE-->
          <div class="card crud-demo">
             <h:form id="form">
@@ -51,7 +51,7 @@
 
                <p:toolbar>
                   <p:toolbarGroup>
-                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{reqsController.openNew}"
+                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
                                       update=":dialogs:manage-requirement-content" oncomplete="PF('manageRequirementDialog').show()"
                                       styleClass="ui-button-success" style="margin-right: .5rem">
                         <p:resetInput target=":dialogs:manage-requirement-content" />
@@ -60,7 +60,7 @@
                  
                </p:toolbar>
 
-               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="req" value="#{reqsController.requirements}"
+               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="tr" value="#{testRunController.testRuns}"
                             reflow="true" styleClass="text-white"
                             rowKey="#{requirement.name}" paginator="false"   >
                   <f:facet name="header">
@@ -69,33 +69,42 @@
                      </div>
                   </f:facet>
                         <p:column  headerText="ID">
-                           <h:outputText  value="#{req.id}" />
+                           <h:outputText  value="#{tr.id}" />
                         </p:column>
 
-                        <p:column  headerText="Name">
-                           <h:outputText value="#{req.name}" />
+                        <p:column  headerText="Titel">
+                           <h:outputText value="#{tr.title}" />
                         </p:column>
 
-                        <p:column  headerText="Beschreibung">
-                           <h:outputText value="#{req.description}" />
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.deadline}" />
                         </p:column>
 
-                        <p:column  headerText="Autor">
-                           <h:outputText value="#{req.author}" />
+                        <p:column  headerText="Erstellungsdatum">
+                           <h:outputText value="#{tr.creationDate}" />
                         </p:column>
-                        <p:column  headerText="Status">
-                           <h:outputText value="#{req.status}" />
+                        <p:column  headerText="Ersteller">
+                           <h:outputText value="#{tr.creator}" />
+                        </p:column>
+                        <p:column  headerText="Anzahl Testfälle">
+                           <h:outputText value="#{tr.testcasesById.size()}" />
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.status}" />
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.deadline}" />
                         </p:column>
                         <p:column headerText="Bearbeiten">
                            <div class="">
                               <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
                                                oncomplete="PF('manageRequirementDialog').show()" process="@this" >
-                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
+                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
                                  <p:resetInput target=":dialogs:manage-requirement-content" />
                               </p:commandButton>
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
                                                oncomplete="PF('deleteRequirementDialog').show()">
-                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
+                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
                            </div>
@@ -109,25 +118,25 @@
                <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageRequirementDialog"
                          responsive="true">
                   <p:outputPanel id="manage-requirement-content" class="ui-fluid">
-                     <p:outputPanel rendered="#{not empty reqsController.selectedRequirement}">
+                     <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
                         <div class="field">
-                           <p:outputLabel styleClass="text-3xl" value="#{reqsController.selectedRequirement.id}"/>
+                           <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
                         </div>
                         <div class="field">
-                           <p:outputLabel for="name">Name</p:outputLabel>
-                           <p:inputText id="name" value="#{reqsController.selectedRequirement.name}" required="true" />
+                           <p:outputLabel for="name">Titel</p:outputLabel>
+                           <p:inputText id="name" value="#{testRunController.selectedTestRun.title}" required="true" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="description">Beschreibung</p:outputLabel>
-                           <p:inputTextarea id="description" value="#{reqsController.selectedRequirement.description}" />
+                           <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="author">Autor</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{reqsController.selectedRequirement.author}" />
+                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.tester}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="status">Status</p:outputLabel>
-                           <p:selectOneButton id="status" value="#{reqsController.selectedRequirement.status}">
+                           <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
                               <f:selectItem itemLabel="Neu" itemValue="Neu"/>
                               <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
                               <f:selectItem itemLabel="Testing" itemValue="Testing"/>

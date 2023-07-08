@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
-public class Testruns {
+public class Testrun {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
@@ -27,9 +27,13 @@ public class Testruns {
     @Column(name = "Tester")
     private String tester;
 
+    @Basic
+    @Column(name = "Status")
+    private String status;
+
 
     @OneToMany(mappedBy = "testrunsByTestrunId")
-    private Collection<Testcases> testcasesById;
+    private Collection<Testcase> testcasesById;
 
     public int getId() {
         return id;
@@ -71,11 +75,11 @@ public class Testruns {
         this.creator = creator;
     }
 
-    public Collection<Testcases> getTestcasesById() {
+    public Collection<Testcase> getTestcasesById() {
         return testcasesById;
     }
 
-    public void setTestcasesById(Collection<Testcases> testcasesById) {
+    public void setTestcasesById(Collection<Testcase> testcasesById) {
         this.testcasesById = testcasesById;
     }
 
@@ -85,5 +89,13 @@ public class Testruns {
 
     public void setTester(String tester) {
         this.tester = tester;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

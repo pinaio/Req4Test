@@ -1175,11 +1175,11 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="335" parent="329" name="testcases">
+    <table id="335" parent="329" name="testcase">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="336" parent="329" name="testruns">
+    <table id="336" parent="329" name="testrun">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
@@ -1251,7 +1251,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>ID</RefColNames>
-      <RefTableName>testruns</RefTableName>
+      <RefTableName>testrun</RefTableName>
     </foreign-key>
     <index id="352" parent="335" name="PRIMARY">
       <ColNames>ID</ColNames>
@@ -1296,12 +1296,16 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <DasType>text|0s</DasType>
       <Position>6</Position>
     </column>
-    <index id="361" parent="336" name="PRIMARY">
+    <column id="361" parent="336" name="Status">
+      <DasType>text|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <index id="362" parent="336" name="PRIMARY">
       <ColNames>ID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="362" parent="336" name="PRIMARY">
+    <key id="363" parent="336" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

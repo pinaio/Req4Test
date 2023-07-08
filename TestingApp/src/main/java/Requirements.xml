@@ -3,7 +3,7 @@
                  version="3.0">
 
     <entity class="Entities.Requirement">
-        <table name="requirement" schema="testingapp" catalog=""/>
+        <table name="requirement" schema="testingapp" />
         <attributes>
             <id name="id">
                 <column name="ID"/>
@@ -19,8 +19,8 @@
             </basic>
         </attributes>
     </entity>
-    <entity class="Entities.Testcases">
-        <table name="testcases" schema="testingapp" catalog=""/>
+    <entity class="Entities.Testcase">
+        <table name="testcase" schema="testingapp" />
         <attributes>
             <id name="id">
                 <column name="ID"/>
@@ -41,13 +41,13 @@
                 <column name="FailOrPass"/>
             </basic>
 
-            <many-to-one name="testrunsByTestrunId" optional="true" target-entity="Entities.Testruns">
+            <many-to-one name="testrunsByTestrunId" optional="true" target-entity="Entities.Testrun">
                 <join-column name="Testrun_id" nullable="false" referenced-column-name="ID"/>
             </many-to-one>
         </attributes>
     </entity>
-    <entity class="Entities.Testruns">
-        <table name="testruns" schema="testingapp" catalog=""/>
+    <entity class="Entities.Testrun">
+        <table name="testrun" schema="testingapp" />
         <attributes>
             <id name="id">
                 <column name="ID"/>
@@ -67,9 +67,11 @@
             <basic name="tester">
                 <column name="Tester"/>
             </basic>
+            <basic name="status">
+                <column name="Status"/>
+            </basic>
 
-
-            <one-to-many name="testcasesById" mapped-by="testrunsByTestrunId" target-entity="Entities.Testcases"/>
+            <one-to-many name="testcasesById" mapped-by="testrunsByTestrunId" target-entity="Entities.Testcase"/>
         </attributes>
     </entity>
 

@@ -1,4 +1,5 @@
 import Entities.Requirement;
+import Entities.Testrun;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -16,17 +17,17 @@ import java.util.List;
 @ViewScoped
 public class TestRunController implements Serializable {
 
-    private List<Requirement> requirements;
-    private Requirement selectedRequirement;
+    private List<Testrun> testRuns;
+    private Testrun selectedTestRun;
 
 
     @Inject
     private TestSystem testSystem;
-    private String header ="Anforderungen im Überblick";
+    private String header ="Testläufe im Überblick";
 
     @PostConstruct
     public void init(){
-        this.requirements = testSystem.getReqList();
+        this.testRuns = testSystem.getTestRunList();
     }
 
     public TestRunController() {
@@ -39,37 +40,37 @@ public class TestRunController implements Serializable {
     public String getHeader() {
         return header;
     }
-    public List<Requirement> getRequirements() {
-        return requirements;
+    public List<Testrun> getTestRuns() {
+        return testRuns;
     }
 
-    public Requirement getSelectedRequirement() {
-        return selectedRequirement;
+    public Testrun getSelectedTestRun() {
+        return selectedTestRun;
     }
 
-    public void setSelectedRequirement(Requirement selectedRequirement){
-        this.selectedRequirement = selectedRequirement;
+    public void setSelectedTestRun(Testrun selectedTestRun){
+        this.selectedTestRun = selectedTestRun;
     }
 
 
 
     public void openNew() {
-        this.selectedRequirement = new Requirement();
+        this.selectedTestRun = new Testrun();
     }
     public void saveRequirement() {
-        if (this.selectedRequirement.getId() == null) {
-            this.selectedRequirement.setId(
-                   String.valueOf(getNextIndex())
+        if (this.selectedTestRun== null) {
+            this.selectedTestRun.setId(
+                   getNextIndex()
             );
-            testSystem.saveRequirement(this.selectedRequirement);
-            this.requirements = testSystem.getReqList();
+            testSystem.saveTestRun(this.selectedTestRun);
+            this.testRuns = testSystem.getTestRunList();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung hinzugefügt"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf hinzugefügt"));
         }
         else {
-            testSystem.saveRequirement(this.selectedRequirement);
-            this.requirements = testSystem.getReqList();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung geändert"));
+            testSystem.saveTestRun(this.selectedTestRun);
+            this.testRuns = testSystem.getTestRunList();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf geändert"));
 
         }
 
@@ -78,9 +79,9 @@ public class TestRunController implements Serializable {
     }
     public void deleteRequirement() {
 //        HIER MUSS DIE DAO LÖSCHEN UND AKTUALISIEREN
-        testSystem.deleteRequirement(this.selectedRequirement);
-        this.selectedRequirement = null;
-        this.requirements = testSystem.getReqList();
+        testSystem.deleteTestRun(this.selectedTestRun);
+        this.selectedTestRun = null;
+        this.testRuns = testSystem.getTestRunList();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
     }
@@ -88,9 +89,9 @@ public class TestRunController implements Serializable {
     private int getNextIndex(){
         int highestId;
         List<Integer> ident = new ArrayList<>() ;
-        if ( !requirements.isEmpty()){
-            for (Requirement req : this.requirements){
-                ident.add(Integer.parseInt((req.getId())));
+        if ( !testRuns.isEmpty()){
+            for (Testrun tr : this.testRuns){
+                ident.add(tr.getId());
             }
             highestId = Collections.max(ident);
         }else{

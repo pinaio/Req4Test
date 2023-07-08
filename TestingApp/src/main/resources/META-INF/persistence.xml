@@ -7,10 +7,10 @@
 
     <persistence-unit name="TESTINGAPP" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <mapping-file>Requirements.xml</mapping-file>
+
         <class>Entities.Requirement</class>
-        <class>Entities.Testcases</class>
-        <class>Entities.Testruns</class>
+        <class>Entities.Testcase</class>
+        <class>Entities.Testrun</class>
 
         <!-- Add more class tags for additional entity classes -->
 

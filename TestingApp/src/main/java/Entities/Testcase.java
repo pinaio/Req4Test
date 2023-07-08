@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Entity
 @Named
 @RequestScoped
-public class Testcases {
+public class Testcase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
@@ -29,7 +29,7 @@ public class Testcases {
     private String title;
     @ManyToOne
     @JoinColumn(name = "Testrun_id", referencedColumnName = "ID")
-    private Testruns testrunsByTestrunId;
+    private Testrun testrunsByTestrunId;
 
     public int getId() {
         return id;
@@ -79,11 +79,11 @@ public class Testcases {
         this.title = title;
     }
 
-    public Testruns getTestrunsByTestrunId() {
+    public Testrun getTestrunsByTestrunId() {
         return testrunsByTestrunId;
     }
 
-    public void setTestrunsByTestrunId(Testruns testrunsByTestrunId) {
+    public void setTestrunsByTestrunId(Testrun testrunsByTestrunId) {
         this.testrunsByTestrunId = testrunsByTestrunId;
     }
 }
