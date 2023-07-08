@@ -18,7 +18,9 @@ public class TestSystem implements Serializable {
     private String name = "TestingApp 0.1 alpha";
     private List reqList =new ArrayList<Requirement>();
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TESTINGAPP");
+    private ReqsDAO reqsDao = new ReqsDAO();
+
+
     public TestSystem() {
 
 
@@ -29,13 +31,18 @@ public class TestSystem implements Serializable {
     }
 
     public ArrayList<Requirement> getReqList() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        Query q = em.createQuery("select a from Requirement a order by id");
-        this.reqList = q.getResultList();
-        em.close();
+
+        this.reqList = reqsDao.loadAll();
+
         return (ArrayList<Requirement>) this.reqList;
     }
 
+    public void saveRequirement(Requirement selectedRequirement){
+            reqsDao.saveRequirement(selectedRequirement);
+    }
+    public void deleteRequirement(Requirement selectedRequirement){
+        reqsDao.deleteRequirement(selectedRequirement);
+    }
 
     public int sayAmount(){
         return this.reqList.size();

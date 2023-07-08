@@ -6,10 +6,12 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="TESTINGAPP" />
+          <factory-entry name="TESTINGAPP" value="5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14" />
           <factory-entry name="TestingApp" value="5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="TESTINGAPP" />
+        </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>

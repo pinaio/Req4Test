@@ -29,6 +29,10 @@
                   <p:menuitem value="Übersicht"  outcome="reqsView"
                               icon="pi pi-book"/>
                </p:submenu>
+               <p:submenu label="Testläufe">
+                  <p:menuitem value="Übersicht"  outcome="testRunView"
+                              icon="pi pi-book"/>
+               </p:submenu>
                <p:submenu label="Navigations">
                   <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
                   <p:menuitem value="Internal"  icon="pi pi-upload"/>
@@ -57,7 +61,7 @@
                </p:toolbar>
 
                <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="req" value="#{reqsController.requirements}"
-                            reflow="true" styleClass="text-white" selection="#{reqsController.selectedRequirements}"
+                            reflow="true" styleClass="text-white"
                             rowKey="#{requirement.name}" paginator="false"   >
                   <f:facet name="header">
                      <div class="requirements-table-header">
@@ -79,7 +83,7 @@
                         <p:column  headerText="Autor">
                            <h:outputText value="#{req.author}" />
                         </p:column>
-                        <p:column  headerText="Autor">
+                        <p:column  headerText="Status">
                            <h:outputText value="#{req.status}" />
                         </p:column>
                         <p:column headerText="Bearbeiten">

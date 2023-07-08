@@ -3,7 +3,7 @@
                  version="3.0">
 
     <entity class="Entities.Requirement">
-        <table name="requirements" schema="testingapp" catalog=""/>
+        <table name="requirement" schema="testingapp" catalog=""/>
         <attributes>
             <id name="id">
                 <column name="ID"/>
@@ -14,12 +14,63 @@
             <basic name="description">
                 <column name="Description"/>
             </basic>
-            <basic name="autor">
-                <column name="Autor"/>
-            </basic>
             <basic name="status">
                 <column name="Status"/>
             </basic>
         </attributes>
     </entity>
+    <entity class="Entities.Testcases">
+        <table name="testcases" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="description">
+                <column name="Description"/>
+            </basic>
+            <basic name="title">
+                <column name="Title"/>
+            </basic>
+            <basic name="expectedResult">
+                <column name="ExpectedResult"/>
+            </basic>
+            <basic name="observedResult">
+                <column name="ObservedResult"/>
+            </basic>
+            <basic name="failOrPass">
+                <column name="FailOrPass"/>
+            </basic>
+
+            <many-to-one name="testrunsByTestrunId" optional="true" target-entity="Entities.Testruns">
+                <join-column name="Testrun_id" nullable="false" referenced-column-name="ID"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="Entities.Testruns">
+        <table name="testruns" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="title">
+                <column name="Title"/>
+            </basic>
+            <basic name="deadline">
+                <column name="Deadline"/>
+            </basic>
+            <basic name="creationDate">
+                <column name="CreationDate"/>
+            </basic>
+            <basic name="creator">
+                <column name="Creator"/>
+            </basic>
+            <basic name="tester">
+                <column name="Tester"/>
+            </basic>
+
+
+            <one-to-many name="testcasesById" mapped-by="testrunsByTestrunId" target-entity="Entities.Testcases"/>
+        </attributes>
+    </entity>
+
 </entity-mappings>

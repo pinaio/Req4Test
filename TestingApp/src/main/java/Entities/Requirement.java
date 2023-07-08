@@ -26,7 +26,7 @@ public class Requirement {
     private String status;
 
 
-public Requirement(){}
+    public Requirement(){}
     public Requirement(String id,String name, String description, String status, String author) {
         this.id = id;
         this.name = name;
@@ -59,12 +59,12 @@ public Requirement(){}
         this.description = description;
     }
 
-    public String getAutor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAutor(String autor) {
-        this.author = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getStatus() {

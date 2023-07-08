@@ -14,7 +14,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class ReqsController implements Serializable {
+public class TestRunController implements Serializable {
 
     private List<Requirement> requirements;
     private Requirement selectedRequirement;
@@ -29,7 +29,7 @@ public class ReqsController implements Serializable {
         this.requirements = testSystem.getReqList();
     }
 
-    public ReqsController() {
+    public TestRunController() {
     }
 //Eventuell kann der getter für das testsystem weg
     public TestSystem getTestSystem() {
