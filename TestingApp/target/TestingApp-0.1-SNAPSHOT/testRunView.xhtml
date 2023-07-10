@@ -52,15 +52,15 @@
                <p:toolbar>
                   <p:toolbarGroup>
                      <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
-                                      update=":dialogs:manage-requirement-content" oncomplete="PF('manageRequirementDialog').show()"
+                                      update=":dialogs:manage-testrun-content" oncomplete="PF('manageTestrunDialog').show()"
                                       styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":dialogs:manage-requirement-content" />
+                        <p:resetInput target=":dialogs:manage-testrun-content" />
                      </p:commandButton>
                   </p:toolbarGroup>
                  
                </p:toolbar>
 
-               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="tr" value="#{testRunController.testRuns}"
+               <p:dataTable id="dt-testruns" widgetVar="dtTestruns" var="tr" value="#{testRunController.testRuns}"
                             reflow="true" styleClass="text-white"
                             rowKey="#{requirement.name}" paginator="false"   >
                   <f:facet name="header">
@@ -97,13 +97,13 @@
                         </p:column>
                         <p:column headerText="Bearbeiten">
                            <div class="">
-                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
-                                               oncomplete="PF('manageRequirementDialog').show()" process="@this" >
+                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
+                                               oncomplete="PF('manageTestrunDialog').show()" process="@this" >
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
-                                 <p:resetInput target=":dialogs:manage-requirement-content" />
+                                 <p:resetInput target=":dialogs:manage-testrun-content" />
                               </p:commandButton>
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
-                                               oncomplete="PF('deleteRequirementDialog').show()">
+                                               oncomplete="PF('deleteTestrunDialog').show()">
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
@@ -115,9 +115,9 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageRequirementDialog"
+               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageTestrunDialog"
                          responsive="true">
-                  <p:outputPanel id="manage-requirement-content" class="ui-fluid">
+                  <p:outputPanel id="manage-testrun-content" class="ui-fluid">
                      <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
                         <div class="field">
                            <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
@@ -135,6 +135,11 @@
                            <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.tester}" />
                         </div>
                         <div class="field">
+                           <p:outputLabel for="creationDate">Erstellungsdatum</p:outputLabel>
+                           <p:calendar id="creationDate" value="#{testRunController.selectedTestRun.creationDate}" required="true"/>
+
+                        </div>
+                        <div class="field">
                            <p:outputLabel for="status">Status</p:outputLabel>
                            <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
                               <f:selectItem itemLabel="Neu" itemValue="Neu"/>
@@ -147,20 +152,20 @@
                   </p:outputPanel>
 
                   <f:facet name="footer">
-                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{reqsController.saveRequirement}"
-                                      update="manage-requirement-content" process="manage-requirement-content @this" />
-                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageRequirementDialog').hide()"
+                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{testRunController.saveTestRun}"
+                                      update="manage-testrun-content" process="manage-testrun-content @this" />
+                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageTestrunDialog').hide()"
                                       class="ui-button-secondary" type="button" />
                   </f:facet>
                </p:dialog>
 
-               <p:confirmDialog widgetVar="deleteRequirementDialog" showEffect="fade" width="300"
-                                message="Diese Anforderung löschen?" header="Bestätigung" severity="warn">
-                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{reqsController.deleteRequirement}"
+               <p:confirmDialog widgetVar="deleteTestrunDialog" showEffect="fade" width="300"
+                                message="Diesen Testlauf löschen?" header="Bestätigung" severity="warn">
+                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{testRunController.deleteTestRun()}"
                                    process="@this"
-                                   oncomplete="PF('deleteRequirementDialog').hide()" />
+                                   oncomplete="PF('deleteTestrunDialog').hide()" />
                   <p:commandButton value="Nein" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                   onclick="PF('deleteRequirementDialog').hide()"  />
+                                   onclick="PF('deleteTestrunDialog').hide()"  />
                </p:confirmDialog>
 
                <p:confirmDialog global="true" showEffect="fade" width="300">

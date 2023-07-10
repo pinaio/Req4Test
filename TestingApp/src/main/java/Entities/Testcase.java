@@ -1,17 +1,14 @@
 package Entities;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 @Entity
-@Named
-@RequestScoped
 public class Testcase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
     private int id;
+
     @Basic
     @Column(name = "Description")
     private String description;
@@ -19,17 +16,21 @@ public class Testcase {
     @Column(name = "ExpectedResult")
     private String expectedResult;
     @Basic
-    @Column(name = "ObservedResult")
-    private String observedResult;
-    @Basic
     @Column(name = "FailOrPass")
     private String failOrPass;
     @Basic
-    @Column(name="Title")
+    @Column(name = "ObservedResult")
+    private String observedResult;
+    @Basic
+    @Column(name = "Title")
     private String title;
+
     @ManyToOne
     @JoinColumn(name = "Testrun_id", referencedColumnName = "ID")
-    private Testrun testrunsByTestrunId;
+    private Testrun testrunByTestrunId;
+    @ManyToOne
+    @JoinColumn(name = "requirement_id", referencedColumnName = "ID")
+    private Requirement requirementByRequirementId;
 
     public int getId() {
         return id;
@@ -38,6 +39,8 @@ public class Testcase {
     public void setId(int id) {
         this.id = id;
     }
+
+
 
     public String getDescription() {
         return description;
@@ -55,20 +58,20 @@ public class Testcase {
         this.expectedResult = expectedResult;
     }
 
-    public String getObservedResult() {
-        return observedResult;
-    }
-
-    public void setObservedResult(String observedResult) {
-        this.observedResult = observedResult;
-    }
-
     public String getFailOrPass() {
         return failOrPass;
     }
 
     public void setFailOrPass(String failOrPass) {
         this.failOrPass = failOrPass;
+    }
+
+    public String getObservedResult() {
+        return observedResult;
+    }
+
+    public void setObservedResult(String observedResult) {
+        this.observedResult = observedResult;
     }
 
     public String getTitle() {
@@ -79,11 +82,21 @@ public class Testcase {
         this.title = title;
     }
 
-    public Testrun getTestrunsByTestrunId() {
-        return testrunsByTestrunId;
+
+
+    public Testrun getTestrunByTestrunId() {
+        return testrunByTestrunId;
     }
 
-    public void setTestrunsByTestrunId(Testrun testrunsByTestrunId) {
-        this.testrunsByTestrunId = testrunsByTestrunId;
+    public void setTestrunByTestrunId(Testrun testrunByTestrunId) {
+        this.testrunByTestrunId = testrunByTestrunId;
+    }
+
+    public Requirement getRequirementByRequirementId() {
+        return requirementByRequirementId;
+    }
+
+    public void setRequirementByRequirementId(Requirement requirementByRequirementId) {
+        this.requirementByRequirementId = requirementByRequirementId;
     }
 }

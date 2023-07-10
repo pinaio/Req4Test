@@ -2,7 +2,7 @@ package Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
@@ -12,28 +12,25 @@ public class Testrun {
     @Column(name = "ID")
     private int id;
     @Basic
-    @Column(name = "Title")
-    private String title;
+    @Column(name = "CreationDate")
+    private Timestamp creationDate;
     @Basic
     @Column(name = "Deadline")
-    private Date deadline;
-    @Basic
-    @Column(name = "CreationDate")
-    private Date creationDate;
+    private Timestamp deadline;
     @Basic
     @Column(name = "Creator")
     private String creator;
     @Basic
-    @Column(name = "Tester")
-    private String tester;
-
-    @Basic
     @Column(name = "Status")
     private String status;
-
-
-    @OneToMany(mappedBy = "testrunsByTestrunId")
+    @Basic
+    @Column(name = "Title")
+    private String title;
+    @OneToMany(mappedBy = "testrunByTestrunId")
     private Collection<Testcase> testcasesById;
+    @ManyToOne
+    @JoinColumn(name = "Tester", referencedColumnName = "ID")
+    private User userById;
 
     public int getId() {
         return id;
@@ -43,28 +40,20 @@ public class Testrun {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public Date getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate =creationDate;
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Timestamp getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Timestamp deadline) {
+        this.deadline = deadline;
     }
 
     public String getCreator() {
@@ -75,6 +64,24 @@ public class Testrun {
         this.creator = creator;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Collection<Testcase> getTestcasesById() {
         return testcasesById;
     }
@@ -83,19 +90,11 @@ public class Testrun {
         this.testcasesById = testcasesById;
     }
 
-    public String getTester() {
-        return tester;
+    public User getUserByTester() {
+        return userById;
     }
 
-    public void setTester(String tester) {
-        this.tester = tester;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUserByTester(User userById) {
+        this.userById = userById;
     }
 }

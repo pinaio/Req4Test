@@ -1,4 +1,3 @@
-import Entities.Requirement;
 import Entities.Testrun;
 import jakarta.persistence.*;
 

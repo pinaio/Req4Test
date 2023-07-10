@@ -1,4 +1,3 @@
-import Entities.Requirement;
 import Entities.Testrun;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -78,7 +77,7 @@ public class TestRunController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
     public void deleteTestRun() {
-//        HIER MUSS DIE DAO LÖSCHEN UND AKTUALISIEREN
+
         testSystem.deleteTestRun(this.selectedTestRun);
         this.selectedTestRun = null;
         this.testRuns = testSystem.getTestRunList();
