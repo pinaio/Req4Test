@@ -57,7 +57,7 @@ public class TestRunController implements Serializable {
     public void openNew() {
         this.selectedTestRun = new Testrun();
     }
-    public void saveRequirement() {
+    public void saveTestRun() {
         if (this.selectedTestRun== null) {
             this.selectedTestRun.setId(
                    getNextIndex()
@@ -74,16 +74,16 @@ public class TestRunController implements Serializable {
 
         }
 
-        PrimeFaces.current().executeScript("PF('manageRequirementDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
+        PrimeFaces.current().executeScript("PF('manageTestrunDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
-    public void deleteRequirement() {
+    public void deleteTestRun() {
 //        HIER MUSS DIE DAO LÖSCHEN UND AKTUALISIEREN
         testSystem.deleteTestRun(this.selectedTestRun);
         this.selectedTestRun = null;
         this.testRuns = testSystem.getTestRunList();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
 
     private int getNextIndex(){

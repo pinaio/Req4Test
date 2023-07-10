@@ -2,7 +2,7 @@ package Entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 @Entity
@@ -64,7 +64,7 @@ public class Testrun {
     }
 
     public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+        this.creationDate =creationDate;
     }
 
     public String getCreator() {
