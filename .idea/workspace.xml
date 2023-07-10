@@ -9,20 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Created DB SHEMA for testcases and testruns, added testrunView">
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testcases.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testcase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testruns.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Requirements.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Requirements.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" afterDir="false" />
-    </list>
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Worked on Req2 2. **MUST:** Als Testmanager:in möchte ich Testläufe anlegen können." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -321,7 +308,7 @@
       <workItem from="1688756669957" duration="5725000" />
       <workItem from="1688765393607" duration="1224000" />
       <workItem from="1688766637042" duration="85000" />
-      <workItem from="1688809273185" duration="13410000" />
+      <workItem from="1688809273185" duration="13676000" />
     </task>
     <task id="LOCAL-00001" summary="Initial2">
       <option name="closed" value="true" />
@@ -379,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688821698757</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Worked on Req2 2. **MUST:** Als Testmanager:in möchte ich Testläufe anlegen können.">
+      <option name="closed" value="true" />
+      <created>1688825225053</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688825225053</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,6 +386,7 @@
     <MESSAGE value="Updatet RequirementsView -&gt; Encountered Problem while filtered the Table" />
     <MESSAGE value="Working Hibernate Configuration" />
     <MESSAGE value="Created DB SHEMA for testcases and testruns, added testrunView" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created DB SHEMA for testcases and testruns, added testrunView" />
+    <MESSAGE value="Worked on Req2 2. **MUST:** Als Testmanager:in möchte ich Testläufe anlegen können." />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on Req2 2. **MUST:** Als Testmanager:in möchte ich Testläufe anlegen können." />
   </component>
 </project>

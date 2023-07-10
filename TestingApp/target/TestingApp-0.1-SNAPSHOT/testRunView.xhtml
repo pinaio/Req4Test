@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+
+<h:head>
+   <title>TestingApp 0.1</title>
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
+
+</h:head>
+<h:body styleClass="m-0 p-0">
+   <!---Header Start-->
+   <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+      <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
+      <div class="max-h-4rem">
+         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+      </div>
+   </div>
+   <!--App & Sidebar-->
+   <div class="flex surface-card h-full ">
+      <h:form>
+         <div class="card">
+            <p:menu styleClass="w-20rem border-0">
+               <p:submenu label="Anforderungen">
+                  <p:menuitem value="Übersicht"  outcome="reqsView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testläufe">
+                  <p:menuitem value="Übersicht"  outcome="testRunView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Navigations">
+                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               </p:submenu>
+            </p:menu>
+         </div>
+      </h:form>
+      <!--Main Application "Window"-->
+
+      <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
+         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testRunController.header}"/>
+         <!--CRUD-TABLE-->
+         <div class="card crud-demo">
+            <h:form id="form">
+               <p:growl id="messages" showDetail="true" />
+
+               <p:toolbar>
+                  <p:toolbarGroup>
+                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
+                                      update=":dialogs:manage-requirement-content" oncomplete="PF('manageRequirementDialog').show()"
+                                      styleClass="ui-button-success" style="margin-right: .5rem">
+                        <p:resetInput target=":dialogs:manage-requirement-content" />
+                     </p:commandButton>
+                  </p:toolbarGroup>
+                 
+               </p:toolbar>
+
+               <p:dataTable id="dt-requirements" widgetVar="dtRequirements" var="tr" value="#{testRunController.testRuns}"
+                            reflow="true" styleClass="text-white"
+                            rowKey="#{requirement.name}" paginator="false"   >
+                  <f:facet name="header">
+                     <div class="requirements-table-header">
+                        <span style="font-weight: bold">Anforderungen</span>
+                     </div>
+                  </f:facet>
+                        <p:column  headerText="ID">
+                           <h:outputText  value="#{tr.id}" />
+                        </p:column>
+
+                        <p:column  headerText="Titel">
+                           <h:outputText value="#{tr.title}" />
+                        </p:column>
+
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.deadline}" />
+                        </p:column>
+
+                        <p:column  headerText="Erstellungsdatum">
+                           <h:outputText value="#{tr.creationDate}" />
+                        </p:column>
+                        <p:column  headerText="Ersteller">
+                           <h:outputText value="#{tr.creator}" />
+                        </p:column>
+                        <p:column  headerText="Anzahl Testfälle">
+                           <h:outputText value="#{tr.testcasesById.size()}" />
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.status}" />
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tr.deadline}" />
+                        </p:column>
+                        <p:column headerText="Bearbeiten">
+                           <div class="">
+                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
+                                               oncomplete="PF('manageRequirementDialog').show()" process="@this" >
+                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
+                                 <p:resetInput target=":dialogs:manage-requirement-content" />
+                              </p:commandButton>
+                              <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
+                                               oncomplete="PF('deleteRequirementDialog').show()">
+                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
+
+                              </p:commandButton>
+                           </div>
+
+                        </p:column>
+
+               </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageRequirementDialog"
+                         responsive="true">
+                  <p:outputPanel id="manage-requirement-content" class="ui-fluid">
+                     <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
+                        <div class="field">
+                           <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="name">Titel</p:outputLabel>
+                           <p:inputText id="name" value="#{testRunController.selectedTestRun.title}" required="true" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="description">Beschreibung</p:outputLabel>
+                           <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="author">Autor</p:outputLabel>
+                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.tester}" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="status">Status</p:outputLabel>
+                           <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
+                              <f:selectItem itemLabel="Neu" itemValue="Neu"/>
+                              <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
+                              <f:selectItem itemLabel="Testing" itemValue="Testing"/>
+                              <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
+                           </p:selectOneButton>
+                        </div>
+                     </p:outputPanel>
+                  </p:outputPanel>
+
+                  <f:facet name="footer">
+                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{reqsController.saveRequirement}"
+                                      update="manage-requirement-content" process="manage-requirement-content @this" />
+                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageRequirementDialog').hide()"
+                                      class="ui-button-secondary" type="button" />
+                  </f:facet>
+               </p:dialog>
+
+               <p:confirmDialog widgetVar="deleteRequirementDialog" showEffect="fade" width="300"
+                                message="Diese Anforderung löschen?" header="Bestätigung" severity="warn">
+                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{reqsController.deleteRequirement}"
+                                   process="@this"
+                                   oncomplete="PF('deleteRequirementDialog').hide()" />
+                  <p:commandButton value="Nein" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                   onclick="PF('deleteRequirementDialog').hide()"  />
+               </p:confirmDialog>
+
+               <p:confirmDialog global="true" showEffect="fade" width="300">
+                  <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                  <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                   icon="pi pi-times" />
+               </p:confirmDialog>
+            </h:form>
+         </div>
+      </div>
+   </div>
+</h:body>
+</html>
+
