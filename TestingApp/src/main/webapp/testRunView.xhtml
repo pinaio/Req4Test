@@ -76,12 +76,11 @@
                            <h:outputText value="#{tr.title}" />
                         </p:column>
 
-                        <p:column  headerText="Deadline">
-                           <h:outputText value="#{tr.deadline}" />
-                        </p:column>
 
                         <p:column  headerText="Erstellungsdatum">
-                           <h:outputText value="#{tr.creationDate}" />
+                           <h:outputText value="#{tr.creationDate}">
+                              <f:convertDateTime type="date" dateStyle="short"/>
+                           </h:outputText>
                         </p:column>
                         <p:column  headerText="Ersteller">
                            <h:outputText value="#{tr.creator}" />
@@ -90,10 +89,12 @@
                            <h:outputText value="#{tr.testcasesById.size()}" />
                         </p:column>
                         <p:column  headerText="Deadline">
-                           <h:outputText value="#{tr.status}" />
+                           <h:outputText value="#{tr.status}"/>
                         </p:column>
                         <p:column  headerText="Deadline">
-                           <h:outputText value="#{tr.deadline}" />
+                           <h:outputText value="#{tr.deadline}" >
+                              <f:convertDateTime type="date" dateStyle="default"/>
+                           </h:outputText>
                         </p:column>
                         <p:column headerText="Bearbeiten">
                            <div class="">
@@ -123,6 +124,9 @@
                            <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
                         </div>
                         <div class="field">
+                           <p:outputLabel styleClass="text-lg" value="#{testRunController.selectedTestRun.creationDate}"/>
+                        </div>
+                        <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
                            <p:inputText id="name" value="#{testRunController.selectedTestRun.title}" required="true" />
                         </div>
@@ -131,14 +135,14 @@
                            <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
                         <div class="field">
-                           <p:outputLabel for="author">Autor</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.tester}" />
+                           <p:outputLabel for="author">Ersteller</p:outputLabel>
+                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
                         <div class="field">
-                           <p:outputLabel for="creationDate">Erstellungsdatum</p:outputLabel>
-                           <p:calendar id="creationDate" value="#{testRunController.selectedTestRun.creationDate}" required="true"/>
-
+                           <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
+                           <p:calendar id="deadline" value="#{testRunController.selectedTestRun.deadline}" required="true"/>
                         </div>
+
                         <div class="field">
                            <p:outputLabel for="status">Status</p:outputLabel>
                            <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">

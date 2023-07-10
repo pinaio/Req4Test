@@ -16,7 +16,7 @@
 <h:body>
   <!---Header Start-->
   <div class="bg-red-400 m-0 p-0  flex flex-row justify-content-around align-items-center">
-    <h:outputText styleClass="text-6xl pl-4 px-2" value="#{testSystem.name}"> </h:outputText>
+
     <div class="max-h-4rem">
       <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
       <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
@@ -38,9 +38,8 @@
     <div>
       <h:form>
       <h:outputText styleClass="text-6xl" value="STARTSEITE"/>
-      <h:commandButton  styleClass="p-4 font-bold bg-blue-300 border-round-2xl" value="click here to go to Requirements" action="reqs"/>
+      <h:commandButton  styleClass="p-4 font-bold bg-blue-300 border-round-2xl" value="Testdaten initalisieren" action="#{indexController.testSystem.createTestData()}"/>
         <h:outputText value="Anzahl der Anforderungen:      " ></h:outputText>
-        <h:outputText value="#{testSystem.sayAmount()}" ></h:outputText>
       </h:form>
     </div>
 

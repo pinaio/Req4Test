@@ -16,6 +16,9 @@ public class User {
     @Column(name = "Lastname")
     private String lastname;
     @Basic
+    @Column(name = "Password")
+    private String password;
+    @Basic
     @Column(name = "Role")
     private String role;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +27,19 @@ public class User {
     private int id;
     @OneToMany(mappedBy = "userById")
     private Collection<Testrun> testrunsById;
+
+
+    public User() {
+    }
+
+    public User(String username, String firstname, String lastname, String password, String role, int id) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.role = role;
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

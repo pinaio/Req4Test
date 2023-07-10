@@ -1229,36 +1229,36 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <DasType>int(11)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="347" parent="335" name="Description">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="347" parent="335" name="requirement_id">
+      <DasType>int(11)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="348" parent="335" name="ExpectedResult">
+    <column id="348" parent="335" name="Description">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="349" parent="335" name="FailOrPass">
+    <column id="349" parent="335" name="ExpectedResult">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="350" parent="335" name="ObservedResult">
+    <column id="350" parent="335" name="FailOrPass">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="351" parent="335" name="Title">
+    <column id="351" parent="335" name="ObservedResult">
       <DasType>varchar(255)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="352" parent="335" name="requirement_id">
-      <DasType>int(11)|0s</DasType>
+    <column id="352" parent="335" name="Title">
+      <DasType>varchar(255)|0s</DasType>
       <Position>8</Position>
     </column>
-    <foreign-key id="353" parent="335" name="testcase_testrun_ID_fk">
+    <foreign-key id="353" parent="335" name="FKtfykluih5wmdkinvo0nl7crgs">
       <ColNames>Testrun_id</ColNames>
       <RefColNames>ID</RefColNames>
       <RefTableName>testrun</RefTableName>
     </foreign-key>
-    <foreign-key id="354" parent="335" name="testcase_requirement_ID_fk">
+    <foreign-key id="354" parent="335" name="FK9vbaiys6xbj9ydb0tpowm06ih">
       <ColNames>requirement_id</ColNames>
       <RefColNames>ID</RefColNames>
       <RefTableName>requirement</RefTableName>
@@ -1268,11 +1268,11 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="356" parent="335" name="testcase_testrun_ID_fk">
+    <index id="356" parent="335" name="FKtfykluih5wmdkinvo0nl7crgs">
       <ColNames>Testrun_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="357" parent="335" name="testcase_requirement_ID_fk">
+    <index id="357" parent="335" name="FK9vbaiys6xbj9ydb0tpowm06ih">
       <ColNames>requirement_id</ColNames>
       <Type>btree</Type>
     </index>
@@ -1287,31 +1287,32 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="360" parent="336" name="CreationDate">
-      <DasType>datetime(6)|0s</DasType>
+    <column id="360" parent="336" name="Tester">
+      <DasType>int(11)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="361" parent="336" name="Deadline">
-      <DasType>datetime(6)|0s</DasType>
+    <column id="361" parent="336" name="CreationDate">
+      <DasType>timestamp|0s</DasType>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
       <Position>3</Position>
     </column>
-    <column id="362" parent="336" name="Creator">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="362" parent="336" name="Deadline">
+      <DasType>datetime(6)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="363" parent="336" name="Status">
+    <column id="363" parent="336" name="Creator">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="364" parent="336" name="Tester">
-      <DasType>int(11)|0s</DasType>
+    <column id="364" parent="336" name="Status">
+      <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
     </column>
     <column id="365" parent="336" name="Title">
       <DasType>varchar(255)|0s</DasType>
       <Position>7</Position>
     </column>
-    <foreign-key id="366" parent="336" name="testrun_user_ID_fk">
+    <foreign-key id="366" parent="336" name="FK1q2qa0mhnl83r4a5v81jyykk9">
       <ColNames>Tester</ColNames>
       <RefColNames>ID</RefColNames>
       <RefTableName>user</RefTableName>
@@ -1321,7 +1322,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="368" parent="336" name="testrun_user_ID_fk">
+    <index id="368" parent="336" name="FK1q2qa0mhnl83r4a5v81jyykk9">
       <ColNames>Tester</ColNames>
       <Type>btree</Type>
     </index>
@@ -1330,29 +1331,26 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="370" parent="337" name="Username">
-      <DasType>varchar(24)|0s</DasType>
+    <column id="370" parent="337" name="ID">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
     <column id="371" parent="337" name="Firstname">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
+      <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
     </column>
     <column id="372" parent="337" name="Lastname">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
+      <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
     </column>
     <column id="373" parent="337" name="Role">
-      <DasType>text|0s</DasType>
+      <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="374" parent="337" name="ID">
-      <AutoIncrement>1</AutoIncrement>
-      <DasType>int(11)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="374" parent="337" name="Username">
+      <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
     </column>
     <index id="375" parent="337" name="PRIMARY">

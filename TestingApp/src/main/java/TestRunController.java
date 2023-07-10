@@ -10,6 +10,7 @@ import org.primefaces.PrimeFaces;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Named
@@ -17,7 +18,7 @@ import java.util.List;
 public class TestRunController implements Serializable {
 
     private List<Testrun> testRuns;
-    private Testrun selectedTestRun;
+    private Testrun selectedTestRun = new Testrun();
 
 
     @Inject
@@ -60,6 +61,7 @@ public class TestRunController implements Serializable {
         if (this.selectedTestRun== null) {
             this.selectedTestRun.setId(
                    getNextIndex()
+
             );
             testSystem.saveTestRun(this.selectedTestRun);
             this.testRuns = testSystem.getTestRunList();

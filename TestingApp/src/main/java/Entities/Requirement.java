@@ -25,6 +25,17 @@ public class Requirement {
     @OneToMany(mappedBy = "requirementByRequirementId")
     private Collection<Testcase> testcasesById;
 
+    public Requirement() {
+    }
+
+    public Requirement(int id, String author, String description, String name, String status) {
+        this.id = id;
+        this.author = author;
+        this.description = description;
+        this.name = name;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

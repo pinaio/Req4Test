@@ -1,22 +1,36 @@
 package Entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
 public class Testrun {
+
+    public Testrun() {
+    }
+
+    public Testrun(int id, Date deadline, String creator, String status, String title) {
+        this.id = id;
+        this.deadline = deadline;
+        this.creator = creator;
+        this.status = status;
+        this.title = title;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
     private int id;
-    @Basic
+    @CreationTimestamp
     @Column(name = "CreationDate")
     private Timestamp creationDate;
     @Basic
     @Column(name = "Deadline")
-    private Timestamp deadline;
+    private Date deadline;
     @Basic
     @Column(name = "Creator")
     private String creator;
@@ -40,7 +54,7 @@ public class Testrun {
         this.id = id;
     }
 
-    public Timestamp getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
@@ -48,11 +62,11 @@ public class Testrun {
         this.creationDate = creationDate;
     }
 
-    public Timestamp getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Timestamp deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
