@@ -55,11 +55,12 @@ public class ReqsController implements Serializable {
 
     public void openNew() {
         this.selectedRequirement = new Requirement();
+        this.selectedRequirement.setId(getNextIndex());
     }
     public void saveRequirement() {
-        if (this.selectedRequirement.getId() == null) {
+        if (this.selectedRequirement == null) {
             this.selectedRequirement.setId(
-                   String.valueOf(getNextIndex())
+                   (getNextIndex())
             );
             testSystem.saveRequirement(this.selectedRequirement);
             this.requirements = testSystem.getReqList();
@@ -90,7 +91,7 @@ public class ReqsController implements Serializable {
         List<Integer> ident = new ArrayList<>() ;
         if ( !requirements.isEmpty()){
             for (Requirement req : this.requirements){
-                ident.add(Integer.parseInt((req.getId())));
+                ident.add(req.getId());
             }
             highestId = Collections.max(ident);
         }else{

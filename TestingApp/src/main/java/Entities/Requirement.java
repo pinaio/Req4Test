@@ -11,7 +11,7 @@ public class Requirement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private String id;
+    private int id;
     @Basic
     @Column(name = "Name")
     private String name;
@@ -27,7 +27,7 @@ public class Requirement {
 
 
     public Requirement(){}
-    public Requirement(String id,String name, String description, String status, String author) {
+    public Requirement(int id,String name, String description, String status, String author) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,11 +35,11 @@ public class Requirement {
         this.author = author;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
