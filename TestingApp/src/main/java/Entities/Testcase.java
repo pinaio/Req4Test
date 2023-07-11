@@ -32,6 +32,21 @@ public class Testcase {
     @JoinColumn(name = "requirement_id", referencedColumnName = "ID")
     private Requirement requirementByRequirementId;
 
+
+    public Testcase() {
+    }
+
+    public Testcase(int id, String description, String expectedResult, String failOrPass, String observedResult, String title, Testrun testrunByTestrunId, Requirement requirementByRequirementId) {
+        this.id = id;
+        this.description = description;
+        this.expectedResult = expectedResult;
+        this.failOrPass = failOrPass;
+        this.observedResult = observedResult;
+        this.title = title;
+        this.testrunByTestrunId = testrunByTestrunId;
+        this.requirementByRequirementId = requirementByRequirementId;
+    }
+
     public int getId() {
         return id;
     }

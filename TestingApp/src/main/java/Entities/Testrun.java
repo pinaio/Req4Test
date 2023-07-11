@@ -21,6 +21,15 @@ public class Testrun {
         this.title = title;
     }
 
+    public Testrun(int id, Date deadline, String creator, String status, String title, User userById) {
+        this.id = id;
+        this.deadline = deadline;
+        this.creator = creator;
+        this.status = status;
+        this.title = title;
+        this.userById = userById;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")

@@ -1,4 +1,5 @@
 import Entities.Requirement;
+import Entities.Testcase;
 import Entities.Testrun;
 import Entities.User;
 import jakarta.annotation.PostConstruct;
@@ -18,10 +19,13 @@ public class TestSystem implements Serializable {
     private List reqList =new ArrayList<Requirement>();
     private List testRunList =new ArrayList<Testrun>();
 
+    private List testCaseList = new ArrayList<Testcase>();
+
     private List userList = new ArrayList<User>();
 
     private ReqsDAO reqsDao = new ReqsDAO();
     private TestRunDAO testRunDao = new TestRunDAO();
+    private TestCaseDAO testCaseDao = new TestCaseDAO();
 
     private UserDAO userDao = new UserDAO();
 
@@ -45,6 +49,11 @@ public class TestSystem implements Serializable {
         return (ArrayList<Testrun>) this.testRunList;
     }
 
+    public ArrayList<Testcase> getTestCaseList(){
+        this.testCaseList = testCaseDao.loadAll();
+        return (ArrayList<Testcase>) this.testCaseList;
+    }
+
     public ArrayList<User> getUserList(){
     this.userList = userDao.loadAll();
     return (ArrayList<User>) this.userList;
@@ -59,6 +68,8 @@ public class TestSystem implements Serializable {
         testRunDao.saveTestRun(selectedTestRun);
     }
 
+    public void saveTestCase(Testcase selectedTestCase){testCaseDao.saveTestCase(selectedTestCase);}
+
     public void saveUser(User selectedUser) {userDao.saveUser(selectedUser);}
 
     public void deleteRequirement(Requirement selectedRequirement){
@@ -67,6 +78,8 @@ public class TestSystem implements Serializable {
     public void deleteTestRun(Testrun selectedTestRun){
         testRunDao.deleteTestRun(selectedTestRun);
     }
+
+    public void deleteTestCase(Testcase selectedTestCase) {testCaseDao.deleteTestCase(selectedTestCase);}
 
     public void deleteUser(User selectedUser){
         userDao.deleteUser(selectedUser);
@@ -78,9 +91,15 @@ public class TestSystem implements Serializable {
     }
 
     public  void createTestData(){
-        createTestRequirements();
-        createTestTestRuns();
         createTestUser();
+        getUserList();
+        createTestRequirements();
+        getReqList();
+        createTestTestRuns();
+        getTestRunList();
+        createTestTestCases();
+        getTestCaseList();
+
     }
     private   void createTestRequirements(){
         List<Requirement> testReqList = new ArrayList<Requirement>();
@@ -94,11 +113,13 @@ public class TestSystem implements Serializable {
         }
     }
     private   void createTestTestRuns(){
+        User ersterUser = (User) userList.get(0);
         List<Testrun> testTrList = new ArrayList<Testrun>();
-        testTrList.add(new Testrun(1 ,new Date(),"Peter Testmanager","Neu","Erster Testlauf" ));
+        testTrList.add(new Testrun(1 ,new Date(),"Peter Testmanager","Neu","Erster Testlauf", ersterUser ));
         testTrList.add(new Testrun(2 ,new Date(),"Peter Testmanager","Neu","2. Testlauf" ));
         testTrList.add(new Testrun(3 ,new Date(),"Peter Testmanager","Neu","3. Testlauf" ));
         testTrList.add(new Testrun(4 ,new Date(),"Peter Testmanager","Neu","4. Testlauf" ));
+
 
 
         for(Testrun tr : testTrList){
@@ -118,6 +139,20 @@ public class TestSystem implements Serializable {
             }
 
 
+
+    }
+
+    private void createTestTestCases(){
+        Testrun firstTestrun = (Testrun) this.testRunList.get(0);
+        Requirement firstrequirement = (Requirement) this.getReqList().get(0);
+        List<Testcase> tcases = new ArrayList<Testcase>();
+        tcases.add(new Testcase( 1, "Ich möchte neue Testfälle anlegen können", "Ich kann Testfälle anlegen","","","Testfälle anlegen",firstTestrun,firstrequirement));
+        tcases.add(new Testcase( 2, "Ich möchte neue Testläufe anlegen können", "Ich kann Testläufe anlegen","","","Testläufe anlegen",firstTestrun,firstrequirement));
+        tcases.add(new Testcase( 3, "Ich möchte neue Anforderungen anlegen können", "Ich kann Anforderungen anlegen","","","Anforderungen anlegen",firstTestrun,firstrequirement));
+
+        for(Testcase tc : tcases){
+            saveTestCase(tc);
+        }
     }
 
 

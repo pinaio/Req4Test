@@ -47,98 +47,70 @@
       <!--Main Application "Window"-->
 
       <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
-         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testRunController.header}"/>
+         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testCasesController.header}"/>
          <!--CRUD-TABLE-->
-         <div class="card crud-demo">
+         <div class="card ">
             <h:form id="form">
                <p:growl id="messages" showDetail="true" />
 
                <p:toolbar>
                   <p:toolbarGroup>
-                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
-                                      update=":dialogs:manage-testrun-content" oncomplete="PF('manageTestrunDialog').show()"
+                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testCasesController.openNew}"
+                                      update=":dialogs:manage-testCase-content" oncomplete="PF('managetestCaseDialog').show()"
                                       styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":dialogs:manage-testrun-content" />
+                        <p:resetInput target=":dialogs:manage-testCase-content" />
                      </p:commandButton>
                   </p:toolbarGroup>
                  
                </p:toolbar>
 
-               <p:dataTable id="dt-testruns" widgetVar="dtTestruns" var="tr" value="#{testRunController.testRuns}"
-                            reflow="true" styleClass="text-white p-2"
-                            rowKey="#{requirement.name}" paginator="false"   >
+               <p:dataTable id="dt-testCases" widgetVar="dttestCases" var="tc" value="#{testCasesController.testcases}"
+                            reflow="true" styleClass="text-white"
+                            paginator="false"   >
                   <f:facet name="header">
                      <div class="requirements-table-header">
                         <span style="font-weight: bold">Anforderungen</span>
                      </div>
                   </f:facet>
                         <p:column  headerText="ID">
-                           <h:outputText  value="#{tr.id}" />
+                           <h:outputText  value="#{tc.id}" />
                         </p:column>
-
+                        <p:column  headerText="Zugeordet zu Testlauf">
+                           <h:outputText  value="#{tc.testrunByTestrunId.title}" />
+                        </p:column>
                         <p:column  headerText="Titel">
-                           <h:outputText value="#{tr.title}"  />
+                           <h:outputText value="#{tc.title}" />
                         </p:column>
-
-
-                        <p:column  headerText="Erstellungsdatum">
-                           <h:outputText value="#{tr.creationDate}">
+                        <p:column  headerText="Beschreibung">
+                           <h:outputText value="#{tc.description}">
                               <f:convertDateTime type="date" dateStyle="short"/>
                            </h:outputText>
                         </p:column>
-                        <p:column  headerText="Ersteller">
-                           <h:outputText value="#{tr.creator}" />
+                        <p:column  headerText="Erwartetes Verhalten">
+                           <h:outputText value="#{tc.expectedResult}" />
                         </p:column>
-                        <p:column  headerText="Zugewiesene Testfälle(Mouseover)">
-                           <h:outputText value="#{tr.testcasesById.size()}" id="testCaseField" />
-
-
-                           <p:overlayPanel for="testCaseField" style="width:350px" showEvent="mouseover" hideEvent="mouseout" autoHide="false">
-                              <p:dataTable id="dt-testcases" widgetVar="dtTestCases" var="tc" value="#{tr.testcasesById}" >
-                                 <f:facet name="header">
-                                    <div class="">
-                                       <span style="font-weight: bold">Zugewiesene Testfälle</span>
-                                    </div>
-                                 </f:facet>
-                                 <p:column>
-                                    <h:outputText value="#{tc.title}"/>
-                                 </p:column>
-                                 <p:column>
-                                    <h:outputText value="#{tc.description}"/>
-                                 </p:column>
-
-                              </p:dataTable>
-                           </p:overlayPanel>
-
+                        <p:column  headerText="Beobachtetes Verhalten">
+                           <h:outputText value="#{tc.observedResult}" />
+                        </p:column>
+                        <p:column  headerText="Fail/Pass">
+                           <h:outputText value="#{tc.failOrPass}"/>
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tc.requirementByRequirementId.name}" />
 
                         </p:column>
-                        <p:column  headerText="Status">
-                           <h:outputText value="#{tr.status}"/>
-                        </p:column>
-                        <p:column  headerText="Zu testen bis">
-                           <h:outputText value="#{tr.deadline}" >
-                              <f:convertDateTime type="date" dateStyle="default"/>
-                           </h:outputText>
-                        </p:column>
-                     <p:column  headerText="Tester">
-                        <h:outputText value="#{tr.userByTester.firstname}" rendered="#{not empty tr.userByTester }" />
-                        <h:outputText value="Nicht Zugewiesen" rendered="#{empty tr.userByTester }" />
-
-                     </p:column>
                         <p:column headerText="Bearbeiten">
                            <div class="">
-                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
-                                               oncomplete="PF('manageTestrunDialog').show()" process="@this" >
-                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
-                                 <p:resetInput target=":dialogs:manage-testrun-content" />
+                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testCase-content"
+                                               oncomplete="PF('managetestCaseDialog').show()" process="@this" >
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+                                 <p:resetInput target=":dialogs:manage-testCase-content" />
                               </p:commandButton>
-
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
-                                               oncomplete="PF('deleteTestrunDialog').show()">
-                                 <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
+                                               oncomplete="PF('deletetestCaseDialog').show()">
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
 
                               </p:commandButton>
-
                            </div>
 
                         </p:column>
@@ -147,36 +119,36 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageTestrunDialog"
+               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
                          responsive="true">
-                  <p:outputPanel id="manage-testrun-content" class="ui-fluid">
-                     <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
+                  <p:outputPanel id="manage-testCase-content" class="ui-fluid">
+                     <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">
                         <div class="field">
-                           <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
+                           <p:outputLabel styleClass="text-3xl" value="#{testCasesController.selectedTestCase.id}"/>
                         </div>
                         <div class="field">
-                           <p:outputLabel styleClass="text-lg" value="#{testRunController.selectedTestRun.creationDate}"/>
+                           <p:outputLabel styleClass="text-lg" value="#{testCasesController.selectedTestCase.title}"/>
                         </div>
                         <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
-                           <p:inputText id="name" value="#{testRunController.selectedTestRun.title}" required="true" />
+                           <p:inputText id="name" value="#{testCasesController.selectedTestCase.title}" required="true" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="description">Beschreibung</p:outputLabel>
-                           <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
+                           <p:inputTextarea id="description" value="#{testCasesController.selectedTestCase.failOrPass}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="author">Ersteller</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.creator}" />
+                           <p:inputTextarea id="author" value="#{testCasesController.selectedTestCase.title}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
-                           <p:calendar id="deadline" value="#{testRunController.selectedTestRun.deadline}" required="true"/>
+                           <p:calendar id="deadline" value="#{testCasesController.selectedTestCase.title}" required="true"/>
                         </div>
 
                         <div class="field">
                            <p:outputLabel for="status">Status</p:outputLabel>
-                           <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
+                           <p:selectOneButton id="status" value="#{testCasesController.selectedTestCase.failOrPass}">
                               <f:selectItem itemLabel="Neu" itemValue="Neu"/>
                               <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
                               <f:selectItem itemLabel="Testing" itemValue="Testing"/>
@@ -187,20 +159,20 @@
                   </p:outputPanel>
 
                   <f:facet name="footer">
-                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{testRunController.saveTestRun}"
-                                      update="manage-testrun-content" process="manage-testrun-content @this" />
-                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageTestrunDialog').hide()"
+                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{testCasesController.saveTestCase()}"
+                                      update="manage-testCase-content" process="manage-testCase-content @this" />
+                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('managetestCaseDialog').hide()"
                                       class="ui-button-secondary" type="button" />
                   </f:facet>
                </p:dialog>
 
-               <p:confirmDialog widgetVar="deleteTestrunDialog" showEffect="fade" width="300"
+               <p:confirmDialog widgetVar="deletetestCaseDialog" showEffect="fade" width="300"
                                 message="Diesen Testlauf löschen?" header="Bestätigung" severity="warn">
-                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{testRunController.deleteTestRun()}"
+                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{testCasesController.deleteTestCase()}"
                                    process="@this"
-                                   oncomplete="PF('deleteTestrunDialog').hide()" />
+                                   oncomplete="PF('deletetestCaseDialog').hide()" />
                   <p:commandButton value="Nein" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                   onclick="PF('deleteTestrunDialog').hide()"  />
+                                   onclick="PF('deletetestCaseDialog').hide()"  />
                </p:confirmDialog>
 
                <p:confirmDialog global="true" showEffect="fade" width="300">
