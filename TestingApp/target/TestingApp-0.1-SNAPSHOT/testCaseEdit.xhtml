@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <title>TestingApp 0.1</title>
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
+
+</h:head>
+
+<h:form>
+   <p:outputPanel id="manage-testCase" class="ui-fluid">
+   <p:outputPanel rendered="#{not empty tce.selectedTestCase}">
+      <div class="field">
+         <p:outputLabel styleClass="text-3xl" value="#{tce.selectedTestCase.id}"/>
+      </div>
+      <div class="field">
+         <p:outputLabel for="requirement">Zugewiesener Testlauf</p:outputLabel>
+         <p:selectOneMenu id="requirement" value="#{tce.selectedTestCase.requirementByRequirementId}" required="false"  >
+            <f:selectItem itemLabel="Bitte Anforderung Auswählen" value="#{null}" noSelectionOption="true"/>
+            <f:selectItems var="req" value="#{tce.requirements}" itemValue="#{req}" itemLabel="#{req.name}"/>
+         </p:selectOneMenu>
+      </div>
+      <div class="field">
+         <p:outputLabel styleClass="text-lg" value="#{tce.selectedTestCase.title}"/>
+      </div>
+      <div class="field">
+         <p:outputLabel for="name">Titel</p:outputLabel>
+         <p:inputText id="name" value="#{tce.selectedTestCase.title}" required="true" />
+      </div>
+      <div class="field">
+         <p:outputLabel for="description">Beschreibung</p:outputLabel>
+         <p:inputTextarea id="description" value="#{tce.selectedTestCase.description}" />
+      </div>
+      <div class="field">
+         <p:outputLabel >Fail / Pass</p:outputLabel>
+         <h:outputText  value="#{tce.selectedTestCase.failOrPass}" rendered="#{not empty tce.selectedTestCase.failOrPass}"/>
+         <h:outputText  value="Nicht getestet" rendered="#{empty tce.selectedTestCase.failOrPass}"/>
+      </div>
+      <div class="field">
+         <p:outputLabel for="testRun">Zugewiesener Testlauf</p:outputLabel>
+         <p:selectOneMenu id="testRun" value="#{tce.selectedTestCase.testrunByTestrunId}" required="false" >
+            <f:selectItem itemLabel="Testlauf auswählen" itemValue="#{null}" noSelectionOption="true"/>
+            <f:selectItems var="str" value="#{tce.testruns}" itemValue="#{str}" itemLabel="#{str.title}" noSelectionValue="#{null}"/>
+         </p:selectOneMenu>
+      </div>
+      <div class="field">
+         <p:outputLabel  value="#{str.userByTester.firstname}"/>
+      </div>
+      <div>
+         <p:commandButton value="Speichern" icon="pi pi-check" onclick="#{tce.saveTestCase()}"
+                          process="manage-testCase @this" />
+         <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('managetestCaseDialog').hide()"
+                          class="ui-button-secondary" type="button" />
+      </div>>
+   </p:outputPanel>
+
+   </p:outputPanel>
+</h:form>
+</html>

@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+
+<h:head>
+   <title>TestingApp 0.1</title>
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
+
+</h:head>
+<h:body styleClass="m-0 p-0">
+   <!---Header Start-->
+   <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+      <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
+      <div class="max-h-4rem">
+         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+      </div>
+   </div>
+   <!--App & Sidebar-->
+   <div class="flex surface-card h-full ">
+      <h:form>
+         <div class="card">
+            <p:menu styleClass="w-20rem border-0">
+               <p:submenu label="Anforderungen">
+                  <p:menuitem value="Übersicht"  outcome="reqsView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testläufe">
+                  <p:menuitem value="Übersicht"  outcome="testRunView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testfälle">
+                  <p:menuitem value="Übersicht"  outcome="testCasesView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Navigations">
+                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               </p:submenu>
+            </p:menu>
+         </div>
+      </h:form>
+      <!--Main Application "Window"-->
+
+      <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
+         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testCasesController.header}"/>
+         <!--CRUD-TABLE-->
+         <div class="card ">
+            <h:form id="form">
+               <p:growl id="messages" showDetail="true" />
+
+               <p:toolbar>
+                  <p:toolbarGroup>
+                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testCasesController.openNew}"
+                                      update=":dialogs:manage-testCase-content" oncomplete="PF('managetestCaseDialog').show()"
+                                      styleClass="ui-button-success" style="margin-right: .5rem">
+                        <p:resetInput target=":dialogs:manage-testCase-content" />
+                     </p:commandButton>
+                  </p:toolbarGroup>
+                 
+               </p:toolbar>
+
+               <p:dataTable id="dt-testCases" widgetVar="dttestCases" var="tc" value="#{testCasesController.testcases}"
+                            reflow="true" styleClass="text-white"
+                            paginator="false"   >
+                  <f:facet name="header">
+                     <div class="requirements-table-header">
+                        <span style="font-weight: bold">Anforderungen</span>
+                     </div>
+                  </f:facet>
+                        <p:column  headerText="ID">
+                           <h:outputText  value="#{tc.id}" />
+                        </p:column>
+                        <p:column  headerText="Zugeordet zu Testlauf">
+                           <h:outputText  value="#{tc.testrunByTestrunId.title}" />
+                        </p:column>
+                        <p:column  headerText="Titel">
+                           <h:outputText value="#{tc.title}" />
+                        </p:column>
+                        <p:column  headerText="Beschreibung">
+                           <h:outputText value="#{tc.description}">
+                              <f:convertDateTime type="date" dateStyle="short"/>
+                           </h:outputText>
+                        </p:column>
+                        <p:column  headerText="Erwartetes Verhalten">
+                           <h:outputText value="#{tc.expectedResult}" />
+                        </p:column>
+                        <p:column  headerText="Beobachtetes Verhalten">
+                           <h:outputText value="#{tc.observedResult}" />
+                        </p:column>
+                        <p:column  headerText="Fail/Pass">
+                           <h:outputText value="#{tc.failOrPass}"/>
+                        </p:column>
+                        <p:column  headerText="Deadline">
+                           <h:outputText value="#{tc.requirementByRequirementId.name}" />
+
+                        </p:column>
+                        <p:column headerText="Bearbeiten">
+                           <div class="">
+                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testCase-content"
+                                               oncomplete="PF('managetestCaseDialog').show()" process="@this" >
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+                                 <p:resetInput target=":dialogs:manage-testCase-content" />
+                              </p:commandButton>
+                              <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
+                                               oncomplete="PF('deletetestCaseDialog').show()">
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+
+                              </p:commandButton>
+                              <p:commandButton styleClass="ui-button-danger m-2 " value="Bearbeiten2" icon="pi pi-pencil"
+                                               action="#{testCasesController.openEdit(tc)}">
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+                              </p:commandButton>
+                           </div>
+
+                        </p:column>
+
+               </p:dataTable>
+            </h:form>
+
+            <h:form id="dialogs">
+               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
+                         responsive="true">
+                  <p:outputPanel id="manage-testCase-content" class="ui-fluid">
+                     <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">
+                        <div class="field">
+                           <p:outputLabel styleClass="text-3xl" value="#{testCasesController.selectedTestCase.id}"/>
+                        </div>
+                        <div class="field">
+                           <p:outputLabel styleClass="text-lg" value="#{testCasesController.selectedTestCase.title}"/>
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="name">Titel</p:outputLabel>
+                           <p:inputText id="name" value="#{testCasesController.selectedTestCase.title}" required="true" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="description">Beschreibung</p:outputLabel>
+                           <p:inputTextarea id="description" value="#{testCasesController.selectedTestCase.failOrPass}" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="author">Ersteller</p:outputLabel>
+                           <p:inputTextarea id="author" value="#{testCasesController.selectedTestCase.title}" />
+                        </div>
+                        <div class="field">
+                           <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
+                           <p:calendar id="deadline" value="#{testCasesController.selectedTestCase.title}" required="true"/>
+                        </div>
+
+                        <div class="field">
+                           <p:outputLabel for="status">Status</p:outputLabel>
+                           <p:selectOneButton id="status" value="#{testCasesController.selectedTestCase.failOrPass}">
+                              <f:selectItem itemLabel="Neu" itemValue="Neu"/>
+                              <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
+                              <f:selectItem itemLabel="Testing" itemValue="Testing"/>
+                              <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
+                           </p:selectOneButton>
+                        </div>
+                     </p:outputPanel>
+                  </p:outputPanel>
+
+                  <f:facet name="footer">
+                     <p:commandButton value="Speichern" icon="pi pi-check" actionListener="#{testCasesController.saveTestCase()}"
+                                      update="manage-testCase-content" process="manage-testCase-content @this" />
+                     <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('managetestCaseDialog').hide()"
+                                      class="ui-button-secondary" type="button" />
+                  </f:facet>
+               </p:dialog>
+
+               <p:confirmDialog widgetVar="deletetestCaseDialog" showEffect="fade" width="300"
+                                message="Diesen Testlauf löschen?" header="Bestätigung" severity="warn">
+                  <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{testCasesController.deleteTestCase()}"
+                                   process="@this"
+                                   oncomplete="PF('deletetestCaseDialog').hide()" />
+                  <p:commandButton value="Nein" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                   onclick="PF('deletetestCaseDialog').hide()"  />
+               </p:confirmDialog>
+
+               <p:confirmDialog global="true" showEffect="fade" width="300">
+                  <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                  <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                   icon="pi pi-times" />
+               </p:confirmDialog>
+            </h:form>
+         </div>
+      </div>
+   </div>
+</h:body>
+</html>
+

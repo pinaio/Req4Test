@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="Entities.Requirement">
+        <table name="requirement" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="author">
+                <column name="Author"/>
+            </basic>
+            <basic name="description">
+                <column name="Description"/>
+            </basic>
+            <basic name="name">
+                <column name="Name"/>
+            </basic>
+            <basic name="status">
+                <column name="Status"/>
+            </basic>
+            <one-to-many name="testcasesById" mapped-by="requirementByRequirementId" target-entity="Entities.Testcase"/>
+        </attributes>
+    </entity>
+    <entity class="Entities.Testcase">
+        <table name="testcase" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="testrunId">
+                <column name="Testrun_id"/>
+            </basic>
+            <basic name="description">
+                <column name="Description"/>
+            </basic>
+            <basic name="expectedResult">
+                <column name="ExpectedResult"/>
+            </basic>
+            <basic name="failOrPass">
+                <column name="FailOrPass"/>
+            </basic>
+            <basic name="observedResult">
+                <column name="ObservedResult"/>
+            </basic>
+            <basic name="title">
+                <column name="Title"/>
+            </basic>
+            <basic name="requirementId">
+                <column name="requirement_id"/>
+            </basic>
+            <many-to-one name="testrunByTestrunId" optional="true" target-entity="Entities.Testrun">
+                <join-column name="Testrun_id" nullable="false" referenced-column-name="ID"/>
+            </many-to-one>
+            <many-to-one name="requirementByRequirementId" optional="true" target-entity="Entities.Requirement">
+                <join-column name="requirement_id" nullable="false" referenced-column-name="ID"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="Entities.Testrun">
+        <table name="testrun" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="creationDate">
+                <column name="CreationDate"/>
+            </basic>
+            <basic name="deadline">
+                <column name="Deadline"/>
+            </basic>
+            <basic name="creator">
+                <column name="Creator"/>
+            </basic>
+            <basic name="status">
+                <column name="Status"/>
+            </basic>
+            <basic name="tester">
+                <column name="Tester"/>
+            </basic>
+            <basic name="title">
+                <column name="Title"/>
+            </basic>
+            <many-to-one name="userByTester" optional="true" target-entity="Entities.User">
+                <join-column name="Tester" nullable="false" referenced-column-name="ID"/>
+            </many-to-one>
+            <one-to-many name="testcasesById" mapped-by="testrunByTestrunId" target-entity="Entities.Testcase"/>
+        </attributes>
+    </entity>
+    <entity class="Entities.User">
+        <table name="user" schema="testingapp" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID"/>
+            </id>
+            <basic name="username">
+                <column name="Username"/>
+            </basic>
+            <basic name="firstname">
+                <column name="Firstname"/>
+            </basic>
+            <basic name="lastname">
+                <column name="Lastname"/>
+            </basic>
+            <basic name="role">
+                <column name="Role"/>
+            </basic>
+            <one-to-many name="testrunsById" mapped-by="userByTester" target-entity="Entities.Testrun"/>
+        </attributes>
+    </entity>
+</entity-mappings>
