@@ -6,6 +6,9 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.primefaces.PrimeFaces;
+import org.primefaces.component.dialog.Dialog;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.util.Constants;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -117,7 +120,21 @@ public class TestCasesController implements Serializable {
         return highestId+1;
     }
 
+    public void openEdit(Testcase tc){
+        testSystem.setTcToEditOrRun(tc);
 
+        PrimeFaces.current().dialog().openDynamic("testCaseEdit");
+        System.out.println("Wurde geklickt");
+
+    }
+
+    public void onEdited(SelectEvent event){
+        Testcase tc = (Testcase) event.getObject();
+        this.selectedTestCase = tc;
+        saveTestCase();
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-testCases");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf geändert"));
+    }
 
 
 }

@@ -29,6 +29,8 @@ public class TestSystem implements Serializable {
 
     private UserDAO userDao = new UserDAO();
 
+    private Testcase tcToEditOrRun = new Testcase();
+
 
     public TestSystem() {
     }
@@ -83,6 +85,14 @@ public class TestSystem implements Serializable {
 
     public void deleteUser(User selectedUser){
         userDao.deleteUser(selectedUser);
+    }
+
+    public Testcase getTcToEditOrRun() {
+        return tcToEditOrRun;
+    }
+
+    public void setTcToEditOrRun(Testcase tcToEditOrRun) {
+        this.tcToEditOrRun = tcToEditOrRun;
     }
 
     public int sayAmount(){
@@ -147,7 +157,7 @@ public class TestSystem implements Serializable {
         Requirement firstrequirement = (Requirement) this.getReqList().get(0);
         List<Testcase> tcases = new ArrayList<Testcase>();
         tcases.add(new Testcase( 1, "Ich möchte neue Testfälle anlegen können", "Ich kann Testfälle anlegen","","","Testfälle anlegen",firstTestrun,firstrequirement));
-        tcases.add(new Testcase( 2, "Ich möchte neue Testläufe anlegen können", "Ich kann Testläufe anlegen","","","Testläufe anlegen",firstTestrun,firstrequirement));
+        tcases.add(new Testcase( 2, "Ich möchte neue Testläufe anlegen können", "Ich kann Testläufe anlegen","","","Testläufe anlegen",null,firstrequirement));
         tcases.add(new Testcase( 3, "Ich möchte neue Anforderungen anlegen können", "Ich kann Anforderungen anlegen","","","Anforderungen anlegen",firstTestrun,firstrequirement));
 
         for(Testcase tc : tcases){

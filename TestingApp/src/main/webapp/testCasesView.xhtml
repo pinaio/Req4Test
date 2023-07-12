@@ -111,6 +111,11 @@
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
 
                               </p:commandButton>
+                              <p:commandButton styleClass="ui-button-danger m-2 " value="Bearbeiten2" icon="pi pi-pencil"
+                                               action="#{testCasesController.openEdit(tc)}">
+                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+
+                              </p:commandButton>
                            </div>
 
                         </p:column>

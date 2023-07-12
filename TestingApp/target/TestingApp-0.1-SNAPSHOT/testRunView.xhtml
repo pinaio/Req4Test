@@ -33,6 +33,10 @@
                   <p:menuitem value="Übersicht"  outcome="testRunView"
                               icon="pi pi-book"/>
                </p:submenu>
+               <p:submenu label="Testfälle">
+                  <p:menuitem value="Übersicht"  outcome="testCasesView"
+                              icon="pi pi-book"/>
+               </p:submenu>
                <p:submenu label="Navigations">
                   <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
                   <p:menuitem value="Internal"  icon="pi pi-upload"/>
@@ -61,8 +65,8 @@
                </p:toolbar>
 
                <p:dataTable id="dt-testruns" widgetVar="dtTestruns" var="tr" value="#{testRunController.testRuns}"
-                            reflow="true" styleClass="text-white"
-                            rowKey="#{requirement.name}" paginator="false"   >
+                            reflow="true" styleClass="text-white p-2"
+                             paginator="false"   >
                   <f:facet name="header">
                      <div class="requirements-table-header">
                         <span style="font-weight: bold">Anforderungen</span>
@@ -73,7 +77,7 @@
                         </p:column>
 
                         <p:column  headerText="Titel">
-                           <h:outputText value="#{tr.title}" />
+                           <h:outputText value="#{tr.title}"  />
                         </p:column>
 
 
@@ -85,17 +89,42 @@
                         <p:column  headerText="Ersteller">
                            <h:outputText value="#{tr.creator}" />
                         </p:column>
-                        <p:column  headerText="Anzahl Testfälle">
-                           <h:outputText value="#{tr.testcasesById.size()}" />
+                        <p:column  headerText="Zugewiesene Testfälle(Mouseover)">
+                           <h:outputText value="#{tr.testcasesById.size()}" id="testCaseField" />
+
+
+                           <p:overlayPanel for="testCaseField" style="width:350px" showEvent="mouseover" hideEvent="mouseout" autoHide="false">
+                              <p:dataTable id="dt-testcases" widgetVar="dtTestCases" var="tc" value="#{tr.testcasesById}" >
+                                 <f:facet name="header">
+                                    <div class="">
+                                       <span style="font-weight: bold">Zugewiesene Testfälle</span>
+                                    </div>
+                                 </f:facet>
+                                 <p:column>
+                                    <h:outputText value="#{tc.title}"/>
+                                 </p:column>
+                                 <p:column>
+                                    <h:outputText value="#{tc.description}"/>
+                                 </p:column>
+
+                              </p:dataTable>
+                           </p:overlayPanel>
+
+
                         </p:column>
-                        <p:column  headerText="Deadline">
+                        <p:column  headerText="Status">
                            <h:outputText value="#{tr.status}"/>
                         </p:column>
-                        <p:column  headerText="Deadline">
+                        <p:column  headerText="Zu testen bis">
                            <h:outputText value="#{tr.deadline}" >
                               <f:convertDateTime type="date" dateStyle="default"/>
                            </h:outputText>
                         </p:column>
+                     <p:column  headerText="Tester">
+                        <h:outputText value="#{tr.userByTester.firstname}" rendered="#{not empty tr.userByTester }" />
+                        <h:outputText value="Nicht Zugewiesen" rendered="#{empty tr.userByTester }" />
+
+                     </p:column>
                         <p:column headerText="Bearbeiten">
                            <div class="">
                               <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
@@ -103,11 +132,13 @@
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
                                  <p:resetInput target=":dialogs:manage-testrun-content" />
                               </p:commandButton>
+
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
                                                oncomplete="PF('deleteTestrunDialog').show()">
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
+
                            </div>
 
                         </p:column>
