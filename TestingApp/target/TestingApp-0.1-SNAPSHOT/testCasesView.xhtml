@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 >
 
 
@@ -112,9 +112,14 @@
 
                               </p:commandButton>
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Bearbeiten2" icon="pi pi-pencil"
-                                               action="#{testCasesController.openEdit(tc)}">
+                                               action="#{testCasesController.openEdit(tc)}" >
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+
                               </p:commandButton>
+                              <h:link outcome="testCaseEdit" value="Edit 3" styleClass="m-2">
+                                 <f:param name="id" value="#{tc.id}" />
+
+                              </h:link>
                            </div>
 
                         </p:column>
@@ -123,15 +128,20 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
+               <p:dialog header="TestCase Bearbeiten" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
                          responsive="true">
                   <p:outputPanel id="manage-testCase-content" class="ui-fluid">
                      <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">
                         <div class="field">
                            <p:outputLabel styleClass="text-3xl" value="#{testCasesController.selectedTestCase.id}"/>
                         </div>
-                        <div class="field">
-                           <p:outputLabel styleClass="text-lg" value="#{testCasesController.selectedTestCase.title}"/>
+                        <div class="field flex flex-column">
+                           <p:outputLabel for="requirement">Zugewiesene Anforderung</p:outputLabel>
+                           <p:selectOneMenu id="requirement" value="#{testCasesController.selectedReqString}" required="true"  >
+                              <f:selectItem value="#{null}" itemLabel="Bitte Anforderung auswählen" />
+                              <f:selectItems var="req" value="#{testCasesController.reqStrings}" itemValue="#{req}" itemLabel="#{req}" />
+                           </p:selectOneMenu>
+                           <h:message for="requirement"/>
                         </div>
                         <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
@@ -139,26 +149,16 @@
                         </div>
                         <div class="field">
                            <p:outputLabel for="description">Beschreibung</p:outputLabel>
-                           <p:inputTextarea id="description" value="#{testCasesController.selectedTestCase.failOrPass}" />
+                           <p:inputTextarea id="description" value="#{testCasesController.selectedTestCase.description}" required="true" />
                         </div>
                         <div class="field">
-                           <p:outputLabel for="author">Ersteller</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{testCasesController.selectedTestCase.title}" />
+                           <p:outputLabel for="expResult">Erwartetes Ergebnis</p:outputLabel>
+                           <p:inputTextarea id="expResult" value="#{testCasesController.selectedTestCase.expectedResult}" required="true" />
                         </div>
-                        <div class="field">
-                           <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
-                           <p:calendar id="deadline" value="#{testCasesController.selectedTestCase.title}" required="true"/>
-                        </div>
+                        <p:outputLabel >Fail / Pass</p:outputLabel>
+                        <h:outputText  value="#{testCasesController.selectedTestCase.failOrPass}" rendered="#{not empty testCasesController.selectedTestCase.failOrPass}"/>
+                        <h:outputText  value="Nicht getestet" rendered="#{empty testCasesController.selectedTestCase.failOrPass}"/>
 
-                        <div class="field">
-                           <p:outputLabel for="status">Status</p:outputLabel>
-                           <p:selectOneButton id="status" value="#{testCasesController.selectedTestCase.failOrPass}">
-                              <f:selectItem itemLabel="Neu" itemValue="Neu"/>
-                              <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
-                              <f:selectItem itemLabel="Testing" itemValue="Testing"/>
-                              <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
-                           </p:selectOneButton>
-                        </div>
                      </p:outputPanel>
                   </p:outputPanel>
 

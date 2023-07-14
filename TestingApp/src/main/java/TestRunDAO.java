@@ -1,3 +1,4 @@
+import Entities.Requirement;
 import Entities.Testrun;
 import jakarta.persistence.*;
 
@@ -22,6 +23,13 @@ public class TestRunDAO {
         em.close();
 
     }
+    public Testrun find(Long id){
+        EntityManager em = entityManagerFactory.createEntityManager();
+        Testrun tc = em.find(Testrun.class, id);
+        em.close();
+        return tc;
+    }
+
 
     public void deleteTestRun(Testrun selectedTestRun) {
         EntityManager em = entityManagerFactory.createEntityManager();

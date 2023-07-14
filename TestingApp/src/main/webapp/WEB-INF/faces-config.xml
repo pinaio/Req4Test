@@ -15,4 +15,15 @@
             org.primefaces.application.DialogViewHandler
         </view-handler>
     </application>
+    <navigation-rule>
+        <from-view-id>testCaseEdit.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-action>#{tce.saveTestCase}</from-action>
+            <from-outcome>page</from-outcome>
+            <to-view-id>testCasesView.xhtml</to-view-id>
+        </navigation-case>
+
+
+    </navigation-rule>
 </faces-config>

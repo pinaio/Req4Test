@@ -7,7 +7,7 @@ public class Testcase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private int id;
+    private Long id;
 
     @Basic
     @Column(name = "Description")
@@ -36,7 +36,7 @@ public class Testcase {
     public Testcase() {
     }
 
-    public Testcase(int id, String description, String expectedResult, String failOrPass, String observedResult, String title, Testrun testrunByTestrunId, Requirement requirementByRequirementId) {
+    public Testcase(Long id, String description, String expectedResult, String failOrPass, String observedResult, String title, Testrun testrunByTestrunId, Requirement requirementByRequirementId) {
         this.id = id;
         this.description = description;
         this.expectedResult = expectedResult;
@@ -47,11 +47,11 @@ public class Testcase {
         this.requirementByRequirementId = requirementByRequirementId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

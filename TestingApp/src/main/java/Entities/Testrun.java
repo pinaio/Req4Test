@@ -13,7 +13,7 @@ public class Testrun {
     public Testrun() {
     }
 
-    public Testrun(int id, Date deadline, String creator, String status, String title) {
+    public Testrun(Long id, Date deadline, String creator, String status, String title) {
         this.id = id;
         this.deadline = deadline;
         this.creator = creator;
@@ -21,7 +21,7 @@ public class Testrun {
         this.title = title;
     }
 
-    public Testrun(int id, Date deadline, String creator, String status, String title, User userById) {
+    public Testrun(Long id, Date deadline, String creator, String status, String title, User userById) {
         this.id = id;
         this.deadline = deadline;
         this.creator = creator;
@@ -33,7 +33,7 @@ public class Testrun {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private int id;
+    private Long id;
     @CreationTimestamp
     @Column(name = "CreationDate")
     private Timestamp creationDate;
@@ -55,11 +55,11 @@ public class Testrun {
     @JoinColumn(name = "Tester", referencedColumnName = "ID")
     private User userById;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

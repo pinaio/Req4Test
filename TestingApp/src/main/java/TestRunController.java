@@ -87,16 +87,16 @@ public class TestRunController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
 
-    private int getNextIndex(){
-        int highestId;
-        List<Integer> ident = new ArrayList<>() ;
+    private Long getNextIndex(){
+        Long highestId;
+        List<Long> ident = new ArrayList<>() ;
         if ( !testRuns.isEmpty()){
             for (Testrun tr : this.testRuns){
                 ident.add(tr.getId());
             }
             highestId = Collections.max(ident);
         }else{
-            highestId = 0;
+            highestId = 0L;
         }
         return highestId+1;
     }

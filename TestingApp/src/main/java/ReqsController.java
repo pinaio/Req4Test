@@ -86,18 +86,18 @@ public class ReqsController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
     }
 
-    private int getNextIndex(){
-        int highestId;
-        List<Integer> ident = new ArrayList<>() ;
+    private Long getNextIndex(){
+        Long highestId;
+        List<Long> ident = new ArrayList<>() ;
         if ( !requirements.isEmpty()){
             for (Requirement req : this.requirements){
                 ident.add(req.getId());
             }
             highestId = Collections.max(ident);
         }else{
-            highestId = 0;
+            highestId = 0L;
         }
-        return highestId+1;
+        return highestId+1L;
     }
 
 

@@ -9,7 +9,7 @@ public class Requirement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "Author")
     private String author;
@@ -28,7 +28,7 @@ public class Requirement {
     public Requirement() {
     }
 
-    public Requirement(int id, String author, String description, String name, String status) {
+    public Requirement(Long id, String author, String description, String name, String status) {
         this.id = id;
         this.author = author;
         this.description = description;
@@ -36,11 +36,11 @@ public class Requirement {
         this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

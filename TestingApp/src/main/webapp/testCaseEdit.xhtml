@@ -12,53 +12,107 @@
 
 </h:head>
 
-<h:form>
-   <p:outputPanel id="manage-testCase" class="ui-fluid">
-   <p:outputPanel rendered="#{not empty tce.selectedTestCase}">
-      <div class="field">
-         <p:outputLabel styleClass="text-3xl" value="#{tce.selectedTestCase.id}"/>
+<h:messages>
+   <f:metadata>
+      <f:viewParam name="id" value="#{tce.selectedTestCase}"
+                   converter="#{testCaseConverter}" converterMessage="Unknown product, please use a link from within the system."
+                   required="true" requiredMessage="Bad request, please use a link from within the system."
+      />
+   </f:metadata>
+</h:messages>
+<h:body styleClass="m-0 p-0">
+   <!---Header Start-->
+   <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+      <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
+      <div class="max-h-4rem">
+         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
       </div>
-      <div class="field">
-         <p:outputLabel for="requirement">Zugewiesener Testlauf</p:outputLabel>
-         <p:selectOneMenu id="requirement" value="#{tce.selectedTestCase.requirementByRequirementId}" required="false"  >
-            <f:selectItem itemLabel="Bitte Anforderung Auswählen" value="#{null}" noSelectionOption="true"/>
-            <f:selectItems var="req" value="#{tce.requirements}" itemValue="#{req}" itemLabel="#{req.name}"/>
-         </p:selectOneMenu>
-      </div>
-      <div class="field">
-         <p:outputLabel styleClass="text-lg" value="#{tce.selectedTestCase.title}"/>
-      </div>
-      <div class="field">
-         <p:outputLabel for="name">Titel</p:outputLabel>
-         <p:inputText id="name" value="#{tce.selectedTestCase.title}" required="true" />
-      </div>
-      <div class="field">
-         <p:outputLabel for="description">Beschreibung</p:outputLabel>
-         <p:inputTextarea id="description" value="#{tce.selectedTestCase.description}" />
-      </div>
-      <div class="field">
-         <p:outputLabel >Fail / Pass</p:outputLabel>
-         <h:outputText  value="#{tce.selectedTestCase.failOrPass}" rendered="#{not empty tce.selectedTestCase.failOrPass}"/>
-         <h:outputText  value="Nicht getestet" rendered="#{empty tce.selectedTestCase.failOrPass}"/>
-      </div>
-      <div class="field">
-         <p:outputLabel for="testRun">Zugewiesener Testlauf</p:outputLabel>
-         <p:selectOneMenu id="testRun" value="#{tce.selectedTestCase.testrunByTestrunId}" required="false" >
-            <f:selectItem itemLabel="Testlauf auswählen" itemValue="#{null}" noSelectionOption="true"/>
-            <f:selectItems var="str" value="#{tce.testruns}" itemValue="#{str}" itemLabel="#{str.title}" noSelectionValue="#{null}"/>
-         </p:selectOneMenu>
-      </div>
-      <div class="field">
-         <p:outputLabel  value="#{str.userByTester.firstname}"/>
-      </div>
-      <div>
-         <p:commandButton value="Speichern" icon="pi pi-check" onclick="#{tce.saveTestCase()}"
-                          process="manage-testCase @this" />
-         <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('managetestCaseDialog').hide()"
-                          class="ui-button-secondary" type="button" />
-      </div>>
-   </p:outputPanel>
+   </div>
+   <!--App & Sidebar-->
+   <div class="flex surface-card h-full ">
+      <h:form id="sidebar">
+         <div class="card">
+            <p:menu styleClass="w-20rem border-0">
+               <p:submenu label="Anforderungen">
+                  <p:menuitem value="Übersicht"  outcome="reqsView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testläufe">
+                  <p:menuitem value="Übersicht"  outcome="testRunView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testfälle">
+                  <p:menuitem value="Übersicht"  outcome="testCasesView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Navigations">
+                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               </p:submenu>
+            </p:menu>
+         </div>
+      </h:form>
 
-   </p:outputPanel>
-</h:form>
+      <!--Main Application "Window"-->
+      <div class="flex justify-content-center h-screen surface-ground w-full">
+         <div id="content" class="text-xl flex flex-column p-4 surface-card">
+            <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{tce.header}"/>
+         <h:form>
+            <p:outputPanel id="manage-testCase" >
+               <p:outputPanel rendered="#{not empty tce.selectedTestCase}" styleClass="text-white flex flex-column justify-content-center">
+                  <div class="field flex flex-column" >
+                     <p:outputLabel styleClass="text-3xl" value="#{tce.selectedTestCase.id}"/>
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel for="requirement">Zugewiesener Testlauf</p:outputLabel>
+                     <p:selectOneMenu id="requirement" value="#{tce.selectedTestCase.requirementByRequirementId}" required="true"  >
+                        <f:selectItem itemLabel="REQUIREMENT WÄHLEN" value="#{null}"  noSelectionOption="true"/>
+                        <f:selectItems var="req" value="#{.requirements}" itemValue="#{req}" itemLabel="#{req.name}"/>
+                     </p:selectOneMenu>
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel styleClass="text-lg" value="#{tce.selectedTestCase.title}"/>
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel for="name">Titel</p:outputLabel>
+                     <p:inputText id="name" value="#{tce.selectedTestCase.title}" required="true" />
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel for="description">Beschreibung</p:outputLabel>
+                     <p:inputTextarea id="description" value="#{tce.selectedTestCase.description}" />
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel >Fail / Pass</p:outputLabel>
+                     <h:outputText  value="#{tce.selectedTestCase.failOrPass}" rendered="#{not empty tce.selectedTestCase.failOrPass}"/>
+                     <h:outputText  value="Nicht getestet" rendered="#{empty tce.selectedTestCase.failOrPass}"/>
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel for="testRun">Zugewiesener Testlauf</p:outputLabel>
+                     <p:selectOneMenu id="testRun" value="#{tce.selectedTestCase.testrunByTestrunId}" required="false" >
+                        <f:selectItem itemLabel="Kein Testlauf zugewiesen" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems var="str" value="#{tce.testruns}" itemValue="#{str}" itemLabel="#{str.title}" noSelectionValue="#{null}"/>
+                     </p:selectOneMenu>
+                  </div>
+                  <div class="field flex flex-column">
+                     <p:outputLabel  value="#{str.userByTester.firstname}"/>
+                  </div>
+                  <div>
+                     <h:commandButton value="Speichern" icon="pi pi-check" action="#{tce.saveTestCase}" />
+                     <h:commandButton value="Abbrechen" icon="pi pi-check" action="testCasesEdit.xhtml?faces-redirect=true" />
+                  </div>
+               </p:outputPanel>
+            </p:outputPanel>
+         </h:form>
+         </div>
+      </div>
+   </div>
+
+</h:body>
+
+
+
+
+
+
+
 </html>

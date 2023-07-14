@@ -1,4 +1,6 @@
+import Entities.Requirement;
 import Entities.Testcase;
+import Entities.Testrun;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -20,11 +22,17 @@ import java.util.List;
 public class TestCasesController implements Serializable {
 
     private List<Testcase> testcases;
+    private Long selectedReqIndex;
     
     private List<Testcase> filteredTestCases;
     private Testcase selectedTestCase = new Testcase();
+
+    private List<Testrun> testruns = new ArrayList<Testrun>();
+    private List<Requirement> requirements = new ArrayList<Requirement>();
     
-    
+    private List<String> reqStrings = new ArrayList<String>();
+
+    private String selectedReqString;
 
 
     @Inject
@@ -35,6 +43,14 @@ public class TestCasesController implements Serializable {
     @PostConstruct
     public void init(){
         this.testcases = testSystem.getTestCaseList();
+        this.testruns = testSystem.getTestRunList();
+        this.requirements= testSystem.getReqList();
+
+        for(Requirement req: this.requirements){
+            reqStrings.add(req.getName());
+        }
+
+
     }
 
     public TestCasesController() {
@@ -48,6 +64,34 @@ public class TestCasesController implements Serializable {
         return header;
     }
 
+
+    public Long getSelectedReqIndex() {
+        return selectedReqIndex;
+    }
+
+    public void setSelectedReqIndex(Long selectedReqIndex) {
+        this.selectedReqIndex = selectedReqIndex;
+    }
+
+    public List<String> getReqStrings() {
+        return reqStrings;
+    }
+
+    public void setReqStrings(List<String> reqStrings) {
+        this.reqStrings = reqStrings;
+    }
+
+    public String getSelectedReqString() {
+        return selectedReqString;
+    }
+
+    public void setSelectedReqString(String selectedReqString) {
+        this.selectedReqString = selectedReqString;
+        this.selectedReqIndex = (long) reqStrings.indexOf(this.selectedReqString);
+        selectedTestCase.setRequirementByRequirementId(
+                testSystem.findRequirement(this.selectedReqIndex+1)
+        );
+    }
 
     public List<Testcase> getTestcases() {
         return testcases;
@@ -69,15 +113,35 @@ public class TestCasesController implements Serializable {
         return selectedTestCase;
     }
 
+//    Setzt neben dem Selected Testcase auch dessen selectetRequirement String
     public void setSelectedTestCase(Testcase selectedTestCase) {
         this.selectedTestCase = selectedTestCase;
+        this.selectedReqString = this.selectedTestCase.getRequirementByRequirementId().getName();
     }
 
     public void openNew() {
         this.selectedTestCase = new Testcase();
+        this.selectedReqString = null;
     }
+
+    public List<Testrun> getTestruns() {
+        return testruns;
+    }
+
+    public void setTestruns(List<Testrun> testruns) {
+        this.testruns = testruns;
+    }
+
+    public List<Requirement> getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(List<Requirement> requirements) {
+        this.requirements = requirements;
+    }
+
     public void saveTestCase() {
-        if (this.selectedTestCase== null) {
+        if (this.selectedTestCase == null) {
             this.selectedTestCase.setId(
                    getNextIndex()
 
@@ -106,18 +170,18 @@ public class TestCasesController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testCases");
     }
 
-    private int getNextIndex(){
-        int highestId;
-        List<Integer> ident = new ArrayList<>() ;
+    private Long getNextIndex(){
+        Long highestId;
+        List<Long> ident = new ArrayList<>() ;
         if ( !testcases.isEmpty()){
             for (Testcase tc : this.testcases){
                 ident.add(tc.getId());
             }
             highestId = Collections.max(ident);
         }else{
-            highestId = 0;
+            highestId = 0L;
         }
-        return highestId+1;
+        return highestId+1L;
     }
 
     public void openEdit(Testcase tc){

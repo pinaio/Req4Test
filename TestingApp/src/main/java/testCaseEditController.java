@@ -26,8 +26,13 @@ public class testCaseEditController  implements Serializable {
     private Testcase selectedTestCase;
 
 
+
+
+
     private List<Testrun> testruns = new ArrayList<Testrun>();
     private List<Requirement> requirements = new ArrayList<Requirement>();
+
+    private String header = "Testfall bearbeiten";
 
 
 
@@ -38,10 +43,8 @@ public class testCaseEditController  implements Serializable {
 
     @PostConstruct
     public void init(){
-        this.selectedTestCase = testSystem.getTcToEditOrRun();
         this.testruns = testSystem.getTestRunList();
         this.requirements= testSystem.getReqList();
-
 
 
     }
@@ -62,6 +65,7 @@ public class testCaseEditController  implements Serializable {
         this.testruns = testruns;
     }
 
+
     public List<Requirement> getRequirements() {
         return requirements;
     }
@@ -70,12 +74,19 @@ public class testCaseEditController  implements Serializable {
         this.requirements = requirements;
     }
 
+    public String getHeader() {
+        return header;
+    }
+
+    public String saveTestCase() {
+            System.out.println(this.selectedTestCase.getTestrunByTestrunId().getTitle());
+            System.out.println(this.selectedTestCase.getDescription());
+            System.out.println(this.selectedTestCase.getRequirementByRequirementId().getDescription());
+
+            testSystem.saveTestCase(this.selectedTestCase);
 
 
-    public void saveTestCase() {
-            System.out.println("Wurde gedrückt");
-            PrimeFaces.current().dialog().closeDynamic(this.selectedTestCase);
-
+        return "testCasesEdit.xhtml?faces-redirect=true";
     }
 
 

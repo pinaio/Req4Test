@@ -87,6 +87,20 @@ public class TestSystem implements Serializable {
         userDao.deleteUser(selectedUser);
     }
 
+    public Testcase findTestCase(Long id){
+        return testCaseDao.find(id);
+
+    }
+    public Requirement findRequirement(Long id){
+        return reqsDao.find(id);
+
+    }
+    public Testrun findTestRun(Long id){
+        return testRunDao.find(id);
+
+    }
+
+
     public Testcase getTcToEditOrRun() {
         return tcToEditOrRun;
     }
@@ -113,10 +127,10 @@ public class TestSystem implements Serializable {
     }
     private   void createTestRequirements(){
         List<Requirement> testReqList = new ArrayList<Requirement>();
-        testReqList.add(new Requirement(1,"Person A","Dies ist das Erste Requirement","Erstes Requirement","Neu"));
-        testReqList.add(new Requirement(2,"Person B","Dies ist das 2. Requirement","Zweites Requirement","Neu"));
-        testReqList.add(new Requirement(3,"Person C","Dies ist das 3. Requirement","Drittes Requirement","Neu"));
-        testReqList.add(new Requirement(4,"Person D","Dies ist das 4. Requirement","Viertes Requirement","Neu"));
+        testReqList.add(new Requirement(1L,"Person A","Dies ist das Erste Requirement","Erstes Requirement","Neu"));
+        testReqList.add(new Requirement(2L,"Person B","Dies ist das 2. Requirement","Zweites Requirement","Neu"));
+        testReqList.add(new Requirement(3L,"Person C","Dies ist das 3. Requirement","Drittes Requirement","Neu"));
+        testReqList.add(new Requirement(4L,"Person D","Dies ist das 4. Requirement","Viertes Requirement","Neu"));
 
         for(Requirement req : testReqList){
             saveRequirement(req);
@@ -125,10 +139,10 @@ public class TestSystem implements Serializable {
     private   void createTestTestRuns(){
         User ersterUser = (User) userList.get(0);
         List<Testrun> testTrList = new ArrayList<Testrun>();
-        testTrList.add(new Testrun(1 ,new Date(),"Peter Testmanager","Neu","Erster Testlauf", ersterUser ));
-        testTrList.add(new Testrun(2 ,new Date(),"Peter Testmanager","Neu","2. Testlauf" ));
-        testTrList.add(new Testrun(3 ,new Date(),"Peter Testmanager","Neu","3. Testlauf" ));
-        testTrList.add(new Testrun(4 ,new Date(),"Peter Testmanager","Neu","4. Testlauf" ));
+        testTrList.add(new Testrun(1L ,new Date(),"Peter Testmanager","Neu","Erster Testlauf", ersterUser ));
+        testTrList.add(new Testrun(2L ,new Date(),"Peter Testmanager","Neu","2. Testlauf" ));
+        testTrList.add(new Testrun(3L ,new Date(),"Peter Testmanager","Neu","3. Testlauf" ));
+        testTrList.add(new Testrun(4L ,new Date(),"Peter Testmanager","Neu","4. Testlauf" ));
 
 
 
@@ -156,9 +170,9 @@ public class TestSystem implements Serializable {
         Testrun firstTestrun = (Testrun) this.testRunList.get(0);
         Requirement firstrequirement = (Requirement) this.getReqList().get(0);
         List<Testcase> tcases = new ArrayList<Testcase>();
-        tcases.add(new Testcase( 1, "Ich möchte neue Testfälle anlegen können", "Ich kann Testfälle anlegen","","","Testfälle anlegen",firstTestrun,firstrequirement));
-        tcases.add(new Testcase( 2, "Ich möchte neue Testläufe anlegen können", "Ich kann Testläufe anlegen","","","Testläufe anlegen",null,firstrequirement));
-        tcases.add(new Testcase( 3, "Ich möchte neue Anforderungen anlegen können", "Ich kann Anforderungen anlegen","","","Anforderungen anlegen",firstTestrun,firstrequirement));
+        tcases.add(new Testcase( 1L, "Ich möchte neue Testfälle anlegen können", "Ich kann Testfälle anlegen","","","Testfälle anlegen",firstTestrun,firstrequirement));
+        tcases.add(new Testcase( 2L, "Ich möchte neue Testläufe anlegen können", "Ich kann Testläufe anlegen","","","Testläufe anlegen",null,firstrequirement));
+        tcases.add(new Testcase( 3L, "Ich möchte neue Anforderungen anlegen können", "Ich kann Anforderungen anlegen","","","Anforderungen anlegen",firstTestrun,firstrequirement));
 
         for(Testcase tc : tcases){
             saveTestCase(tc);

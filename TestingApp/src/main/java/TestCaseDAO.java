@@ -21,8 +21,17 @@ public class TestCaseDAO {
         em.merge(selectedTestCase);
         t.commit();
         em.close();
+        System.out.println("Testfall gespeichert");
 
     }
+
+    public Testcase find(Long id){
+        EntityManager em = entityManagerFactory.createEntityManager();
+        Testcase tc = em.find(Testcase.class, id);
+        em.close();
+        return tc;
+    }
+
 
     public void deleteTestCase(Testcase selectedTestCase) {
         EntityManager em = entityManagerFactory.createEntityManager();

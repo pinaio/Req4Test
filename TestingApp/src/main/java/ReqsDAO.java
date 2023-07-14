@@ -1,4 +1,5 @@
 import Entities.Requirement;
+import Entities.Testcase;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public class ReqsDAO {
         t.commit();
         em.close();
 
+    }
+    public Requirement find(Long id){
+        EntityManager em = entityManagerFactory.createEntityManager();
+        Requirement tc = em.find(Requirement.class, id);
+        em.close();
+        return tc;
     }
 
     public void deleteRequirement(Requirement selectedRequirement) {
