@@ -23,6 +23,8 @@ public class TestCasesController implements Serializable {
 
     private List<Testcase> testcases;
     private Long selectedReqIndex;
+
+    private Long selectedTrIndex;
     
     private List<Testcase> filteredTestCases;
     private Testcase selectedTestCase = new Testcase();
@@ -31,8 +33,10 @@ public class TestCasesController implements Serializable {
     private List<Requirement> requirements = new ArrayList<Requirement>();
     
     private List<String> reqStrings = new ArrayList<String>();
-
+    private List<String> trStrings = new ArrayList<String>();
     private String selectedReqString;
+
+    private String selectedTestRunString;
 
 
     @Inject
@@ -48,6 +52,10 @@ public class TestCasesController implements Serializable {
 
         for(Requirement req: this.requirements){
             reqStrings.add(req.getName());
+        }
+
+        for (Testrun tr: this.testruns){
+            trStrings.add(tr.getTitle());
         }
 
 
@@ -73,6 +81,10 @@ public class TestCasesController implements Serializable {
         this.selectedReqIndex = selectedReqIndex;
     }
 
+    public void setSelectedTrIndex(Long selectedTrIndex) {
+        this.selectedTrIndex = selectedTrIndex;
+    }
+
     public List<String> getReqStrings() {
         return reqStrings;
     }
@@ -81,8 +93,24 @@ public class TestCasesController implements Serializable {
         this.reqStrings = reqStrings;
     }
 
+    public List<String> getTrStrings() {
+        return trStrings;
+    }
+
+    public void setTrStrings(List<String> trStrings) {
+        this.trStrings = trStrings;
+    }
+
     public String getSelectedReqString() {
         return selectedReqString;
+    }
+
+    public Long getSelectedTrIndex() {
+        return selectedTrIndex;
+    }
+
+    public String getSelectedTestRunString() {
+        return selectedTestRunString;
     }
 
     public void setSelectedReqString(String selectedReqString) {
@@ -91,6 +119,15 @@ public class TestCasesController implements Serializable {
         selectedTestCase.setRequirementByRequirementId(
                 testSystem.findRequirement(this.selectedReqIndex+1)
         );
+    }
+
+    public void setSelectedTestRunString(String selectedTestRunString){
+        this.selectedTestRunString = selectedTestRunString;
+        this.selectedTrIndex = (long) this.trStrings.indexOf(this.selectedTestRunString);
+        selectedTestCase.setTestrunByTestrunId(
+                testSystem.findTestRun(this.selectedTrIndex+1)
+        );
+
     }
 
     public List<Testcase> getTestcases() {
@@ -117,11 +154,18 @@ public class TestCasesController implements Serializable {
     public void setSelectedTestCase(Testcase selectedTestCase) {
         this.selectedTestCase = selectedTestCase;
         this.selectedReqString = this.selectedTestCase.getRequirementByRequirementId().getName();
+        if(this.selectedTestCase.getTestrunByTestrunId() == null){
+            this.selectedTestRunString = null;
+        }else{
+            this.selectedTestRunString = this.selectedTestCase.getTestrunByTestrunId().getTitle();
+        }
+
     }
 
     public void openNew() {
         this.selectedTestCase = new Testcase();
         this.selectedReqString = null;
+        this.selectedTestRunString = null;
     }
 
     public List<Testrun> getTestruns() {

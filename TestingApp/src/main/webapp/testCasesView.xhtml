@@ -155,10 +155,19 @@
                            <p:outputLabel for="expResult">Erwartetes Ergebnis</p:outputLabel>
                            <p:inputTextarea id="expResult" value="#{testCasesController.selectedTestCase.expectedResult}" required="true" />
                         </div>
-                        <p:outputLabel >Fail / Pass</p:outputLabel>
-                        <h:outputText  value="#{testCasesController.selectedTestCase.failOrPass}" rendered="#{not empty testCasesController.selectedTestCase.failOrPass}"/>
-                        <h:outputText  value="Nicht getestet" rendered="#{empty testCasesController.selectedTestCase.failOrPass}"/>
-
+                       <div class="field">
+                           <p:outputLabel >Fail / Pass</p:outputLabel>
+                           <h:outputText  value="#{testCasesController.selectedTestCase.failOrPass}" rendered="#{not empty testCasesController.selectedTestCase.failOrPass}"/>
+                           <h:outputText  value="Nicht getestet" rendered="#{empty testCasesController.selectedTestCase.failOrPass}"/>
+                       </div>
+                        <div class="field flex flex-column">
+                           <p:outputLabel for="testrun">Zugewiesene Anforderung</p:outputLabel>
+                           <p:selectOneMenu id="testrun" value="#{testCasesController.selectedTestRunString}" required="false"  >
+                              <f:selectItem value="#{null}" itemLabel="Bitte Testlauf auswählen" />
+                              <f:selectItems var="tr" value="#{testCasesController.trStrings}" itemValue="#{tr}" itemLabel="#{tr}" />
+                           </p:selectOneMenu>
+                           <h:message for="requirement"/>
+                        </div>
                      </p:outputPanel>
                   </p:outputPanel>
 

@@ -9,51 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Worked on TestCaseEdit">
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/RequirementConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestCaseConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Requirement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testcase.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testcase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/ReqsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/ReqsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/ReqsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/ReqsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestCaseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestCaseDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/testCaseEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/testCaseEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/WEB-INF/faces-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/WEB-INF/faces-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Requirement.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Requirement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testcase.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testcase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/ReqsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/ReqsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/ReqsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/ReqsDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCaseDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCaseDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/testCaseEditController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/testCaseEditController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCaseEdit.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCaseEdit.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Requirement.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Requirement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testcase.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testcase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/ReqsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/ReqsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/ReqsDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/ReqsDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestCaseDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestCaseDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/testCaseEditController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/testCaseEditController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,7 +320,8 @@
       <workItem from="1689088682673" duration="7920000" />
       <workItem from="1689176685355" duration="20765000" />
       <workItem from="1689323832735" duration="16848000" />
-      <workItem from="1689341583603" duration="1893000" />
+      <workItem from="1689341583603" duration="2216000" />
+      <workItem from="1689413436117" duration="4162000" />
     </task>
     <task id="LOCAL-00001" summary="Initial2">
       <option name="closed" value="true" />
@@ -482,7 +443,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689198562243</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View">
+      <option name="closed" value="true" />
+      <created>1689343791857</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1689343791857</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,6 +469,7 @@
     <MESSAGE value="Created UserDao || Integrated TestData init" />
     <MESSAGE value="Created TestCase Page || Adjusted Testrun Table" />
     <MESSAGE value="Worked on TestCaseEdit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked on TestCaseEdit" />
+    <MESSAGE value="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View" />
   </component>
 </project>
