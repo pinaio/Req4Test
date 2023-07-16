@@ -67,7 +67,7 @@
                      <p:outputLabel for="requirement">Zugewiesener Testlauf</p:outputLabel>
                      <p:selectOneMenu id="requirement" value="#{tce.selectedTestCase.requirementByRequirementId}" required="true"  >
                         <f:selectItem itemLabel="REQUIREMENT WÄHLEN" value="#{null}"  noSelectionOption="true"/>
-                        <f:selectItems var="req" value="#{.requirements}" itemValue="#{req}" itemLabel="#{req.name}"/>
+                        <f:selectItems var="req" value="#{tce.requirements}" itemValue="#{req}" itemLabel="#{req.name}"/>
                      </p:selectOneMenu>
                   </div>
                   <div class="field flex flex-column">

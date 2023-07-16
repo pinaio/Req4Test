@@ -1,3 +1,4 @@
+import Entities.Testcase;
 import Entities.Testrun;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -6,11 +7,12 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.primefaces.PrimeFaces;
+import org.primefaces.model.DualListModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+
 import java.util.List;
 
 @Named
@@ -20,6 +22,14 @@ public class TestRunController implements Serializable {
     private List<Testrun> testRuns;
     private Testrun selectedTestRun = new Testrun();
 
+    private List<Testcase> testcases = new ArrayList<Testcase>();
+    private List<Testcase> unasignedTC = new ArrayList<Testcase>();
+    private List<Testcase> asignedTC = new ArrayList<Testcase>();
+
+    private DualListModel<Testcase> dlTestcases;
+
+
+
 
     @Inject
     private TestSystem testSystem;
@@ -28,6 +38,14 @@ public class TestRunController implements Serializable {
     @PostConstruct
     public void init(){
         this.testRuns = testSystem.getTestRunList();
+        this.testcases = testSystem.getTestCaseList();
+        for(Testcase tc : this.testcases){
+            if(tc.getTestrunByTestrunId() == null){
+                this.unasignedTC.add(tc);
+            }
+        }
+        dlTestcases = new DualListModel<>(unasignedTC,asignedTC);
+
     }
 
     public TestRunController() {
@@ -50,9 +68,21 @@ public class TestRunController implements Serializable {
 
     public void setSelectedTestRun(Testrun selectedTestRun){
         this.selectedTestRun = selectedTestRun;
+        for(Testcase tc : this.testcases){
+            if(tc.getTestrunByTestrunId() == selectedTestRun){
+                this.asignedTC.add(tc);
+            }
+        }
+
     }
 
+    public DualListModel<Testcase> getDlTestcases() {
+        return dlTestcases;
+    }
 
+    public void setDlTestcases(DualListModel<Testcase> dlTestcases) {
+        this.dlTestcases = dlTestcases;
+    }
 
     public void openNew() {
         this.selectedTestRun = new Testrun();

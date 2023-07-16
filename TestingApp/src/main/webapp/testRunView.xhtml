@@ -183,6 +183,10 @@
                               <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
                            </p:selectOneButton>
                         </div>
+
+                        <p:commandButton styleClass="ui-button m-2 " value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
+                                         oncomplete="PF('addRemoveTestCases').show()" process="@this" >
+                        </p:commandButton>
                      </p:outputPanel>
                   </p:outputPanel>
 
@@ -192,6 +196,23 @@
                      <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageTestrunDialog').hide()"
                                       class="ui-button-secondary" type="button" />
                   </f:facet>
+               </p:dialog>
+               <p:dialog id="add-Remove-TestCases" widgetVar="addRemoveTestCases">
+                  <p:pickList id="tcpicklist" value="#{testRunController.dlTestcases}" var="tc"
+                              itemValue="#{tc}" itemLabel="#{tc.title}"
+                              showTargetControls="true"
+                              showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"
+                              converter="#{testCaseConverter}" responsive="true">
+
+                     <f:facet name="sourceCaption">Nicht Zugewiesen</f:facet>
+                     <f:facet name="targetCaption">Dieser Testlauf</f:facet>
+                     <p:column>
+                        <div class="flex align-items-center">
+                           <h:outputText value="#{tc.title}"/>
+                        </div>
+                     </p:column>
+                  </p:pickList>
+
                </p:dialog>
 
                <p:confirmDialog widgetVar="deleteTestrunDialog" showEffect="fade" width="300"

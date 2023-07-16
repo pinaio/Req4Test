@@ -13,44 +13,60 @@
 
 </h:head>
 
-<h:body>
+<h:body styleClass="m-0 p-0">
   <!---Header Start-->
-  <div class="bg-red-400 m-0 p-0  flex flex-row justify-content-around align-items-center">
-
+  <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+    <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
     <div class="max-h-4rem">
-      <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
-      <h:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1 " value="Logout"/>
+      <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
     </div>
   </div>
   <!--App & Sidebar-->
-  <div class="flex bg-green-100 h-full ">
-    <div class="max-w-20remrem  w-20rem border-2 flex flex-column align-items-center ">
-      <p:linkButton outcome="reqsView" value="Anforderungen" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button"  value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button" value="Primary" styleClass="ui-button-flat bg-teal-500 m-2 w-12rem text-white" />
-      <p:commandButton type="button" value="Submit" icon="pi pi-check" iconPos="right" />
+  <div class="flex surface-card h-full ">
+    <h:form >
+      <div class="card">
+        <p:menu styleClass="w-20rem border-0">
+          <p:submenu label="Anforderungen">
+            <p:menuitem value="Übersicht"  outcome="reqsView"
+                        icon="pi pi-book"/>
+          </p:submenu>
+          <p:submenu label="Testläufe">
+            <p:menuitem value="Übersicht"  outcome="testRunView"
+                        icon="pi pi-book"/>
+          </p:submenu>
+          <p:submenu label="Testfälle">
+            <p:menuitem value="Übersicht"  outcome="testCasesView"
+                        icon="pi pi-book"/>
+          </p:submenu>
+          <p:submenu label="Navigations">
+            <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+            <p:menuitem value="Internal"  icon="pi pi-upload"/>
+          </p:submenu>
+        </p:menu>
+      </div>
+    </h:form>
+    <div class="flex flex-column  p-4 align-items-center surface-ground w-full">
+      <h:form id="statistics">
+        <div class="flex flex-column justify-content-center">
+          <h:outputText styleClass="text-3xlxl text-white" value="STARTSEITE"/>
+          <p:commandButton styleClass="text-3xl" value="Testdaten initalisieren" action="index" actionListener="#{indexController.createTestData()}"  process="@this" >
+          </p:commandButton>
 
-    </div>
-    <!--Main Application "Window"-->
-    <div>
-      <h:form>
-      <h:outputText styleClass="text-6xl" value="STARTSEITE"/>
-      <h:commandButton  styleClass="p-4 font-bold bg-blue-300 border-round-2xl" value="Testdaten initalisieren" action="#{indexController.testSystem.createTestData()}"/>
-        <h:outputText value="Anzahl der Anforderungen:      " ></h:outputText>
+          <div class="text-white text-lg flex flex-column justify-content-center p-8">
+            <h:outputText value="Anzahl der Anforderungen: #{testSystem.reqList.size()} " /> <br/>
+            <h:outputText value="Anzahl der Testläufe: #{testSystem.testRunList.size()} " /> <br/>
+            <h:outputText value="Anzahl der Testfälle: #{testSystem.testCaseList.size()} " />
+            <h:messages/>
+          </div>
+        </div>
       </h:form>
     </div>
+    <!--Main Application "Window"-->
 
-
-    </div>
-
-
-
-
-
+  </div>
 
 </h:body>
+
+
 </html>
 

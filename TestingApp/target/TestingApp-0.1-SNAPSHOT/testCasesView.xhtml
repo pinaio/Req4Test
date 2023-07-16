@@ -3,14 +3,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
->
-
-
 <h:head>
-   <title>TestingApp 0.1</title>
+   <title>Testfall-Management</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
-
 </h:head>
 <h:body styleClass="m-0 p-0">
    <!---Header Start-->
@@ -75,15 +71,14 @@
                         <p:column  headerText="ID">
                            <h:outputText  value="#{tc.id}" />
                         </p:column>
-                        <p:column  headerText="Zugeordet zu Testlauf">
-                           <h:outputText  value="#{tc.testrunByTestrunId.title}" />
+                        <p:column  headerText="Anfoderung">
+                           <h:outputText value="#{tc.requirementByRequirementId.name}" />
                         </p:column>
                         <p:column  headerText="Titel">
                            <h:outputText value="#{tc.title}" />
                         </p:column>
                         <p:column  headerText="Beschreibung">
                            <h:outputText value="#{tc.description}">
-                              <f:convertDateTime type="date" dateStyle="short"/>
                            </h:outputText>
                         </p:column>
                         <p:column  headerText="Erwartetes Verhalten">
@@ -92,15 +87,16 @@
                         <p:column  headerText="Beobachtetes Verhalten">
                            <h:outputText value="#{tc.observedResult}" />
                         </p:column>
-                        <p:column  headerText="Fail/Pass">
-                           <h:outputText value="#{tc.failOrPass}"/>
+                        <p:column  headerText="Fail/Pass" >
+                           <p:tag styleClass="py-1 px-2 my-4 " value="Nicht getestet" rendered="#{empty tc.failOrPass}"/>
+                           <p:tag styleClass="py-1 px-2 my-4" value="Pass" severity="success" rendered="#{tc.failOrPass == 'pass'}"/>
+                           <p:tag styleClass="py-1 px-2 my-4" value="Fail" severity="danger" rendered="#{tc.failOrPass == 'fail'}"/>
                         </p:column>
-                        <p:column  headerText="Deadline">
-                           <h:outputText value="#{tc.requirementByRequirementId.name}" />
-
+                        <p:column  headerText="Zugeordet zu Testlauf">
+                           <h:outputText  value="#{tc.testrunByTestrunId.title}" />
                         </p:column>
                         <p:column headerText="Bearbeiten">
-                           <div class="">
+                           <div>
                               <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testCase-content"
                                                oncomplete="PF('managetestCaseDialog').show()" process="@this" >
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
@@ -109,17 +105,7 @@
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
                                                oncomplete="PF('deletetestCaseDialog').show()">
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
-
                               </p:commandButton>
-                              <p:commandButton styleClass="ui-button-danger m-2 " value="Bearbeiten2" icon="pi pi-pencil"
-                                               action="#{testCasesController.openEdit(tc)}" >
-                                 <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
-
-                              </p:commandButton>
-                              <h:link outcome="testCaseEdit" value="Edit 3" styleClass="m-2">
-                                 <f:param name="id" value="#{tc.id}" />
-
-                              </h:link>
                            </div>
 
                         </p:column>
@@ -128,12 +114,12 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="TestCase Bearbeiten" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
+               <p:dialog header="Testfall bearbeiten / anlegen" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
                          responsive="true">
                   <p:outputPanel id="manage-testCase-content" class="ui-fluid">
                      <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">
-                        <div class="field">
-                           <p:outputLabel styleClass="text-3xl" value="#{testCasesController.selectedTestCase.id}"/>
+                        <div class="field flex justify-content-center " >
+                           <p:outputLabel styleClass="text-5xl" value="#{testCasesController.selectedTestCase.id}"/>
                         </div>
                         <div class="field flex flex-column">
                            <p:outputLabel for="requirement">Zugewiesene Anforderung</p:outputLabel>
@@ -141,7 +127,7 @@
                               <f:selectItem value="#{null}" itemLabel="Bitte Anforderung auswählen" />
                               <f:selectItems var="req" value="#{testCasesController.reqStrings}" itemValue="#{req}" itemLabel="#{req}" />
                            </p:selectOneMenu>
-                           <h:message for="requirement"/>
+                           <p:message for="requirement"/>
                         </div>
                         <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
@@ -155,10 +141,24 @@
                            <p:outputLabel for="expResult">Erwartetes Ergebnis</p:outputLabel>
                            <p:inputTextarea id="expResult" value="#{testCasesController.selectedTestCase.expectedResult}" required="true" />
                         </div>
-                        <p:outputLabel >Fail / Pass</p:outputLabel>
-                        <h:outputText  value="#{testCasesController.selectedTestCase.failOrPass}" rendered="#{not empty testCasesController.selectedTestCase.failOrPass}"/>
-                        <h:outputText  value="Nicht getestet" rendered="#{empty testCasesController.selectedTestCase.failOrPass}"/>
+                       <div class="field">
+                           <p:outputLabel >Status</p:outputLabel> <br/>
+                          <div class="flex justify-content-center">
+                             <p:tag styleClass="py-1 px-2 my-4 " value="Nicht getestet" rendered="#{empty testCasesController.selectedTestCase.failOrPass}"/>
+                             <p:tag styleClass="py-1 px-2 my-4" value="Pass" severity="success" rendered="#{testCasesController.selectedTestCase.failOrPass == 'pass'}"/>
+                             <p:tag styleClass="py-1 px-2 my-4" value="Fail" severity="danger" rendered="#{testCasesController.selectedTestCase.failOrPass == 'fail'}"/>
 
+                          </div>
+
+                       </div>
+                        <div class="field flex flex-column">
+                           <p:outputLabel for="testrun">Zugewiesene Testlauf</p:outputLabel>
+                           <p:selectOneMenu id="testrun" value="#{testCasesController.selectedTestRunString}" required="false"  >
+                              <f:selectItem value="#{null}" itemLabel="Bitte Testlauf auswählen" />
+                              <f:selectItems var="tr" value="#{testCasesController.trStrings}" itemValue="#{tr}" itemLabel="#{tr}" />
+                           </p:selectOneMenu>
+                           <h:message for="requirement"/>
+                        </div>
                      </p:outputPanel>
                   </p:outputPanel>
 

@@ -1,6 +1,8 @@
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 
@@ -19,5 +21,14 @@ public class indexController implements Serializable {
 
     public void setTestSystem(TestSystem testSystem) {
         this.testSystem = testSystem;
+    }
+
+
+
+    public String createTestData () throws InterruptedException {
+        testSystem.createTestData();
+        PrimeFaces.current().ajax().update("form:statistics");
+        return "";
+
     }
 }

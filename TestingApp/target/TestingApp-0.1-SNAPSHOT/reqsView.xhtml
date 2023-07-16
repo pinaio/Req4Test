@@ -56,6 +56,7 @@
                                       styleClass="ui-button-success" style="margin-right: .5rem">
                         <p:resetInput target=":dialogs:manage-requirement-content" />
                      </p:commandButton>
+                     <p:commandButton action="testCasesView" value="Testfall Anlegen"/>
                   </p:toolbarGroup>
                  
                </p:toolbar>
@@ -134,6 +135,11 @@
                               <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
                            </p:selectOneButton>
                         </div>
+                        <div>
+                           <p:commandButton styleClass="ui-button m-2 " value="Nested Test" icon="pi pi-pencil" update=":dialogs:test-dialog"
+                                            oncomplete="PF('testdialog').show()" process="@this" >
+                           </p:commandButton>
+                        </div>
                      </p:outputPanel>
                   </p:outputPanel>
 
@@ -143,6 +149,16 @@
                      <p:commandButton value="Abbrechen" icon="pi pi-times" onclick="PF('manageRequirementDialog').hide()"
                                       class="ui-button-secondary" type="button" />
                   </f:facet>
+               </p:dialog>
+               <p:dialog widgetVar="testdialog" header="Testdialog" showEffect="fade" modal="true">
+                  <p:outputPanel id="test-dialog">
+                     <div>
+                        <h1>
+                           Nested Dialog :)
+                        </h1>
+                     </div>
+                  </p:outputPanel>
+
                </p:dialog>
 
                <p:confirmDialog widgetVar="deleteRequirementDialog" showEffect="fade" width="300"

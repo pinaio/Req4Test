@@ -9,11 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View">
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/indexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/indexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/index.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/index.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/reqsView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/reqsView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,7 +330,8 @@
       <workItem from="1689176685355" duration="20765000" />
       <workItem from="1689323832735" duration="16848000" />
       <workItem from="1689341583603" duration="2216000" />
-      <workItem from="1689413436117" duration="4162000" />
+      <workItem from="1689413436117" duration="4232000" />
+      <workItem from="1689518727429" duration="7618000" />
     </task>
     <task id="LOCAL-00001" summary="Initial2">
       <option name="closed" value="true" />
@@ -451,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689343791857</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation">
+      <option name="closed" value="true" />
+      <created>1689418047678</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1689418047678</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,6 +488,7 @@
     <MESSAGE value="Created TestCase Page || Adjusted Testrun Table" />
     <MESSAGE value="Worked on TestCaseEdit" />
     <MESSAGE value="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View" />
+    <MESSAGE value="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation" />
+    <option name="LAST_COMMIT_MESSAGE" value="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation" />
   </component>
 </project>
