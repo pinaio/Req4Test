@@ -183,10 +183,11 @@
                               <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
                            </p:selectOneButton>
                         </div>
-                        
+
                         <p:commandButton styleClass="ui-button m-2 " value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
                                          oncomplete="PF('addRemoveTestCases').show()" process="@this" >
                         </p:commandButton>
+                        <p:outputLabel value="Es gibt ungespeicherte Testfall Änderungen." rendered="#{testRunController.setUnsavedTcChanges()}"/>
                      </p:outputPanel>
                   </p:outputPanel>
 
@@ -212,6 +213,8 @@
                         </div>
                      </p:column>
                   </p:pickList>
+                  <p:commandButton value="Ok" icon="pi pi-check" actionListener="#{testRunController.setUnsavedTcChanges}"
+                                   update="add-Remove-TestCases" process="add-Remove-TestCases @this" />
 
                </p:dialog>
 

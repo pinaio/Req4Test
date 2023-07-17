@@ -10,19 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_07_2023_21_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_07_2023_21_04__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/indexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/indexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/index.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/index.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/reqsView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCaseEdit.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestCasesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/reqsView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/reqsView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestCasesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

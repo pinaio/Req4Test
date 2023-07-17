@@ -27,6 +27,7 @@ public class TestRunController implements Serializable {
     private List<Testcase> asignedTC = new ArrayList<Testcase>();
 
     private DualListModel<Testcase> dlTestcases;
+    private boolean unsavedTCChanges;
 
 
 
@@ -39,11 +40,6 @@ public class TestRunController implements Serializable {
     public void init(){
         this.testRuns = testSystem.getTestRunList();
         this.testcases = testSystem.getTestCaseList();
-        for(Testcase tc : this.testcases){
-            if(tc.getTestrunByTestrunId() == null){
-                this.unasignedTC.add(tc);
-            }
-        }
         dlTestcases = new DualListModel<>(unasignedTC,asignedTC);
 
     }
@@ -68,12 +64,17 @@ public class TestRunController implements Serializable {
 
     public void setSelectedTestRun(Testrun selectedTestRun){
         this.selectedTestRun = selectedTestRun;
+        this.testcases = testSystem.getTestCaseList();
+        this.unasignedTC.clear();
+        this.unsavedTCChanges = false;
         for(Testcase tc : this.testcases){
-            if(tc.getTestrunByTestrunId() == selectedTestRun){
-                this.asignedTC.add(tc);
+            if(tc.getTestrunByTestrunId() == null){
+                this.unasignedTC.add(tc);
             }
         }
-
+        asignedTC = (List<Testcase>) selectedTestRun.getTestcasesById();
+        dlTestcases.setTarget(asignedTC);
+        dlTestcases.setSource(unasignedTC);
     }
 
     public DualListModel<Testcase> getDlTestcases() {
@@ -84,8 +85,17 @@ public class TestRunController implements Serializable {
         this.dlTestcases = dlTestcases;
     }
 
+    public boolean isUnsavedTCChanges() {
+        return unsavedTCChanges;
+    }
+
+    public void setUnsavedTCChanges(boolean unsavedTCChanges) {
+        this.unsavedTCChanges = unsavedTCChanges;
+    }
+
     public void openNew() {
         this.selectedTestRun = new Testrun();
+        this.asignedTC.clear();
     }
     public void saveTestRun() {
         if (this.selectedTestRun== null) {
@@ -129,6 +139,11 @@ public class TestRunController implements Serializable {
             highestId = 0L;
         }
         return highestId+1;
+    }
+    public void setUnsavedTcChanges(){
+        this.unsavedTCChanges = true;
+        PrimeFaces.current().executeScript("PF('addRemoveTestCases').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:manageTestrunDialog");
     }
 
 

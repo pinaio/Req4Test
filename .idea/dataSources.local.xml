@@ -17,7 +17,6 @@
     </data-source>
     <data-source name="TESTINGAPP/Hibernate" uuid="46d27bc7-25e2-46b2-afbb-ea23ee39eb6c">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
-      <user-name>root</user-name>
       <schema-mapping />
     </data-source>
   </component>
