@@ -25,7 +25,7 @@ public class User {
     @Id
     @Column(name = "ID")
     private int id;
-    @OneToMany(mappedBy = "userById")
+    @OneToMany(mappedBy = "userById", cascade = {CascadeType.ALL})
     private Collection<Testrun> testrunsById;
 
 

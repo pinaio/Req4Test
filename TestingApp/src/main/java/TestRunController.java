@@ -40,7 +40,7 @@ public class TestRunController implements Serializable {
     public void init(){
         this.testRuns = testSystem.getTestRunList();
         this.testcases = testSystem.getTestCaseList();
-        dlTestcases = new DualListModel<>(unasignedTC,asignedTC);
+        dlTestcases = new DualListModel<>();
 
     }
 
@@ -65,7 +65,8 @@ public class TestRunController implements Serializable {
     public void setSelectedTestRun(Testrun selectedTestRun){
         this.selectedTestRun = selectedTestRun;
         this.testcases = testSystem.getTestCaseList();
-        this.unasignedTC.clear();
+        this.unasignedTC = new ArrayList<Testcase>();
+        this.asignedTC.clear();
         this.unsavedTCChanges = false;
         for(Testcase tc : this.testcases){
             if(tc.getTestrunByTestrunId() == null){
@@ -95,21 +96,53 @@ public class TestRunController implements Serializable {
 
     public void openNew() {
         this.selectedTestRun = new Testrun();
-        this.asignedTC.clear();
+        this.testcases = testSystem.getTestCaseList();
+        this.unasignedTC = new ArrayList<Testcase>();
+        this.asignedTC = new ArrayList<Testcase>();
+        this.unsavedTCChanges = false;
+        for(Testcase tc : this.testcases){
+            if(tc.getTestrunByTestrunId() == null){
+                this.unasignedTC.add(tc);
+            }
+        }
+        dlTestcases.setTarget(asignedTC);
+        dlTestcases.setSource(unasignedTC);
+
+
     }
     public void saveTestRun() {
-        if (this.selectedTestRun== null) {
+        if (this.selectedTestRun.getId()== null) {
             this.selectedTestRun.setId(
                    getNextIndex()
 
             );
             testSystem.saveTestRun(this.selectedTestRun);
+            for (Testcase tc : dlTestcases.getSource()){
+                tc.setTestrunByTestrunId(null);
+                testSystem.saveTestCase(tc);
+            }
+            for (Testcase tc : dlTestcases.getTarget()){
+                tc.setTestrunByTestrunId(this.selectedTestRun);
+                testSystem.saveTestCase(tc);
+
+            }
+            this.unsavedTCChanges = false;
             this.testRuns = testSystem.getTestRunList();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf hinzugefügt"));
         }
         else {
             testSystem.saveTestRun(this.selectedTestRun);
+            for (Testcase tc : dlTestcases.getSource()){
+                tc.setTestrunByTestrunId(null);
+                testSystem.saveTestCase(tc);
+            }
+            for (Testcase tc : dlTestcases.getTarget()){
+                tc.setTestrunByTestrunId(this.selectedTestRun);
+                testSystem.saveTestCase(tc);
+            }
+
+            this.unsavedTCChanges= false;
             this.testRuns = testSystem.getTestRunList();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf geändert"));
 
@@ -119,7 +152,10 @@ public class TestRunController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
     public void deleteTestRun() {
-
+        for (Testcase tc: this.selectedTestRun.getTestcasesById()){
+            tc.setTestrunByTestrunId(null);
+            testSystem.saveTestCase(tc);
+        }
         testSystem.deleteTestRun(this.selectedTestRun);
         this.selectedTestRun = null;
         this.testRuns = testSystem.getTestRunList();
@@ -141,6 +177,7 @@ public class TestRunController implements Serializable {
         return highestId+1;
     }
     public void setUnsavedTcChanges(){
+
         this.unsavedTCChanges = true;
         PrimeFaces.current().executeScript("PF('addRemoveTestCases').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:manageTestrunDialog");

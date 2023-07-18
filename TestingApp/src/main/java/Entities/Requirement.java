@@ -22,7 +22,7 @@ public class Requirement {
     @Basic
     @Column(name = "Status")
     private String status;
-    @OneToMany(mappedBy = "requirementByRequirementId")
+    @OneToMany(mappedBy = "requirementByRequirementId", cascade = {CascadeType.ALL})
     private Collection<Testcase> testcasesById;
 
     public Requirement() {

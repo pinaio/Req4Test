@@ -114,7 +114,7 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Testfall bearbeiten / anlegen" showEffect="fade" modal="true" widgetVar="managetestCaseDialog"
+               <p:dialog header="Testfall bearbeiten / anlegen" showEffect="fade" modal="true" widgetVar="managetestCaseDialog" minimizable="true" maximizable="true" resizable="true" responsive="true" fitViewport="true" >
                          responsive="true">
                   <p:outputPanel id="manage-testCase-content" class="ui-fluid">
                      <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">

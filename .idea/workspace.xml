@@ -9,18 +9,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_07_2023_21_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_07_2023_21_04__Changes_.xml" afterDir="false" />
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Worked on TestCase Picklist -&gt; Next Save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Requirement.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Requirement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Requirement.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Requirement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestSystem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Requirement.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Requirement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestSystem.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -467,7 +476,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689418047678</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Worked on TestCase Picklist -&gt; Next Save">
+      <option name="closed" value="true" />
+      <created>1689602897916</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1689602897916</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,6 +504,7 @@
     <MESSAGE value="Worked on TestCaseEdit" />
     <MESSAGE value="Worked on TestCaseEdit-Found a Soulution -&gt; Work with Dialog and create a corrosponding String Collection for Display in View" />
     <MESSAGE value="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation" />
+    <MESSAGE value="Worked on TestCase Picklist -&gt; Next Save" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked on TestCase Picklist -&gt; Next Save" />
   </component>
 </project>

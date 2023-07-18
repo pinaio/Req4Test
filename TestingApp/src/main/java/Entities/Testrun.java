@@ -49,7 +49,8 @@ public class Testrun {
     @Basic
     @Column(name = "Title")
     private String title;
-    @OneToMany(mappedBy = "testrunByTestrunId")
+
+    @OneToMany(mappedBy = "testrunByTestrunId", cascade = {CascadeType.ALL})
     private Collection<Testcase> testcasesById;
     @ManyToOne
     @JoinColumn(name = "Tester", referencedColumnName = "ID")

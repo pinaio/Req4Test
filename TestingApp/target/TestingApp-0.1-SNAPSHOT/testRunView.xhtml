@@ -187,7 +187,7 @@
                         <p:commandButton styleClass="ui-button m-2 " value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
                                          oncomplete="PF('addRemoveTestCases').show()" process="@this" >
                         </p:commandButton>
-                        <p:outputLabel value="Es gibt ungespeicherte Testfall Änderungen." rendered="#{testRunController.setUnsavedTcChanges()}"/>
+                        <h:outputText styleClass="text-3xl text-red-200" value="Es gibt ungespeicherte Testfall Änderungen." rendered="#{testRunController.unsavedTCChanges}"/>
                      </p:outputPanel>
                   </p:outputPanel>
 
