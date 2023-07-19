@@ -9,22 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="TestCase Assignment for Testruns working">
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/RunTestRunController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/runTestRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/Testrun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/Entities/Testrun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/WEB-INF/classes/TestRunDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/Entities/Testrun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/classes/TestRunDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/classes/TestRunDAO.class" afterDir="false" />
-    </list>
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Created Run Test Run View -&gt; optimization needed for UI" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -488,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689690294950</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Created Run Test Run View -&gt; optimization needed for UI">
+      <option name="closed" value="true" />
+      <created>1689771441544</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1689771441544</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,6 +503,7 @@
     <MESSAGE value="TESTCASE Edit Done.&#10;Tested Nested Dialog on Requirements for TestCase Creation" />
     <MESSAGE value="Worked on TestCase Picklist -&gt; Next Save" />
     <MESSAGE value="TestCase Assignment for Testruns working" />
-    <option name="LAST_COMMIT_MESSAGE" value="TestCase Assignment for Testruns working" />
+    <MESSAGE value="Created Run Test Run View -&gt; optimization needed for UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Run Test Run View -&gt; optimization needed for UI" />
   </component>
 </project>
