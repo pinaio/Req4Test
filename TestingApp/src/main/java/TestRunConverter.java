@@ -36,7 +36,6 @@ public class TestRunConverter implements Converter {
         if (value == null) {
             return "";
         }
-
         if (value instanceof Testrun) {
             Long id = ((Testrun) value).getId();
             return (id != null) ? String.valueOf(id) : null;

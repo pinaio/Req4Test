@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Testfall-Management</title>
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
+</h:head>
+<h:body styleClass="m-0 p-0">
+   <f:metadata>
+      <f:viewParam name="testrun" value="#{runTestRunController.selectedTestRun}"
+                   converter="#{testRunConverter}" converterMessage="Unknown product, please use a link from within the system."
+                   required="true" requiredMessage="Bad request, please use a link from within the system."
+      />
+   </f:metadata>
+   <!---Header Start-->
+   <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+      <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
+      <div class="max-h-4rem">
+         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+      </div>
+   </div>
+   <!--App & Sidebar-->
+   <div class="flex surface-card min-h-full ">
+      <h:form>
+         <div class="card">
+            <p:menu styleClass="w-16rem border-0">
+               <p:submenu label="Anforderungen">
+                  <p:menuitem value="Übersicht"  outcome="reqsView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testläufe">
+                  <p:menuitem value="Übersicht"  outcome="testRunView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Testfälle">
+                  <p:menuitem value="Übersicht"  outcome="testCasesView"
+                              icon="pi pi-book"/>
+               </p:submenu>
+               <p:submenu label="Navigations">
+                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               </p:submenu>
+            </p:menu>
+         </div>
+      </h:form>
+      <!--Main Application "Window"-->
+
+      <div class="text-xl flex flex-column  p-4 align-items-center surface-ground min-h-full ">
+         <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{runTestRunController.header}"/>
+         <!--CRUD-TABLE-->
+         <div class="card ">
+            <h:form id="form">
+               <p:growl id="messages" showDetail="true" />
+               <h:outputText value="#{runTestRunController.selectedTestRun.id}"/>
+               <h:outputText value="#{runTestRunController.selectedTestRun.title}"/>
+
+               <p:toolbar>
+                  <p:toolbarGroup>
+
+                  </p:toolbarGroup>
+                 
+               </p:toolbar>
+
+               <p:dataTable id="dt-testcases-of-testrun" widgetVar="dttestCasesofTestrun" var="tc" value="#{runTestRunController.selectedTestRun.testcasesById}"
+                            reflow="true" styleClass="text-white" resizableColumns="true"
+                            paginator="false" rendered="#{not empty runTestRunController.selectedTestRun}" >
+                  <f:facet name="header">
+                     <div>
+                        <span style="font-weight: bold">Test durchführen</span>
+
+                     </div>
+                  </f:facet>
+                  <p:column headerText="ID" width="5rem">
+                     <h:outputText value="#{tc.id}" />
+                  </p:column>
+                  <p:column headerText="Anfoderung">
+                     <h:outputText value="#{tc.requirementByRequirementId.name}" />
+                  </p:column>
+                  <p:column headerText="Titel">
+                     <h:outputText value="#{tc.title}" />
+                  </p:column>
+                  <p:column headerText="Beschreibung">
+                     <h:outputText value="#{tc.description}">
+                     </h:outputText>
+                  </p:column>
+                  <p:column headerText="Erwartetes Verhalten">
+                     <h:outputText value="#{tc.expectedResult}" />
+                  </p:column>
+                  <p:column headerText="Beobachtetes Verhalten">
+                     <p:inputText value="#{tc.observedResult}" styleClass="h-10rem" />
+                  </p:column>
+                  <p:column headerText="Fail/Pass" >
+                     <p:selectOneMenu value="#{tc.failOrPass}">
+                        <f:selectItem itemValue="Nicht getestet" itemLabel="Nicht getestet" />
+                        <f:selectItem itemValue="Fail" itemLabel="Fail" />
+                        <f:selectItem itemValue="Pass" itemLabel="Pass" />
+                     </p:selectOneMenu>
+                  </p:column>
+
+               </p:dataTable>
+
+
+               <p:commandButton styleClass="ui-button-danger m-2 " value="Speichern" icon="pi pi-trash" process="@this" actionListener="#{runTestRunController.saveTestRun}">
+                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
+               </p:commandButton>
+            </h:form>
+
+
+
+         </div>
+      </div>
+   </div>
+</h:body>
+</html>
+

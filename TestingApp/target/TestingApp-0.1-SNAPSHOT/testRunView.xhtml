@@ -138,6 +138,10 @@
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
+                              <p:linkButton styleClass="ui-button-danger m-2 " value="Test durchführen" icon="pi pi-trash" process="@this"
+                                               outcome="runTestRunView" >
+                                 <f:param name="testrun" value="#{tr.id}"/>
+                              </p:linkButton>
 
                            </div>
 

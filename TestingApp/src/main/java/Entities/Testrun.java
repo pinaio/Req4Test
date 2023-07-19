@@ -1,7 +1,9 @@
 package Entities;
 
 import jakarta.persistence.*;
+import org.hibernate.FetchMode;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.engine.profile.Fetch;
 
 import java.util.Date;
 import java.sql.Timestamp;
@@ -50,7 +52,8 @@ public class Testrun {
     @Column(name = "Title")
     private String title;
 
-    @OneToMany(mappedBy = "testrunByTestrunId", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "testrunByTestrunId", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+
     private Collection<Testcase> testcasesById;
     @ManyToOne
     @JoinColumn(name = "Tester", referencedColumnName = "ID")

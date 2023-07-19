@@ -25,9 +25,9 @@ public class TestRunDAO {
     }
     public Testrun find(Long id){
         EntityManager em = entityManagerFactory.createEntityManager();
-        Testrun tc = em.find(Testrun.class, id);
+        Testrun tr = em.find(Testrun.class, id);
         em.close();
-        return tc;
+        return tr;
     }
 
 
