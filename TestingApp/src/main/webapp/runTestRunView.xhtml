@@ -26,7 +26,7 @@
    <div class="flex surface-card min-h-full ">
       <h:form>
          <div class="card">
-            <p:menu styleClass="w-16rem border-0">
+            <p:menu styleClass="w-12rem border-0">
                <p:submenu label="Anforderungen">
                   <p:menuitem value="Übersicht"  outcome="reqsView"
                               icon="pi pi-book"/>
@@ -54,57 +54,73 @@
          <div class="card ">
             <h:form id="form">
                <p:growl id="messages" showDetail="true" />
-               <h:outputText value="#{runTestRunController.selectedTestRun.id}"/>
-               <h:outputText value="#{runTestRunController.selectedTestRun.title}"/>
-
-               <p:toolbar>
-                  <p:toolbarGroup>
-                  </p:toolbarGroup>
-               </p:toolbar>
-
                <p:dataTable id="dt-testcases-of-testrun" widgetVar="dttestCasesofTestrun" var="tc" value="#{runTestRunController.selectedTestRun.testcasesById}"
-                            reflow="true" styleClass="text-white" resizableColumns="true"
+                            reflow="true" styleClass="text-white flex-wrap white-space-normal" resizableColumns="true"
                             paginator="false" rendered="#{not empty runTestRunController.selectedTestRun}" >
                   <f:facet name="header">
                      <div>
                         <span style="font-weight: bold">Test durchführen</span>
                      </div>
                   </f:facet>
-                  <p:column headerText="ID" width="5rem">
-                     <h:outputText value="#{tc.id}" />
+                  <p:column headerText="Anforderung" styleClass="white-space-normal">
+                     <h:outputText id="reqName" value="#{tc.requirementByRequirementId.name}" />
+                     <p:overlayPanel for="reqName" showEvent="mouseover" hideEvent="mouseout" autoHide="false">
+                        <h:outputText value="#{tc.requirementByRequirementId.description}"/>
+                     </p:overlayPanel>
                   </p:column>
-                  <p:column headerText="Anfoderung">
-                     <h:outputText value="#{tc.requirementByRequirementId.name}" />
-                  </p:column>
-                  <p:column headerText="Titel">
+                  <p:column headerText="Titel" styleClass="white-space-normal">
                      <h:outputText value="#{tc.title}" />
                   </p:column>
-                  <p:column headerText="Beschreibung">
+                  <p:column headerText="Beschreibung" styleClass="white-space-normal" width="20%">
                      <h:outputText value="#{tc.description}">
                      </h:outputText>
                   </p:column>
-                  <p:column headerText="Erwartetes Verhalten">
-                     <h:outputText value="#{tc.expectedResult}" />
+                  <p:column headerText="Erwartetes Verhalten" width="20%" styleClass="white-space-normal">
+                     <p:outputPanel>
+                        <h:outputText value="#{tc.expectedResult}"/>
+                     </p:outputPanel>
                   </p:column>
-                  <p:column headerText="Beobachtetes Verhalten">
-                     <p:inputText value="#{tc.observedResult}" styleClass="h-10rem" />
+                  <p:column headerText="Beobachtetes Verhalten" width="20%">
+                     <p:inputTextarea value="#{tc.observedResult}"  rows="6" cols="33"/>
                   </p:column>
-                  <p:column headerText="Fail/Pass" >
+                  <p:column headerText="Fail/Pass" width="15%">
                      <p:selectOneMenu value="#{tc.failOrPass}">
-                        <f:selectItem itemValue="Nicht getestet" itemLabel="Nicht getestet" />
-                        <f:selectItem itemValue="Fail" itemLabel="Fail" />
-                        <f:selectItem itemValue="Pass" itemLabel="Pass" />
+                        <f:selectItem itemValue="" itemLabel="Nicht getestet" />
+                        <f:selectItem itemValue="fail" itemLabel="Fail" />
+                        <f:selectItem itemValue="pass" itemLabel="Pass" />
                      </p:selectOneMenu>
                   </p:column>
 
                </p:dataTable>
 
+               <p:toolbar>
+                  <p:toolbarGroup>
+                     <p:commandButton value="Sofort abschließen" icon="pi pi-check" actionListener="#{runTestRunController.saveTestRun}"
+                                      process="dt-testcases-of-testrun @this" update="dt-testcases-of-testrun"
+                                      oncomplete="PF('sucessTestrun').show()" />
+                     <p:commandButton styleClass="ui-button-danger m-2 " value="Abbrechen" icon="pi pi-trash" process="@this" update="dialogs:abort-test-run"
+                                      oncomplete="PF('abortTestRunDialog').show()">
+                     </p:commandButton>
+                  </p:toolbarGroup>
 
-               <p:commandButton styleClass="ui-button-danger m-2 " value="Speichern" icon="pi pi-trash" process="@this" actionListener="#{runTestRunController.saveTestRun}">
-                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
-               </p:commandButton>
+
+
+               </p:toolbar>
             </h:form>
+            <h:form id="dialogs">
+               <p:confirmDialog id="sucess" widgetVar="sucessTestrun" showEffect="fade" width="300"
+                                message="Testlauf erfolgreich abgeschlossen" header="Bestätigung" severity="warn">
+                  <p:linkButton value="OK" type="button" styleClass="ui-confirmdialog-yes no-underline focus:no-underline active:no-underline mx-4" icon="pi pi-check" outcome="testRunView"
+                  />
+               </p:confirmDialog>
 
+               <p:confirmDialog id="abort-test-run" widgetVar="abortTestRunDialog" severity="alert" showEffect="fade" width="300" message="Diesen Testlauf wirklich abbrechen?">
+                  <p:linkButton value="Ja" type="button" styleClass="ui-confirmdialog-yes no-underline focus:no-underline active:no-underline mx-4" icon="pi pi-check" outcome="testRunView"
+                  />
+                  <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                   icon="pi pi-times" onclick="PF('abortTestRunDialog').hide()" />
+               </p:confirmDialog>
+            </h:form>
 
 
          </div>

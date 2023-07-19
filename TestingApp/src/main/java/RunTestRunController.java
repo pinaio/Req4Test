@@ -1,11 +1,14 @@
 import Entities.Testcase;
 import Entities.Testrun;
+import jakarta.annotation.ManagedBean;
 import jakarta.annotation.PostConstruct;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ import static org.primefaces.component.cache.UICacheBase.PropertyKeys.key;
 
 
 @ViewScoped
-@Named()
+@Named
 public class RunTestRunController implements Serializable {
 
     @Inject
@@ -49,5 +52,16 @@ public class RunTestRunController implements Serializable {
 
     public String getHeader() {
         return header;
+    }
+
+    public void saveTestRun(){
+        testSystem.saveTestRun(this.selectedTestRun);
+
+    }
+
+
+
+    public String goBack(){
+        return "testRunView.xhtml";
     }
 }

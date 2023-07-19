@@ -21,10 +21,10 @@
       </div>
    </div>
    <!--App & Sidebar-->
-   <div class="flex surface-card h-full ">
+   <div class="flex surface-card min-h-screen ">
       <h:form>
          <div class="card">
-            <p:menu styleClass="w-20rem border-0">
+            <p:menu styleClass="w-15rem border-0">
                <p:submenu label="Anforderungen">
                   <p:menuitem value="Übersicht"  outcome="reqsView"
                               icon="pi pi-book"/>
@@ -65,39 +65,37 @@
                </p:toolbar>
 
                <p:dataTable id="dt-testruns" widgetVar="dtTestruns" var="tr" value="#{testRunController.testRuns}"
-                            reflow="true" styleClass="text-white p-2"
+                            reflow="true" styleClass="text-white text-center" allowUnsorting="true" sortMode="single"
                              paginator="false"   >
                   <f:facet name="header">
                      <div class="requirements-table-header">
-                        <span style="font-weight: bold">Anforderungen</span>
+                        <span class="text-white font-bold" >Testläufe</span>
                      </div>
                   </f:facet>
-                        <p:column  headerText="ID">
+                        <p:column  headerText="ID" sortBy="#{tr.id}" width="2%">
                            <h:outputText  value="#{tr.id}" />
                         </p:column>
 
-                        <p:column  headerText="Titel">
+                        <p:column  headerText="Titel" sortBy="#{tr.title}">
                            <h:outputText value="#{tr.title}"  />
                         </p:column>
 
 
-                        <p:column  headerText="Erstellungsdatum">
+                        <p:column headerText="Erstellungsdatum" sortBy="#{tr.creationDate}">
                            <h:outputText value="#{tr.creationDate}">
                               <f:convertDateTime type="date" dateStyle="short"/>
                            </h:outputText>
                         </p:column>
-                        <p:column  headerText="Ersteller">
+                        <p:column  headerText="Ersteller" sortBy="#{tr.creator}">
                            <h:outputText value="#{tr.creator}" />
                         </p:column>
-                        <p:column  headerText="Zugewiesene Testfälle(Mouseover)">
+                        <p:column  headerText="Zugewiesene Testfälle" sortBy="#{tr.testcasesById.size()}" width="8%">
                            <h:outputText value="#{tr.testcasesById.size()}" id="testCaseField" />
-
-
                            <p:overlayPanel for="testCaseField" style="width:350px" showEvent="mouseover" hideEvent="mouseout" autoHide="false">
                               <p:dataTable id="dt-testcases" widgetVar="dtTestCases" var="tc" value="#{tr.testcasesById}" >
                                  <f:facet name="header">
                                     <div class="">
-                                       <span style="font-weight: bold">Zugewiesene Testfälle</span>
+                                       <span class="text-white font-bold">Zugewiesene Testfälle</span>
                                     </div>
                                  </f:facet>
                                  <p:column>
@@ -109,39 +107,38 @@
 
                               </p:dataTable>
                            </p:overlayPanel>
-
-
                         </p:column>
-                        <p:column  headerText="Status">
+                        <p:column  headerText="Status" sortBy="#{tr.status}">
                            <h:outputText value="#{tr.status}"/>
                         </p:column>
-                        <p:column  headerText="Zu testen bis">
+                        <p:column  headerText="Zu testen bis" sortBy="#{tr.deadline}">
                            <h:outputText value="#{tr.deadline}" >
                               <f:convertDateTime type="date" dateStyle="default"/>
                            </h:outputText>
                         </p:column>
-                     <p:column  headerText="Tester">
-                        <h:outputText value="#{tr.userByTester.firstname}" rendered="#{not empty tr.userByTester }" />
+                     <p:column  headerText="Tester" sortBy="#{tr.userByTester.firstname}">
+                        <h:outputText value="#{tr.userByTester.firstname.concat(' ').concat(tr.userByTester.lastname)} " rendered="#{not empty tr.userByTester }" />
                         <h:outputText value="Nicht Zugewiesen" rendered="#{empty tr.userByTester }" />
 
                      </p:column>
-                        <p:column headerText="Bearbeiten">
+                        <p:column headerText="Bearbeiten" width="10%" >
                            <div class="">
-                              <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
+                              <p:linkButton styleClass="ui-button m-2 w-full " value="Test durchführen" icon="pi pi-play" process="@this"
+                                            outcome="runTestRunView" rendered="#{not empty tr.testcasesById}"  >
+                                 <f:param name="testrun" value="#{tr.id}"/>
+                              </p:linkButton>
+                              <p:commandButton styleClass="ui-button m-2 w-full" value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
                                                oncomplete="PF('manageTestrunDialog').show()" process="@this" >
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
                                  <p:resetInput target=":dialogs:manage-testrun-content" />
                               </p:commandButton>
 
-                              <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
+                              <p:commandButton styleClass="ui-button-danger m-2 w-full" value="Löschen" icon="pi pi-trash" process="@this"
                                                oncomplete="PF('deleteTestrunDialog').show()">
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
-                              <p:linkButton styleClass="ui-button-danger m-2 " value="Test durchführen" icon="pi pi-trash" process="@this"
-                                               outcome="runTestRunView" >
-                                 <f:param name="testrun" value="#{tr.id}"/>
-                              </p:linkButton>
+
 
                            </div>
 
