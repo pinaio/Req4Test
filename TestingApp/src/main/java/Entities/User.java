@@ -24,7 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private int id;
+    private Long id;
     @OneToMany(mappedBy = "userById", cascade = {CascadeType.ALL})
     private Collection<Testrun> testrunsById;
 
@@ -32,7 +32,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String firstname, String lastname, String password, String role, int id) {
+    public User(String username, String firstname, String lastname, String password, String role, Long id) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -73,11 +73,11 @@ public class User {
         this.role = role;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -27,6 +27,8 @@ public class RunTestRunController implements Serializable {
     private Testrun selectedTestRun;
     private List<Testcase> testcases;
 
+    private String status;
+
     public RunTestRunController() {
     }
 
@@ -55,6 +57,19 @@ public class RunTestRunController implements Serializable {
     }
 
     public void saveTestRun(){
+        this.status = "Abgeschlossen";
+        for(Testcase tc:this.selectedTestRun.getTestcasesById()){
+            if(tc.getFailOrPass().equals( "pass")){
+                continue;
+            } else if (tc.getFailOrPass().equals( "fail")) {
+                status ="Defekt entdeckt";
+
+            } else{
+                status = "Offen";
+                break;
+            }
+        }
+        this.selectedTestRun.setStatus(status);
         testSystem.saveTestRun(this.selectedTestRun);
 
     }

@@ -1,5 +1,6 @@
 import Entities.Testcase;
 import Entities.Testrun;
+import Entities.User;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -25,6 +26,14 @@ public class TestRunController implements Serializable {
     private List<Testcase> testcases = new ArrayList<Testcase>();
     private List<Testcase> unasignedTC = new ArrayList<Testcase>();
     private List<Testcase> asignedTC = new ArrayList<Testcase>();
+    private List<User> users = new ArrayList<User>();
+    private List<User> testers = new ArrayList<User>();
+
+    private List<String> userStrings = new ArrayList<String>();
+
+    private String selectedUserString;
+
+    private int selectedUserIndex;
 
     private DualListModel<Testcase> dlTestcases;
     private boolean unsavedTCChanges;
@@ -34,14 +43,31 @@ public class TestRunController implements Serializable {
 
     @Inject
     private TestSystem testSystem;
+    @Inject
+    private UserController userController;
+    private User currentUser;
+
     private String header ="Testläufe im Überblick";
 
     @PostConstruct
     public void init(){
         this.testRuns = testSystem.getTestRunList();
         this.testcases = testSystem.getTestCaseList();
+        this.users = userController.getAllUser();
         dlTestcases = new DualListModel<>();
+        this.currentUser = userController.getCurrentUser();
 
+        for (User u : this.users){
+            if(u.getRole().equals("Tester")){
+                this.testers.add(u);
+            }
+        }
+
+        for(User u : this.testers){
+            this.userStrings.add(u.getUsername());
+        }
+        System.out.println(this.userStrings.get(0));
+        System.out.println(this.userStrings.get(1));
     }
 
     public TestRunController() {
@@ -62,6 +88,31 @@ public class TestRunController implements Serializable {
         return selectedTestRun;
     }
 
+    public List<String> getUserStrings() {
+        return userStrings;
+    }
+
+    public void setUserStrings(List<String> userStrings) {
+        this.userStrings = userStrings;
+    }
+
+    public String getSelectedUserString() {
+        return selectedUserString;
+    }
+
+    public void setSelectedUserString(String selectedUserString) {
+        this.selectedUserString = selectedUserString;
+        this.selectedUserIndex = this.userStrings.indexOf(this.selectedUserString);
+        if (this.selectedUserIndex == -1){
+            this.selectedTestRun.setUserByTester(null);
+        }else {
+            Long allUserIndex = testers.get(selectedUserIndex).getId();
+            this.selectedTestRun.setUserByTester(testSystem.findUser(allUserIndex));
+        }
+
+
+    }
+
     public void setSelectedTestRun(Testrun selectedTestRun){
         this.selectedTestRun = selectedTestRun;
         this.testcases = testSystem.getTestCaseList();
@@ -76,6 +127,13 @@ public class TestRunController implements Serializable {
         asignedTC = (List<Testcase>) selectedTestRun.getTestcasesById();
         dlTestcases.setTarget(asignedTC);
         dlTestcases.setSource(unasignedTC);
+
+        if(this.selectedTestRun.getUserByTester() == null){
+            this.selectedUserString = null;
+        }else{
+            this.selectedUserString = this.selectedTestRun.getUserByTester().getUsername();
+        }
+
     }
 
     public DualListModel<Testcase> getDlTestcases() {
@@ -96,6 +154,8 @@ public class TestRunController implements Serializable {
 
     public void openNew() {
         this.selectedTestRun = new Testrun();
+        this.selectedTestRun.setCreator(this.currentUser.getUsername());
+        this.selectedTestRun.setStatus("Neu");
         this.testcases = testSystem.getTestCaseList();
         this.unasignedTC = new ArrayList<Testcase>();
         this.asignedTC = new ArrayList<Testcase>();
@@ -107,6 +167,9 @@ public class TestRunController implements Serializable {
         }
         dlTestcases.setTarget(asignedTC);
         dlTestcases.setSource(unasignedTC);
+        this.selectedUserString = null;
+
+
 
 
     }

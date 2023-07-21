@@ -101,6 +101,10 @@ public class TestSystem implements Serializable {
         return testRunDao.find(id);
 
     }
+    public User findUser(Long id){
+        return userDao.find(id);
+
+    }
 
 
     public Testcase getTcToEditOrRun() {
@@ -139,7 +143,7 @@ public class TestSystem implements Serializable {
         }
     }
     private   void createTestTestRuns(){
-        User ersterUser = (User) userList.get(0);
+        User ersterUser = (User) userList.get(2);
         List<Testrun> testTrList = new ArrayList<Testrun>();
         testTrList.add(new Testrun(1L ,new Date(),"Peter Testmanager","Neu","Erster Testlauf", ersterUser ));
         testTrList.add(new Testrun(2L ,new Date(),"Peter Testmanager","Neu","2. Testlauf" ));
@@ -153,10 +157,11 @@ public class TestSystem implements Serializable {
         }}
         private void createTestUser(){
             List<User> tUser = new ArrayList<User>();
-            tUser.add(new User("UserA","Alfons", "Admin","password","Admin",1));
-            tUser.add(new User("UserB","Theo", "Tester","password","Tester",2));
-            tUser.add(new User("UserC","Margret", "Managerin","password","Testmanagerin",3));
-            tUser.add(new User("UserA","Fallo", "Testfallersteller","password","Testfallersteller",4));
+            tUser.add(new User("Alfons Admin","Alfons", "Admin","password","Admin",1L));
+            tUser.add(new User("Theo Tester","Theo", "Tester","password","Tester",2L));
+            tUser.add(new User("Margret Managerin","Margret", "Managerin","password","Testmanagerin",3L));
+            tUser.add(new User("Fallo Testfallersteller","Fallo", "Testfallersteller","password","Testfallersteller",4L));
+            tUser.add(new User("Theresa Tester","Theresa", "Tester","password","Tester",5L));
 
 
 

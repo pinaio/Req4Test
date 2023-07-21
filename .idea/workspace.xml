@@ -9,13 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Created Run Test Run View -&gt; optimization needed for UI">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5dbb91da-f37e-4c9f-a2f2-8fcddbb51b14.xml" afterDir="false" />
+    <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="finished runTestRun">
+      <change afterPath="$PROJECT_DIR$/TestingApp/src/main/java/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/Entities/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/RunTestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/RunTestRunController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/runTestRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/runTestRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestCasesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestRunController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/TestSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/java/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/java/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testRunView.xhtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,6 +330,7 @@
       <workItem from="1689341583603" duration="2216000" />
       <workItem from="1689413436117" duration="4232000" />
       <workItem from="1689518727429" duration="7618000" />
+      <workItem from="1689933189992" duration="9855000" />
     </task>
     <task id="LOCAL-00001" summary="Initial2">
       <option name="closed" value="true" />
@@ -488,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689771441544</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="finished runTestRun">
+      <option name="closed" value="true" />
+      <created>1689786678856</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1689786678856</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,6 +523,7 @@
     <MESSAGE value="Worked on TestCase Picklist -&gt; Next Save" />
     <MESSAGE value="TestCase Assignment for Testruns working" />
     <MESSAGE value="Created Run Test Run View -&gt; optimization needed for UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Run Test Run View -&gt; optimization needed for UI" />
+    <MESSAGE value="finished runTestRun" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished runTestRun" />
   </component>
 </project>

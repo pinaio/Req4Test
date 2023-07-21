@@ -1,3 +1,4 @@
+import Entities.Testcase;
 import Entities.User;
 import jakarta.persistence.*;
 
@@ -20,6 +21,13 @@ public class UserDAO {
         t.commit();
         em.close();
 
+    }
+
+    public User find(Long id){
+        EntityManager em = entityManagerFactory.createEntityManager();
+        User u = em.find(User.class, id);
+        em.close();
+        return u;
     }
 
     public void deleteUser(User selectedUser) {
