@@ -12,6 +12,7 @@ import java.util.List;
 @SessionScoped
 public class UserController implements Serializable {
     private User currentUser;
+    private User loginUser = new User();
 
     private List<User> allUser;
 
@@ -24,6 +25,7 @@ public class UserController implements Serializable {
     }
 
     public List<User> getAllUser() {
+        this.allUser = testSystem.getUserList();
         return allUser;
     }
 
@@ -35,7 +37,11 @@ public class UserController implements Serializable {
     public void init(){
         this.allUser = testSystem.getUserList();
         // Dies muss noch weg und durch das richtige ersetzt werden
-        this.currentUser = testSystem.getUserList().get(0);
+        if(!testSystem.getUserList().isEmpty()){
+            this.currentUser = testSystem.getUserList().get(0);
+        }else {
+            this.currentUser = null;
+        }
 
 
     }
@@ -48,6 +54,11 @@ public class UserController implements Serializable {
         this.currentUser = currentUser;
     }
 
+    public User getLoginUser() {
+        return loginUser;
+    }
 
-
+    public void setLoginUser(User loginUser) {
+        this.loginUser = loginUser;
+    }
 }

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
->
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 
 
 <h:head>
@@ -109,7 +109,12 @@
                            </p:overlayPanel>
                         </p:column>
                         <p:column  headerText="Status" sortBy="#{tr.status}">
-                           <h:outputText value="#{tr.status}"/>
+                           <p:column  headerText="Fail/Pass" >
+                              <p:tag styleClass="py-1 px-2 my-4 " value="Neu" rendered="#{tr.status == 'Neu'}"/>
+                              <p:tag styleClass="py-1 px-2 my-4 " value="Offen" rendered="#{tr.status == 'Offen'}"/>
+                              <p:tag styleClass="py-1 px-2 my-4" value="Abgeschlossen" severity="success" rendered="#{tr.status == 'Abgeschlossen'}"/>
+                              <p:tag styleClass="py-1 px-2 my-4" value="Defekt entdeckt" severity="danger" rendered="#{tr.status == 'Defekt entdeckt'}"/>
+                           </p:column>
                         </p:column>
                         <p:column  headerText="Zu testen bis" sortBy="#{tr.deadline}">
                            <h:outputText value="#{tr.deadline}" >
@@ -166,24 +171,32 @@
                            <p:outputLabel for="description">Beschreibung</p:outputLabel>
                            <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
-                        <div class="field">
-                           <p:outputLabel for="author">Ersteller</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{testRunController.selectedTestRun.creator}" />
+                        <div class="field flex flex-column">
+                           <p:outputLabel for="creator">Ersteller</p:outputLabel>
+                           <h:outputText id="creator" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
                            <p:calendar id="deadline" value="#{testRunController.selectedTestRun.deadline}" required="true"/>
                         </div>
 
-                        <div class="field">
+                        <div class="field flex flex-column">
                            <p:outputLabel for="status">Status</p:outputLabel>
                            <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
                               <f:selectItem itemLabel="Neu" itemValue="Neu"/>
-                              <f:selectItem itemLabel="Zu Testen" itemValue="Zu Testen"/>
-                              <f:selectItem itemLabel="Testing" itemValue="Testing"/>
-                              <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
+                              <f:selectItem itemLabel="Offen" itemValue="Offen"/>
+                              <f:selectItem itemLabel="Defekt entdeckt" itemValue="Defekt entdeckt"/>
+                              <f:selectItem itemLabel="Abgeschlossen" itemValue="Abgeschlossen"/>
                            </p:selectOneButton>
                         </div>
+                        <div class="field flex flex-column">
+                           <p:outputLabel for="tester">Tester</p:outputLabel>
+                           <p:selectOneMenu id="tester" required="false" value="#{testRunController.selectedUserString}">
+                              <f:selectItem  itemLabel="Kein Tester zugewiesen" itemValue="#{null}"  noSelectionOption="true"/>
+                              <f:selectItems var="tester" value="#{testRunController.userStrings}" itemValue="#{tester}" itemLabel="#{tester}"/>
+                           </p:selectOneMenu>
+                        </div>
+
 
                         <p:commandButton styleClass="ui-button m-2 " value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
                                          oncomplete="PF('addRemoveTestCases').show()" process="@this" >

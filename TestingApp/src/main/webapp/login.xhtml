@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>TestingApp 0.1</title>
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
+   <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
+
+</h:head>
+<h:body styleClass="flex justify-content-center flex-column surface-ground align-items-center min-h-screen">
+   <div class="surface-card surface-border shadow-4">
+      <h:form id="loginForm" styleClass="flex flex-column justify-content-center p-6">
+         <div class="field w-full" >
+            <h:outputText styleClass="text-4xl text-white" value="#{loginController.testSystem.name}"/>
+         </div>
+
+      <div class="field flex flex-column  justify-content-center w-full">
+         <p:outputLabel value="Benutzername" for="username" styleClass="text-white"/>
+         <p:inputText required="true" id="username" value="#{loginController.loginUser.username}" placeholder="Benutzername" styleClass="w-20rem">
+            <f:event type="postValidate" listener="#{loginController.postValidateUsername}"/>
+         </p:inputText>
+      </div>
+      <div class="field flex flex-column  justify-content-center w-full">
+         <p:outputLabel value="Passwort" for="password" styleClass="text-white"/>
+         <div>
+            <p:password required="true" id="password" value="#{userController.loginUser.password}"
+                        placeholder="Passwort" toggleMask="true"  styleClass="w-20rem"
+                        validator="#{loginController.validateLogin}">
+
+            </p:password>
+         </div>
+
+      </div>
+         <div class="flex flex-column  my-6 justify-content-center w-full ">
+            <p:commandButton value="Login" styleClass="p-2 w-20rem"  action="#{loginController.login()}" process="@this loginForm" update="@this loginForm"/>
+            <p:messages/>
+         </div>
+
+      </h:form>
+
+   </div>
+   <div>
+      <h:form>
+         <p:commandButton value="Testdaten laden" action="#{loginController.testSystem.createTestData()}"   />
+      </h:form>
+
+   </div>
+
+
+
+</h:body>
+
+</html>
