@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class LoginController implements Serializable {
 
     @Inject
     TestSystem testSystem;
     @Inject UserController userController;
 
-    User LoginUser = new User();
+    private User loginUser = new User();
 
     private  String username;
     private String password;
@@ -50,11 +50,11 @@ public class LoginController implements Serializable {
     }
 
     public User getLoginUser() {
-        return LoginUser;
+        return loginUser;
     }
 
     public void setLoginUser(User loginUser) {
-        LoginUser = loginUser;
+        loginUser = loginUser;
     }
 
     public TestSystem getTestSystem() {
@@ -77,9 +77,11 @@ public class LoginController implements Serializable {
                 User temp = new User(this.username, (String) value);
                 if(u.equals(temp)){
                     if(u.getPassword().equals(temp.getPassword())){
+                        this.loginUser = u;
                         System.out.println("Eingeloggt");
                         return;
                     }else{
+
                         throw new ValidatorException((new FacesMessage("Passwort falsch.")));
                     }
                 }
@@ -89,9 +91,28 @@ public class LoginController implements Serializable {
 
     }
     public String login(){
+        userController.setCurrentUser(loginUser);
         return "index?faces-redirect=true";
 
     }
+    public String adminLogin(){
+        testSystem.createTestData();
+        List<User> userList = userController.getAllUser();
+        User temp = new User("Alfons Admin","password");
+        for(User u : userList){
+            if(u.equals(temp)){
+                if(u.getPassword().equals(temp.getPassword())){
+                    this.loginUser = u;
+                    System.out.println("Eingeloggt");
 
+                    userController.setCurrentUser(loginUser);
+                    return "index?faces-redirect=true";
 
+                }
+
+             }
+
+        }return null;
+
+    }
 }

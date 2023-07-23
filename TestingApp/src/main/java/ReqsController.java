@@ -1,4 +1,5 @@
 import Entities.Requirement;
+import Entities.Testcase;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Named
 @ViewScoped
@@ -19,19 +21,20 @@ public class ReqsController implements Serializable {
     private List<Requirement> requirements;
     private Requirement selectedRequirement;
 
-
     @Inject
     private TestSystem testSystem;
-    private String header ="Anforderungen im Überblick";
+    @Inject
+    private UserController userController;
+    private String header = "Anforderungen";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         this.requirements = testSystem.getReqList();
     }
 
     public ReqsController() {
     }
-//Eventuell kann der getter für das testsystem weg
+
     public TestSystem getTestSystem() {
         return testSystem;
     }
@@ -39,6 +42,7 @@ public class ReqsController implements Serializable {
     public String getHeader() {
         return header;
     }
+
     public List<Requirement> getRequirements() {
         return requirements;
     }
@@ -47,27 +51,27 @@ public class ReqsController implements Serializable {
         return selectedRequirement;
     }
 
-    public void setSelectedRequirement(Requirement selectedRequirement){
+    public void setSelectedRequirement(Requirement selectedRequirement) {
         this.selectedRequirement = selectedRequirement;
     }
-
-
 
     public void openNew() {
         this.selectedRequirement = new Requirement();
         this.selectedRequirement.setId(getNextIndex());
+        this.selectedRequirement.setAuthor(userController.getCurrentUser().getUsername());
+        this.selectedRequirement.setStatus("Neu");
     }
+
     public void saveRequirement() {
-        if (this.selectedRequirement == null) {
+        if (Objects.equals(this.selectedRequirement.getId(), getNextIndex())) {
             this.selectedRequirement.setId(
-                   (getNextIndex())
+                    (getNextIndex())
             );
             testSystem.saveRequirement(this.selectedRequirement);
             this.requirements = testSystem.getReqList();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung hinzugefügt"));
-        }
-        else {
+        } else {
             testSystem.saveRequirement(this.selectedRequirement);
             this.requirements = testSystem.getReqList();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung geändert"));
@@ -77,30 +81,36 @@ public class ReqsController implements Serializable {
         PrimeFaces.current().executeScript("PF('manageRequirementDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
     }
+
     public void deleteRequirement() {
-//        HIER MUSS DIE DAO LÖSCHEN UND AKTUALISIEREN
+        List<Testcase> tcList = (List<Testcase>) this.selectedRequirement.getTestcasesById();
+        for (Testcase tc : tcList) {
+            tc.setRequirementByRequirementId(null);
+            tc.setTestrunByTestrunId(null);
+            testSystem.saveTestCase(tc);
+            testSystem.deleteTestCase(tc);
+        }
+
         testSystem.deleteRequirement(this.selectedRequirement);
         this.selectedRequirement = null;
         this.requirements = testSystem.getReqList();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung und alle Testfälle gelöscht"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-requirements");
     }
 
-    private Long getNextIndex(){
+    private Long getNextIndex() {
         Long highestId;
-        List<Long> ident = new ArrayList<>() ;
-        if ( !requirements.isEmpty()){
-            for (Requirement req : this.requirements){
+        List<Long> ident = new ArrayList<>();
+        if (!requirements.isEmpty()) {
+            for (Requirement req : this.requirements) {
                 ident.add(req.getId());
             }
             highestId = Collections.max(ident);
-        }else{
+        } else {
             highestId = 0L;
         }
-        return highestId+1L;
+        return highestId + 1L;
     }
-
-
 
 
 }

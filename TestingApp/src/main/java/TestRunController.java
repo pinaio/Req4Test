@@ -47,7 +47,7 @@ public class TestRunController implements Serializable {
     private UserController userController;
     private User currentUser;
 
-    private String header ="Testläufe im Überblick";
+    private String header ="Testläufe";
 
     @PostConstruct
     public void init(){
@@ -66,8 +66,7 @@ public class TestRunController implements Serializable {
         for(User u : this.testers){
             this.userStrings.add(u.getUsername());
         }
-        System.out.println(this.userStrings.get(0));
-        System.out.println(this.userStrings.get(1));
+
     }
 
     public TestRunController() {

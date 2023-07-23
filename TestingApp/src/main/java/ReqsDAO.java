@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ReqsDAO {
 
+
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TESTINGAPP");
 
     public List<Requirement> loadAll(){
@@ -35,6 +36,7 @@ public class ReqsDAO {
         Requirement toDelete = em.find(Requirement.class, selectedRequirement.getId());
         EntityTransaction t = em.getTransaction();
         if (toDelete != null) {
+
             t.begin();
             em.remove(toDelete);
             t.commit();

@@ -13,6 +13,8 @@ public class indexController implements Serializable {
 
     @Inject
     private TestSystem testSystem;
+    @Inject
+    private UserController userController;
 
 
     public TestSystem getTestSystem() {
@@ -24,11 +26,7 @@ public class indexController implements Serializable {
     }
 
 
-
-    public String createTestData () throws InterruptedException {
-        testSystem.createTestData();
-        PrimeFaces.current().ajax().update("form:statistics");
-        return "";
-
+    public UserController getUserController() {
+        return userController;
     }
 }

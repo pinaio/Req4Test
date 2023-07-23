@@ -159,9 +159,9 @@ public class TestSystem implements Serializable {
             List<User> tUser = new ArrayList<User>();
             tUser.add(new User("Alfons Admin","Alfons", "Admin","password","Admin",1L));
             tUser.add(new User("Theo Tester","Theo", "Tester","password","Tester",2L));
-            tUser.add(new User("Margret Managerin","Margret", "Managerin","password","Testmanagerin",3L));
-            tUser.add(new User("Fallo Testfallersteller","Fallo", "Testfallersteller","password","Testfallersteller",4L));
-            tUser.add(new User("Theresa Tester","Theresa", "Tester","password","Tester",5L));
+            tUser.add(new User("Margret Managerin","Margret", "Managerin","password","TM",3L));
+            tUser.add(new User("Fallo Testfallersteller","Fallo", "Testfallersteller","password","TFE",4L));
+            tUser.add(new User("Theresa Re","Theresa", "Tester","password","RE",5L));
 
 
 

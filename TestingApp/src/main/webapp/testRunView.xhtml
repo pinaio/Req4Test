@@ -13,33 +13,41 @@
 
 </h:head>
 <h:body styleClass="m-0 p-0">
+   <p:outputPanel rendered="#{userController.currentUser == null}">
+      <h:outputText styleClass="text-red-500 font-bold text-4xl" value="Sie verfügen nicht über die nötigen Berechtigungen für diesen Teil der Anwendung!"/>
+      <h:form>
+         <p:commandButton value="Zum Login" action="login?faces-redirect=true"/>
+      </h:form>
+   </p:outputPanel>
+   <p:outputPanel rendered="#{not empty userController.currentUser}">
    <!---Header Start-->
    <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
       <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
       <div class="max-h-4rem">
-         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+         <h:outputText styleClass="text-white text-xl" value="#{userController.greetString}"/>
+         <p:commandButton styleClass="ui-button-flat p-2 m-1  " value="Logout" action="#{userController.logout}"/>
       </div>
    </div>
    <!--App & Sidebar-->
-   <div class="flex surface-card min-h-screen ">
-      <h:form>
+   <div class="flex surface-card h-full ">
+      <h:form  >
          <div class="card">
-            <p:menu styleClass="w-15rem border-0">
-               <p:submenu label="Anforderungen">
-                  <p:menuitem value="Übersicht"  outcome="reqsView"
+            <p:menu styleClass="w-12rem border-0">
+               <p:submenu>
+                  <p:menuitem value="Startseite"  outcome="index"
+                              icon="pi pi-home"/>
+               </p:submenu>
+               <p:submenu label="Testing">
+                  <p:menuitem value="Anforderungen"  outcome="reqsView"
+                              icon="pi pi-inbox"/>
+                  <p:menuitem value="Testläufe"  outcome="testRunView"
+                              icon="pi pi-play"/>
+                  <p:menuitem value="Testfälle"  outcome="testCasesView"
                               icon="pi pi-book"/>
                </p:submenu>
-               <p:submenu label="Testläufe">
-                  <p:menuitem value="Übersicht"  outcome="testRunView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Testfälle">
-                  <p:menuitem value="Übersicht"  outcome="testCasesView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Navigations">
-                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
-                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               <p:submenu label="Sonstiges">
+                  <p:menuitem value="Ausloggen"
+                              icon="pi pi-sign-out" action="#{userController.logout}"/>
                </p:submenu>
             </p:menu>
          </div>
@@ -55,10 +63,10 @@
 
                <p:toolbar>
                   <p:toolbarGroup>
-                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
+                     <p:commandButton value="Neuen Testlauf anlegen" icon="pi pi-plus" actionListener="#{testRunController.openNew}"
                                       update=":dialogs:manage-testrun-content" oncomplete="PF('manageTestrunDialog').show()"
-                                      styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":dialogs:manage-testrun-content" />
+                                      styleClass="ui-button-success" style="margin-right: .5rem" disabled="#{not userController.TM}">
+                        <p:resetInput target=":dialogs:manage-testrun-content"  />
                      </p:commandButton>
                   </p:toolbarGroup>
                  
@@ -129,17 +137,17 @@
                         <p:column headerText="Bearbeiten" width="10%" >
                            <div class="">
                               <p:linkButton styleClass="ui-button m-2 w-full " value="Test durchführen" icon="pi pi-play" process="@this"
-                                            outcome="runTestRunView" rendered="#{not empty tr.testcasesById}"  >
+                                            outcome="runTestRunView" rendered="#{not empty tr.testcasesById}" disabled="#{not userController.tester}" >
                                  <f:param name="testrun" value="#{tr.id}"/>
                               </p:linkButton>
                               <p:commandButton styleClass="ui-button m-2 w-full" value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
-                                               oncomplete="PF('manageTestrunDialog').show()" process="@this" >
+                                               oncomplete="PF('manageTestrunDialog').show()" process="@this" disabled="#{not userController.TM}">
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
                                  <p:resetInput target=":dialogs:manage-testrun-content" />
                               </p:commandButton>
 
                               <p:commandButton styleClass="ui-button-danger m-2 w-full" value="Löschen" icon="pi pi-trash" process="@this"
-                                               oncomplete="PF('deleteTestrunDialog').show()">
+                                               oncomplete="PF('deleteTestrunDialog').show()" disabled="#{not userController.TM}">
                                  <f:setPropertyActionListener value="#{tr}" target="#{testRunController.selectedTestRun}" />
 
                               </p:commandButton>
@@ -155,7 +163,7 @@
             <h:form id="dialogs">
                <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageTestrunDialog"
                          responsive="true">
-                  <p:outputPanel id="manage-testrun-content" class="ui-fluid">
+                  <p:outputPanel id="manage-testrun-content" class="ui-fluid" >
                      <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
                         <div class="field">
                            <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
@@ -167,13 +175,9 @@
                            <p:outputLabel for="name">Titel</p:outputLabel>
                            <p:inputText id="name" value="#{testRunController.selectedTestRun.title}" required="true" />
                         </div>
-                        <div class="field">
-                           <p:outputLabel for="description">Beschreibung</p:outputLabel>
-                           <p:inputTextarea id="description" value="#{testRunController.selectedTestRun.creator}" />
-                        </div>
                         <div class="field flex flex-column">
                            <p:outputLabel for="creator">Ersteller</p:outputLabel>
-                           <h:outputText id="creator" value="#{testRunController.selectedTestRun.creator}" />
+                           <p:inputText id="creator" disabled="true" value="#{testRunController.selectedTestRun.creator}" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
@@ -183,7 +187,7 @@
                         <div class="field flex flex-column">
                            <p:outputLabel for="status">Status</p:outputLabel>
                            <p:selectOneButton id="status" value="#{testRunController.selectedTestRun.status}">
-                              <f:selectItem itemLabel="Neu" itemValue="Neu"/>
+                              <f:selectItem itemLabel="Neu" itemValue="Neu" />
                               <f:selectItem itemLabel="Offen" itemValue="Offen"/>
                               <f:selectItem itemLabel="Defekt entdeckt" itemValue="Defekt entdeckt"/>
                               <f:selectItem itemLabel="Abgeschlossen" itemValue="Abgeschlossen"/>
@@ -198,7 +202,7 @@
                         </div>
 
 
-                        <p:commandButton styleClass="ui-button m-2 " value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
+                        <p:commandButton styleClass="ui-button" value="Testfälle zuweisen" icon="pi pi-pencil" update="dialogs:add-Remove-TestCases"
                                          oncomplete="PF('addRemoveTestCases').show()" process="@this" >
                         </p:commandButton>
                         <h:outputText styleClass="text-3xl text-red-200" value="Es gibt ungespeicherte Testfall Änderungen." rendered="#{testRunController.unsavedTCChanges}"/>
@@ -250,6 +254,7 @@
          </div>
       </div>
    </div>
+   </p:outputPanel>
 </h:body>
 </html>
 

@@ -27,7 +27,7 @@
       <div class="field flex flex-column  justify-content-center w-full">
          <p:outputLabel value="Passwort" for="password" styleClass="text-white"/>
          <div>
-            <p:password required="true" id="password" value="#{userController.loginUser.password}"
+            <p:password required="true" id="password" value="#{loginController.loginUser.password}"
                         placeholder="Passwort" toggleMask="true"  styleClass="w-20rem"
                         validator="#{loginController.validateLogin}">
 
@@ -44,8 +44,9 @@
 
    </div>
    <div>
-      <h:form>
+      <h:form styleClass="flex flex-column">
          <p:commandButton value="Testdaten laden" action="#{loginController.testSystem.createTestData()}"   />
+         <p:commandButton value="Als Admin einloggen" action="#{loginController.adminLogin}"   />
       </h:form>
 
    </div>

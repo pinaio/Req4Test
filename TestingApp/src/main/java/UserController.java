@@ -12,9 +12,10 @@ import java.util.List;
 @SessionScoped
 public class UserController implements Serializable {
     private User currentUser;
-    private User loginUser = new User();
 
     private List<User> allUser;
+
+    private String greetString;
 
 
     @Inject
@@ -23,6 +24,7 @@ public class UserController implements Serializable {
 
     public UserController() {
     }
+
 
     public List<User> getAllUser() {
         this.allUser = testSystem.getUserList();
@@ -36,12 +38,7 @@ public class UserController implements Serializable {
     @PostConstruct
     public void init(){
         this.allUser = testSystem.getUserList();
-        // Dies muss noch weg und durch das richtige ersetzt werden
-        if(!testSystem.getUserList().isEmpty()){
-            this.currentUser = testSystem.getUserList().get(0);
-        }else {
-            this.currentUser = null;
-        }
+        this.currentUser = null;
 
 
     }
@@ -52,13 +49,53 @@ public class UserController implements Serializable {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+        this.greetString = "Hallo " + this.currentUser.getUsername();
     }
 
-    public User getLoginUser() {
-        return loginUser;
+    public String getGreetString() {
+        return greetString;
+    }
+    public String logout(){
+        this.currentUser = null;
+                return "login?faces-redirect=true";
     }
 
-    public void setLoginUser(User loginUser) {
-        this.loginUser = loginUser;
+    public boolean isRE(){
+        if(this.currentUser.getRole().equals("RE")||this.currentUser.getRole().equals("Admin")){
+            return true;
+        }else{
+            return false;
+        }
+
     }
+    public boolean isAdmin(){
+        if(this.currentUser.getRole().equals("Admin")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public boolean isTM(){
+        if(this.currentUser.getRole().equals("TM")||this.currentUser.getRole().equals("Admin")){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    public boolean isTFE(){
+        if(this.currentUser.getRole().equals("TFE")||this.currentUser.getRole().equals("Admin")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public boolean isTester(){
+        if(this.currentUser.getRole().equals("Tester")||this.currentUser.getRole().equals("Admin")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
