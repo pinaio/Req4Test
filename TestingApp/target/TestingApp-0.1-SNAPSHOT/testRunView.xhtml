@@ -137,7 +137,7 @@
                         <p:column headerText="Bearbeiten" width="10%" >
                            <div class="">
                               <p:linkButton styleClass="ui-button m-2 w-full " value="Test durchführen" icon="pi pi-play" process="@this"
-                                            outcome="runTestRunView" rendered="#{not empty tr.testcasesById}" disabled="#{not userController.tester}" >
+                                            outcome="runTestRunView" rendered="#{not empty tr.testcasesById and tr.status != 'Abgeschlossen'}" disabled="#{not userController.tester}" >
                                  <f:param name="testrun" value="#{tr.id}"/>
                               </p:linkButton>
                               <p:commandButton styleClass="ui-button m-2 w-full" value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testrun-content"
