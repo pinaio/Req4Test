@@ -15,7 +15,7 @@ import java.util.List;
 @ApplicationScoped
 public class TestSystem implements Serializable {
 
-    private String name = "TestingApp 0.1 alpha";
+    private String name = "Require4Test 0.1";
     private List reqList =new ArrayList<Requirement>();
     private List testRunList =new ArrayList<Testrun>();
 

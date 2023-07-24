@@ -38,6 +38,7 @@ public class TestCaseDAO {
         Testcase toDelete = em.find(Testcase.class, selectedTestCase.getId());
         EntityTransaction t = em.getTransaction();
         if (toDelete != null) {
+            System.out.println("Wird gelöscht");
             t.begin();
             em.remove(toDelete);
             t.commit();

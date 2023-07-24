@@ -7,7 +7,7 @@
 
 
 <h:head>
-   <title>TestingApp 0.1</title>
+   <title>Require4Test - Testläufe</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
 
@@ -29,7 +29,7 @@
       </div>
    </div>
    <!--App & Sidebar-->
-   <div class="flex surface-card h-full ">
+   <div class="flex surface-card min-h-full ">
       <h:form  >
          <div class="card">
             <p:menu styleClass="w-12rem border-0">
@@ -54,7 +54,7 @@
       </h:form>
       <!--Main Application "Window"-->
 
-      <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
+      <div class="text-xl flex flex-column  p-4 align-items-center surface-ground min-h-full ">
          <h:outputText styleClass="text-6xl font-bold text-gray-100 my-4" value="#{testRunController.header}"/>
          <!--CRUD-TABLE-->
          <div class="card crud-demo">
@@ -126,7 +126,7 @@
                         </p:column>
                         <p:column  headerText="Zu testen bis" sortBy="#{tr.deadline}">
                            <h:outputText value="#{tr.deadline}" >
-                              <f:convertDateTime type="date" dateStyle="default"/>
+                              <f:convertDateTime type="date" dateStyle="short"/>
                            </h:outputText>
                         </p:column>
                      <p:column  headerText="Tester" sortBy="#{tr.userByTester.firstname}">
@@ -161,7 +161,7 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageTestrunDialog"
+               <p:dialog header="Testlauf Details" showEffect="fade" modal="true" widgetVar="manageTestrunDialog"
                          responsive="true">
                   <p:outputPanel id="manage-testrun-content" class="ui-fluid" >
                      <p:outputPanel rendered="#{not empty testRunController.selectedTestRun}">
@@ -169,7 +169,9 @@
                            <p:outputLabel styleClass="text-3xl" value="#{testRunController.selectedTestRun.id}"/>
                         </div>
                         <div class="field">
-                           <p:outputLabel styleClass="text-lg" value="#{testRunController.selectedTestRun.creationDate}"/>
+                           <p:outputLabel styleClass="text-lg" value="#{testRunController.selectedTestRun.creationDate}">
+                              <f:convertDateTime type="date" dateStyle="short"/>
+                           </p:outputLabel>
                         </div>
                         <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
@@ -181,7 +183,7 @@
                         </div>
                         <div class="field">
                            <p:outputLabel for="deadline">Zu testen bis:</p:outputLabel>
-                           <p:calendar id="deadline" value="#{testRunController.selectedTestRun.deadline}" required="true"/>
+                           <p:datePicker id="deadline" value="#{testRunController.selectedTestRun.deadline}" required="true"/>
                         </div>
 
                         <div class="field flex flex-column">
@@ -227,7 +229,7 @@
                      <f:facet name="targetCaption">Dieser Testlauf</f:facet>
                      <p:column>
                         <div class="flex align-items-center">
-                           <h:outputText value="#{tc.title}"/>
+                           <h:outputText value="#{tc.title}" styleClass="text-white"/>
                         </div>
                      </p:column>
                   </p:pickList>

@@ -4,38 +4,46 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <title>Testfall-Management</title>
+   <title>Require4Test - Testfall-Management</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
 </h:head>
 <h:body styleClass="m-0 p-0">
+   <p:outputPanel rendered="#{userController.currentUser == null}">
+      <h:outputText styleClass="text-red-500 font-bold text-4xl" value="Sie verfügen nicht über die nötigen Berechtigungen für diesen Teil der Anwendung!"/>
+      <h:form>
+         <p:commandButton value="Zum Login" action="login?faces-redirect=true"/>
+      </h:form>
+   </p:outputPanel>
+   <p:outputPanel rendered="#{not empty userController.currentUser}">
    <!---Header Start-->
    <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
       <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
       <div class="max-h-4rem">
-         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+         <h:outputText styleClass="text-white text-xl" value="#{userController.greetString}"/>
+         <p:commandButton styleClass="ui-button-flat p-2 m-1  " value="Logout" action="#{userController.logout}"/>
       </div>
    </div>
    <!--App & Sidebar-->
    <div class="flex surface-card min-h-full ">
-      <h:form>
+      <h:form  >
          <div class="card">
-            <p:menu styleClass="w-16rem border-0">
-               <p:submenu label="Anforderungen">
-                  <p:menuitem value="Übersicht"  outcome="reqsView"
+            <p:menu styleClass="w-12rem border-0">
+               <p:submenu>
+                  <p:menuitem value="Startseite"  outcome="index"
+                              icon="pi pi-home"/>
+               </p:submenu>
+               <p:submenu label="Testing">
+                  <p:menuitem value="Anforderungen"  outcome="reqsView"
+                              icon="pi pi-inbox"/>
+                  <p:menuitem value="Testläufe"  outcome="testRunView"
+                              icon="pi pi-play"/>
+                  <p:menuitem value="Testfälle"  outcome="testCasesView"
                               icon="pi pi-book"/>
                </p:submenu>
-               <p:submenu label="Testläufe">
-                  <p:menuitem value="Übersicht"  outcome="testRunView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Testfälle">
-                  <p:menuitem value="Übersicht"  outcome="testCasesView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Navigations">
-                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
-                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               <p:submenu label="Sonstiges">
+                  <p:menuitem value="Ausloggen"
+                              icon="pi pi-sign-out" action="#{userController.logout}"/>
                </p:submenu>
             </p:menu>
          </div>
@@ -53,7 +61,7 @@
                   <p:toolbarGroup>
                      <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testCasesController.openNew}"
                                       update=":dialogs:manage-testCase-content" oncomplete="PF('managetestCaseDialog').show()"
-                                      styleClass="ui-button-success" style="margin-right: .5rem">
+                                      styleClass="ui-button-success" style="margin-right: .5rem" disabled="#{not userController.TFE}">
                         <p:resetInput target=":dialogs:manage-testCase-content" />
                      </p:commandButton>
                   </p:toolbarGroup>
@@ -98,12 +106,12 @@
                         <p:column headerText="Bearbeiten">
                            <div>
                               <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-testCase-content"
-                                               oncomplete="PF('managetestCaseDialog').show()" process="@this" >
+                                               oncomplete="PF('managetestCaseDialog').show()" process="@this" disabled="#{not userController.TFE}">
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
                                  <p:resetInput target=":dialogs:manage-testCase-content" />
                               </p:commandButton>
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
-                                               oncomplete="PF('deletetestCaseDialog').show()">
+                                               oncomplete="PF('deletetestCaseDialog').show()" disabled="#{not userController.TFE}">
                                  <f:setPropertyActionListener value="#{tc}" target="#{testCasesController.selectedTestCase}" />
                               </p:commandButton>
                            </div>
@@ -114,8 +122,7 @@
             </h:form>
 
             <h:form id="dialogs">
-               <p:dialog header="Testfall bearbeiten / anlegen" showEffect="fade" modal="true" widgetVar="managetestCaseDialog" minimizable="true" maximizable="true" resizable="true" responsive="true" fitViewport="true" >
-                         responsive="true">
+               <p:dialog header="Testfall bearbeiten / anlegen" showEffect="fade" modal="true" widgetVar="managetestCaseDialog" minimizable="true" maximizable="true" resizable="true" responsive="true" fitViewport="true">
                   <p:outputPanel id="manage-testCase-content" class="ui-fluid">
                      <p:outputPanel rendered="#{not empty testCasesController.selectedTestCase}">
                         <div class="field flex justify-content-center " >
@@ -171,12 +178,12 @@
                </p:dialog>
 
                <p:confirmDialog widgetVar="deletetestCaseDialog" showEffect="fade" width="300"
-                                message="Diesen Testlauf löschen?" header="Bestätigung" severity="warn">
+                                message="Diesen Testlfall löschen?" header="Bestätigung" severity="warn">
                   <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{testCasesController.deleteTestCase()}"
                                    process="@this"
                                    oncomplete="PF('deletetestCaseDialog').hide()" />
                   <p:commandButton value="Nein" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                   onclick="PF('deletetestCaseDialog').hide()"  />
+                                   onclick="PF('deletetestCaseDialog').hide()"></p:commandButton>
                </p:confirmDialog>
 
                <p:confirmDialog global="true" showEffect="fade" width="300">
@@ -188,6 +195,7 @@
          </div>
       </div>
    </div>
+   </p:outputPanel>
 </h:body>
 </html>
 

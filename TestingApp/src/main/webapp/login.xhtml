@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <title>TestingApp 0.1</title>
+   <title>Require4Test - Login</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
 
@@ -20,7 +20,7 @@
 
       <div class="field flex flex-column  justify-content-center w-full">
          <p:outputLabel value="Benutzername" for="username" styleClass="text-white"/>
-         <p:inputText required="true" id="username" value="#{loginController.loginUser.username}" placeholder="Benutzername" styleClass="w-20rem">
+         <p:inputText required="true" id="username" value="#{loginController.loginUser.username}" placeholder="Benutzername" styleClass="w-20rem" requiredMessage="Der Benutzername ist notwendig.">
             <f:event type="postValidate" listener="#{loginController.postValidateUsername}"/>
          </p:inputText>
       </div>
@@ -29,7 +29,7 @@
          <div>
             <p:password required="true" id="password" value="#{loginController.loginUser.password}"
                         placeholder="Passwort" toggleMask="true"  styleClass="w-20rem"
-                        validator="#{loginController.validateLogin}">
+                        validator="#{loginController.validateLogin}" requiredMessage="Das Passwort ist notwendig.">
 
             </p:password>
          </div>

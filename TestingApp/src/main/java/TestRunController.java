@@ -221,7 +221,7 @@ public class TestRunController implements Serializable {
         testSystem.deleteTestRun(this.selectedTestRun);
         this.selectedTestRun = null;
         this.testRuns = testSystem.getTestRunList();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf gelöscht"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testruns");
     }
 

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Named
 @ViewScoped
@@ -188,7 +189,7 @@ public class TestCasesController implements Serializable {
     }
 
     public void saveTestCase() {
-        if (this.selectedTestCase == null) {
+        if (Objects.equals(this.selectedTestCase.getId(), getNextIndex())) {
             this.selectedTestCase.setId(
                    getNextIndex()
 
@@ -196,12 +197,12 @@ public class TestCasesController implements Serializable {
             testSystem.saveTestCase(this.selectedTestCase);
             this.testcases = testSystem.getTestCaseList();
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf hinzugefügt"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testfall hinzugefügt"));
         }
         else {
             testSystem.saveTestCase(this.selectedTestCase);
             this.testcases = testSystem.getTestCaseList();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf geändert"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testfall geändert"));
 
         }
 
@@ -209,11 +210,13 @@ public class TestCasesController implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testCases");
     }
     public void deleteTestCase() {
-
+        this.selectedTestCase.setTestrunByTestrunId(null);
+        this.selectedTestCase.setRequirementByRequirementId(null);
+        testSystem.saveTestCase(this.selectedTestCase);
         testSystem.deleteTestCase(this.selectedTestCase);
         this.selectedTestCase = null;
         this.testcases = testSystem.getTestCaseList();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Anforderung gelöscht"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testfall gelöscht"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-testCases");
     }
 
@@ -231,21 +234,7 @@ public class TestCasesController implements Serializable {
         return highestId+1L;
     }
 
-    public void openEdit(Testcase tc){
-        testSystem.setTcToEditOrRun(tc);
 
-        PrimeFaces.current().dialog().openDynamic("testCaseEdit");
-        System.out.println("Wurde geklickt");
-
-    }
-
-    public void onEdited(SelectEvent event){
-        Testcase tc = (Testcase) event.getObject();
-        this.selectedTestCase = tc;
-        saveTestCase();
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-testCases");
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Testlauf geändert"));
-    }
 
 
 }

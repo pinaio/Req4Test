@@ -4,7 +4,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <title>Testfall-Management</title>
+   <title>Require4Test</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
 </h:head>
@@ -95,7 +95,7 @@
 
                <p:toolbar>
                   <p:toolbarGroup>
-                     <p:commandButton value="Sofort abschließen" icon="pi pi-check" actionListener="#{runTestRunController.saveTestRun}"
+                     <p:commandButton value="Abschließen" icon="pi pi-check" actionListener="#{runTestRunController.saveTestRun}"
                                       process="dt-testcases-of-testrun @this" update="dt-testcases-of-testrun"
                                       oncomplete="PF('sucessTestrun').show()" />
                      <p:commandButton styleClass="ui-button-danger m-2 " value="Abbrechen" icon="pi pi-trash" process="@this" update="dialogs:abort-test-run"

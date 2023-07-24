@@ -7,39 +7,51 @@
 
 
 <h:head>
-   <title>TestingApp 0.1</title>
+   <title>Require4Test - Anforderungen</title>
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.css" />
    <h:outputStylesheet library="webjars" name="primeflex/3.2.0/themes/vela-blue.css" />
-
 </h:head>
+
 <h:body styleClass="m-0 p-0">
-   <!---Header Start-->
-   <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
-      <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
-      <div class="max-h-4rem">
-         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
-      </div>
-   </div>
-   <!--App & Sidebar-->
-   <div class="flex surface-card h-full ">
+   <p:outputPanel rendered="#{userController.currentUser == null}">
+      <h:outputText styleClass="text-red-500 font-bold text-4xl" value="Sie verfügen nicht über die nötigen Berechtigungen für diesen Teil der Anwendung!"/>
       <h:form>
-         <div class="card">
-            <p:menu styleClass="w-20rem border-0">
-               <p:submenu label="Anforderungen">
-                  <p:menuitem value="Übersicht"  outcome="reqsView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Testläufe">
-                  <p:menuitem value="Übersicht"  outcome="testRunView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Navigations">
-                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
-                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
-               </p:submenu>
-            </p:menu>
-         </div>
+         <p:commandButton value="Zum Login" action="login?faces-redirect=true"/>
       </h:form>
+   </p:outputPanel>
+   <p:outputPanel rendered="#{not empty userController.currentUser}">
+   <!---Header Start-->
+      <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
+         <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
+         <div class="max-h-4rem">
+            <h:outputText styleClass="text-white text-xl" value="#{userController.greetString}"/>
+            <p:commandButton styleClass="ui-button-flat p-2 m-1  " value="Logout" action="#{userController.logout}"/>
+         </div>
+      </div>
+      <!--App & Sidebar-->
+      <div class="flex surface-card h-full ">
+         <h:form  >
+            <div class="card">
+               <p:menu styleClass="w-12rem border-0">
+                  <p:submenu>
+                     <p:menuitem value="Startseite"  outcome="index"
+                                 icon="pi pi-home"/>
+                  </p:submenu>
+                  <p:submenu label="Testing">
+                     <p:menuitem value="Anforderungen"  outcome="reqsView"
+                                 icon="pi pi-inbox"/>
+                     <p:menuitem value="Testläufe"  outcome="testRunView"
+                                 icon="pi pi-play"/>
+                     <p:menuitem value="Testfälle"  outcome="testCasesView"
+                                 icon="pi pi-book"/>
+                  </p:submenu>
+                  <p:submenu label="Sonstiges">
+                     <p:menuitem value="Ausloggen"
+                                 icon="pi pi-sign-out" action="#{userController.logout}"/>
+                  </p:submenu>
+               </p:menu>
+            </div>
+         </h:form>
       <!--Main Application "Window"-->
 
       <div class="text-xl flex flex-column  p-4 align-items-center surface-ground ">
@@ -50,13 +62,13 @@
                <p:growl id="messages" showDetail="true" />
 
                <p:toolbar>
-                  <p:toolbarGroup>
-                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{reqsController.openNew}"
+                  <p:toolbarGroup >
+                     <p:commandButton value="Neue Anforderung" icon="pi pi-plus" actionListener="#{reqsController.openNew}"
                                       update=":dialogs:manage-requirement-content" oncomplete="PF('manageRequirementDialog').show()"
-                                      styleClass="ui-button-success" style="margin-right: .5rem">
+                                      styleClass="ui-button-success" style="margin-right: .5rem" disabled="#{not userController.RE}">
                         <p:resetInput target=":dialogs:manage-requirement-content" />
                      </p:commandButton>
-                     <p:commandButton action="testCasesView" value="Testfall Anlegen"/>
+                     <p:commandButton action="testCasesView" value="Testfall Anlegen" rendered="#{userController.TFE}"/>
                   </p:toolbarGroup>
                  
                </p:toolbar>
@@ -90,12 +102,12 @@
                         <p:column headerText="Bearbeiten">
                            <div class="">
                               <p:commandButton styleClass="ui-button m-2 " value="Bearbeiten" icon="pi pi-pencil" update=":dialogs:manage-requirement-content"
-                                               oncomplete="PF('manageRequirementDialog').show()" process="@this" >
-                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
+                                               oncomplete="PF('manageRequirementDialog').show()" process="@this" disabled="#{not userController.RE}">
+                                 <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}"  />
                                  <p:resetInput target=":dialogs:manage-requirement-content" />
                               </p:commandButton>
                               <p:commandButton styleClass="ui-button-danger m-2 " value="Löschen" icon="pi pi-trash" process="@this"
-                                               oncomplete="PF('deleteRequirementDialog').show()">
+                                               oncomplete="PF('deleteRequirementDialog').show()" disabled="#{not userController.RE}">
                                  <f:setPropertyActionListener value="#{req}" target="#{reqsController.selectedRequirement}" />
 
                               </p:commandButton>
@@ -105,6 +117,7 @@
 
                </p:dataTable>
             </h:form>
+
 
             <h:form id="dialogs">
                <p:dialog header="Anforderungs Details" showEffect="fade" modal="true" widgetVar="manageRequirementDialog"
@@ -124,7 +137,7 @@
                         </div>
                         <div class="field">
                            <p:outputLabel for="author">Autor</p:outputLabel>
-                           <p:inputTextarea id="author" value="#{reqsController.selectedRequirement.author}" />
+                           <p:inputText id="author" value="#{reqsController.selectedRequirement.author}" disabled="true" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="status">Status</p:outputLabel>
@@ -134,11 +147,6 @@
                               <f:selectItem itemLabel="Testing" itemValue="Testing"/>
                               <f:selectItem itemLabel="Fertig" itemValue="Fertig"/>
                            </p:selectOneButton>
-                        </div>
-                        <div>
-                           <p:commandButton styleClass="ui-button m-2 " value="Nested Test" icon="pi pi-pencil" update=":dialogs:test-dialog"
-                                            oncomplete="PF('testdialog').show()" process="@this" >
-                           </p:commandButton>
                         </div>
                      </p:outputPanel>
                   </p:outputPanel>
@@ -150,19 +158,10 @@
                                       class="ui-button-secondary" type="button" />
                   </f:facet>
                </p:dialog>
-               <p:dialog widgetVar="testdialog" header="Testdialog" showEffect="fade" modal="true">
-                  <p:outputPanel id="test-dialog">
-                     <div>
-                        <h1>
-                           Nested Dialog :)
-                        </h1>
-                     </div>
-                  </p:outputPanel>
 
-               </p:dialog>
 
                <p:confirmDialog widgetVar="deleteRequirementDialog" showEffect="fade" width="300"
-                                message="Diese Anforderung löschen?" header="Bestätigung" severity="warn">
+                                message="Diese Anforderung  wirklich löschen? Es werden auch alle dazugehörigen Testfälle gelöscht!" header="Bestätigung" severity="warn">
                   <p:commandButton value="Ja" icon="pi pi-check" actionListener="#{reqsController.deleteRequirement}"
                                    process="@this"
                                    oncomplete="PF('deleteRequirementDialog').hide()" />
@@ -179,6 +178,7 @@
          </div>
       </div>
    </div>
+   </p:outputPanel>
 </h:body>
 </html>
 
