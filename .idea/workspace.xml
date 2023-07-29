@@ -11,7 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1d2fde64-470f-4672-bae4-f1ec3be89690" name="Changes" comment="Sprint 1 Completed. Implemented all 5(6) Requirments of this Sprint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/login.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/login.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/runTestRunView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/runTestRunView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/src/main/webapp/testCasesView.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/TestingApp/target/TestingApp-0.1-SNAPSHOT/testCasesView.xhtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,9 +80,9 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4862069&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -325,7 +328,10 @@
       <workItem from="1689933189992" duration="9908000" />
       <workItem from="1690022805966" duration="10240000" />
       <workItem from="1690119383709" duration="12695000" />
-      <workItem from="1690204216091" duration="7338000" />
+      <workItem from="1690204216091" duration="7389000" />
+      <workItem from="1690541168008" duration="9811000" />
+      <workItem from="1690572942404" duration="1118000" />
+      <workItem from="1690626659714" duration="1924000" />
     </task>
     <task id="LOCAL-00001" summary="Initial2">
       <option name="closed" value="true" />
@@ -527,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690217629061</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Sprint 1 Completed. Implemented all 5(6) Requirments of this Sprint">
+      <option name="closed" value="true" />
+      <created>1690218394545</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1690218394545</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

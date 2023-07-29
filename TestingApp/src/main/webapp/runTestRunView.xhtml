@@ -15,33 +15,41 @@
                    required="true" requiredMessage="Bad request, please use a link from within the system."
       />
    </f:metadata>
+   <p:outputPanel rendered="#{userController.currentUser == null}">
+      <h:outputText styleClass="text-red-500 font-bold text-4xl" value="Sie verfügen nicht über die nötigen Berechtigungen für diesen Teil der Anwendung!"/>
+      <h:form>
+         <p:commandButton value="Zum Login" action="login?faces-redirect=true"/>
+      </h:form>
+   </p:outputPanel>
+   <p:outputPanel rendered="#{not empty userController.currentUser}">
    <!---Header Start-->
    <div class="surface-card surface-border  shadow-3 m-0 p-0  flex flex-row justify-content-between align-items-center">
       <h:outputText styleClass="text-6xl text-white text-center py-2 px-2" value="#{testSystem.name}"> </h:outputText>
       <div class="max-h-4rem">
-         <p:commandButton styleClass="rounded-button bg-teal-50 p-2 m-1  " value="Logout"/>
+         <h:outputText styleClass="text-white text-xl" value="#{userController.greetString}"/>
+         <p:commandButton styleClass="ui-button-flat p-2 m-1  " value="Logout" action="#{userController.logout}"/>
       </div>
    </div>
    <!--App & Sidebar-->
    <div class="flex surface-card min-h-full ">
-      <h:form>
+      <h:form  >
          <div class="card">
             <p:menu styleClass="w-12rem border-0">
-               <p:submenu label="Anforderungen">
-                  <p:menuitem value="Übersicht"  outcome="reqsView"
+               <p:submenu>
+                  <p:menuitem value="Startseite"  outcome="index"
+                              icon="pi pi-home"/>
+               </p:submenu>
+               <p:submenu label="Testing">
+                  <p:menuitem value="Anforderungen"  outcome="reqsView"
+                              icon="pi pi-inbox"/>
+                  <p:menuitem value="Testläufe"  outcome="testRunView"
+                              icon="pi pi-play"/>
+                  <p:menuitem value="Testfälle"  outcome="testCasesView"
                               icon="pi pi-book"/>
                </p:submenu>
-               <p:submenu label="Testläufe">
-                  <p:menuitem value="Übersicht"  outcome="testRunView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Testfälle">
-                  <p:menuitem value="Übersicht"  outcome="testCasesView"
-                              icon="pi pi-book"/>
-               </p:submenu>
-               <p:submenu label="Navigations">
-                  <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
-                  <p:menuitem value="Internal"  icon="pi pi-upload"/>
+               <p:submenu label="Sonstiges">
+                  <p:menuitem value="Ausloggen"
+                              icon="pi pi-sign-out" action="#{userController.logout}"/>
                </p:submenu>
             </p:menu>
          </div>
@@ -101,7 +109,6 @@
                      <p:commandButton styleClass="ui-button-danger m-2 " value="Abbrechen" icon="pi pi-trash" process="@this" update="dialogs:abort-test-run"
                                       oncomplete="PF('abortTestRunDialog').show()">
                      </p:commandButton>
-                     <p:commandButton action="testRunView" value="Zurück"/>
                   </p:toolbarGroup>
 
 
@@ -127,6 +134,7 @@
          </div>
       </div>
    </div>
+   </p:outputPanel>
 </h:body>
 </html>
 

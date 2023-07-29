@@ -59,7 +59,7 @@
 
                <p:toolbar>
                   <p:toolbarGroup>
-                     <p:commandButton value="New" icon="pi pi-plus" actionListener="#{testCasesController.openNew}"
+                     <p:commandButton value="Neuen Testfall anlegen" icon="pi pi-plus" actionListener="#{testCasesController.openNew}"
                                       update=":dialogs:manage-testCase-content" oncomplete="PF('managetestCaseDialog').show()"
                                       styleClass="ui-button-success" style="margin-right: .5rem" disabled="#{not userController.TFE}">
                         <p:resetInput target=":dialogs:manage-testCase-content" />
@@ -130,11 +130,11 @@
                         </div>
                         <div class="field flex flex-column">
                            <p:outputLabel for="requirement">Zugewiesene Anforderung</p:outputLabel>
-                           <p:selectOneMenu id="requirement" value="#{testCasesController.selectedReqString}" required="true"  >
+                           <p:selectOneMenu id="requirement" value="#{testCasesController.selectedReqString}" required="true" requiredMessage="Es muss eine Anforderung ausgewählt werden." >
                               <f:selectItem value="#{null}" itemLabel="Bitte Anforderung auswählen" />
                               <f:selectItems var="req" value="#{testCasesController.reqStrings}" itemValue="#{req}" itemLabel="#{req}" />
                            </p:selectOneMenu>
-                           <p:message for="requirement"/>
+                           <p:message for="requirement" />
                         </div>
                         <div class="field">
                            <p:outputLabel for="name">Titel</p:outputLabel>
@@ -164,7 +164,6 @@
                               <f:selectItem value="#{null}" itemLabel="Bitte Testlauf auswählen" />
                               <f:selectItems var="tr" value="#{testCasesController.trStrings}" itemValue="#{tr}" itemLabel="#{tr}" />
                            </p:selectOneMenu>
-                           <h:message for="requirement"/>
                         </div>
                      </p:outputPanel>
                   </p:outputPanel>
